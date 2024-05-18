@@ -39,7 +39,7 @@ app.post('/register', async (req,res)=>{
     try{
         let username_exist = await User.findOne({username: username}).exec();
         if (username_exist){
-            res.status(409).json("Username already exist")
+            return res.status(409).json("Username already exist")
 
         }else{
             res.status(200).json({"result": "Does not yet Exist"});
@@ -62,7 +62,7 @@ app.patch('/updateProfile', async(req,res)=>{ //this is for updating
 
     try{
         if (!id || !username || !password || !description){
-            res.status(408).json({"result" : "incomplete parameters"});
+            return res.status(408).json({"result" : "incomplete parameters"});
         }
         else{
             const update = {
@@ -74,18 +74,15 @@ app.patch('/updateProfile', async(req,res)=>{ //this is for updating
             }
             const result = await User.findOneAndUpdate({u_id: id},update)
             if (result){
-                res.status(200).json({"result": "updated successfully"});
+                return res.status(200).json({"result": "updated successfully"});
             }else{
-                res.status(405).json({"result": "did not update successfully"});
+                return res.status(405).json({"result": "did not update successfully"});
             }
         }
     }catch(e){
         console.log(e);
         res.status(406).json({"result": e});
     }
-
-
-
 })
 
 
@@ -99,3 +96,23 @@ app.get('/getUsers', async (req,res)=>{
 
 
 
+
+app.delete('/deleteUser/:id', async (req,res)=>{
+    const {id} = req.params;
+    try{
+        if(!id){
+            return res.status(405).send("No ID given");
+        }else{
+            const result = await User.findByIdAndDelete(id);
+            if(result){
+                return res.status(200).send("succesfully deleted");
+            }else{
+                return res.status(405).send("cannot be deleted");
+            }
+        }
+    }catch(e){
+        console.log(e);
+        return res.status(406).send(e);
+        
+    }
+})
