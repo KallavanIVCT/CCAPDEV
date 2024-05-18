@@ -14,13 +14,18 @@ const userSchema = mongoose.Schema(
         u_profilepic: {
             data:ArrayBuffer,
             type:String,
+            required:false,
         },
         u_description:{
             type: String,
             required:false,
+        },
+        u_password:{
+            type:String,
+            required:true,
         }
     }
 )
 
-const User = reactSchema.model("User", userSchema);
-module.exports = User;
+const User =  mongoose.model("User", userSchema);
+export { User } ;
