@@ -12,6 +12,8 @@
 --slate900: #3730a3;
 --slate950: #312e81;
 --slate1000: #110f28;
+--slate1100: #131132;
+--highlight1: #f792f3;
 font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
@@ -20,14 +22,14 @@ body{
 
     padding:0px;
     margin:0px;
-    background-color:var(--slate100);
-    color:var(--slate1000);
+    background-color:var(--slate1100);
+    color:var(--slate100);
 }
   
 button{
 
     color: rgb(103, 103, 103);;
-    background-color: var(--slate200);
+    background-color: var(--highlight1);
     border: 0px;
     transition: transform 0.2s ease;
     border-radius:5px;

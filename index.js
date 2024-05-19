@@ -150,8 +150,6 @@ app.get('/getPost', async (req,res)=>{
         console.log(e);
         return res.status(406).send(e);
     }
-
-
 })
 
 app.patch('/updatePost', async(req,res)=>{
@@ -211,3 +209,5 @@ app.delete('/deletePost/:id', async(req,res)=>{
         return res.status(406).send(e);
     }
 })
+
+

@@ -8,11 +8,12 @@
     padding:20px;
     box-sizing:border-box;
     color:var(--slate100);
+    border-bottom: 1px solid var(--slate100);
 
 }
 .cards-container{
-    border: 3px solid var(--slate1000);
-    background-color:var(--slate200);
+    border: 1px solid var(--slate500);
+    background-color:var(--slate1000);
     display:grid;
     grid-template-columns: repeat(3, 1fr);
     gap:20px;
@@ -28,7 +29,7 @@
 }
 
 .cards{
-    border:1px solid var(--slate1000);
+    border:1px solid var(--slate500);
     padding:10px;
     transition: transform 0.2s ease;
 }
@@ -102,4 +103,16 @@
 }
 .main-post-title{
     text-align:center;
+}
+
+
+
+.form-container{
+    display:flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.form-label{
+    background-color: var(--slate1000);
 }
