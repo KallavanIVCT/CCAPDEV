@@ -1,6 +1,7 @@
 
 
-:root{
+:root
+{
 --slate100: #eef2ff;
 --slate200: #e0e7ff;
 --slate300: #c7d2fe;
@@ -11,18 +12,21 @@
 --slate800: #4338ca;
 --slate900: #3730a3;
 --slate950: #312e81;
---slate1000: #110f28;
---slate1100: #131132;
+--slate1000: #201135;
+--slate1001: #0c0614;
+--slate1100: #10061b;
 --highlight1: #f792f3;
+--highlight2: #97F1F2;
 font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
-body{
+body
+{
     height: 100vh;
 
     padding:0px;
     margin:0px;
-    background-color:var(--slate1100);
+    background:linear-gradient(var(--slate1001),var(--slate1000),var(--slate950), var(--slate600));
     color:var(--slate100);
 }
   
@@ -35,16 +39,18 @@ button{
     border-radius:5px;
     
 }
-button:hover{
+button:hover
+{
     color: var(--slate100);
     background-color: var(--slate800);
     transform:translate(5px,-2px);
 }
 
-.margin-down{
+.margin-down
+{
     margin: 0px 0px 20px 0px;
 }
-.margin-left-right{
+.margin-left-right
+{
     margin: 0px 50px 0px 50px;
 }
-

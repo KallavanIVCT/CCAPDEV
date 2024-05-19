@@ -1,5 +1,5 @@
 .navbar{
-    background-color:var(--slate1000);
+    /*background-color:var(--slate1000);*/
     display:flex;
     flex-direction: row;
     justify-content: space-between;
@@ -9,7 +9,7 @@
     box-sizing:border-box;
     color:var(--slate100);
     border-bottom: 1px solid var(--slate100);
-
+    background-image: linear-gradient(var(--slate1000) 80%, var(--highlight2) );
 }
 .cards-container{
     border: 1px solid var(--slate500);
