@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 const reactSchema = mongoose.Schema(
     {
@@ -7,11 +7,13 @@ const reactSchema = mongoose.Schema(
             required:true,
         },
         r_c_id:{
-            type:Number,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Comment',
             required:true,
         },
         r_u_id:{
-            type:Number,
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
             required:true,
         },
         r_type:{
