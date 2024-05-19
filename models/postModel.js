@@ -20,6 +20,7 @@ const postSchema = mongoose.Schema(
         p_tags:{
             type:String,
             enum: ['anime', 'manga', 'movies', 'politics'],
+            required:false,
         },
         p_has_been_edited:{
             type:Boolean,
