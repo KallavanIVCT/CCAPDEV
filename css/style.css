@@ -1,5 +1,8 @@
 .navbar{
     /*background-color:var(--slate1000);*/
+.navbar
+{
+    background:linear-gradient(teal, purple);
     display:flex;
     flex-direction: row;
     justify-content: space-between;
@@ -11,7 +14,8 @@
     border-bottom: 1px solid var(--slate100);
     background-image: linear-gradient(var(--slate1000) 80%, var(--highlight2) );
 }
-.cards-container{
+.cards-container
+{
     border: 1px solid var(--slate500);
     background-color:var(--slate1000);
     display:grid;
@@ -20,28 +24,25 @@
     padding:20px;
 
 }
-.title{
+.title
+{
     font-size:2rem;
 }
-.cards:hover{
+.cards:hover
+{
     transform:scale(1.05);
-    background-color:var(--slate300);   
+    background-color:var(--slate1100);   
 }
-
-.cards{
+.cards
+{
     border:1px solid var(--slate500);
     padding:10px;
     transition: transform 0.2s ease;
 }
 
-
-
-
-
-
-
 /*   DOWN BELOW FOR THE USER_PROFILE   */
-.profile-container{
+.profile-container
+{
     padding:10px;
     margin:0px 30px 20px 30px;
     color:var(--slate100);
@@ -50,7 +51,8 @@
     flex-direction:row;
 }
 
-.profile-img{
+.profile-img
+{
     width:500px;
     height:500px;
 }
