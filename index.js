@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import {User} from './models/userModel.js';
+import {Post} from './models/postModel.js';
 
 const app = express();
 
@@ -33,19 +34,16 @@ mongoose.connect("mongodb+srv://joshuavillavieja:kirakiradays@cluster.3c0qj0x.mo
 //lilipat ko pa to next tym sa controller folder 
 
 app.post('/register', async (req,res)=>{
-    let {id, username, password} = req.body;
+    const {username, password} = req.body;
     // place verification if username is already existing nope
 
     try{
-        let username_exist = await User.findOne({username: username}).exec();
+        let username_exist = await User.findOne({u_username: username}).exec();
         if (username_exist){
             return res.status(409).json("Username already exist")
 
         }else{
-            res.status(200).json({"result": "Does not yet Exist"});
-            //put username_exist here
             const user = await User.create({
-                u_id: id,
                 u_username: username,
                 u_password: password,
             })
@@ -57,7 +55,7 @@ app.post('/register', async (req,res)=>{
     }
 })
 
-app.patch('/updateProfile', async(req,res)=>{ //this is for updating
+app.patch('/updateUser', async(req,res)=>{ //this is for updating
     const {id, username, password, description} = req.body;
 
     try{
@@ -72,7 +70,7 @@ app.patch('/updateProfile', async(req,res)=>{ //this is for updating
                     u_description:description,
                 }
             }
-            const result = await User.findOneAndUpdate({u_id: id},update)
+            const result = await User.findByIdAndUpdate(id,update)
             if (result){
                 return res.status(200).json({"result": "updated successfully"});
             }else{
@@ -114,5 +112,26 @@ app.delete('/deleteUser/:id', async (req,res)=>{
         console.log(e);
         return res.status(406).send(e);
         
+    }
+})
+
+app.post('/addPost', async (req,res)=>{
+    const {id, title, body, username, tags} = req.body;
+    try{
+        if (!id || !username || !title || !body || !tags){
+            req.status(405).send("incomplete fields");
+        }
+        else{
+            const result = await Post.create({
+                p_title: title,
+                p_body: body,
+                p_u_OID: id,
+                p_tags: tags,
+            })
+            res.status(404).json({result: succesfully})
+        }
+    }catch(e){
+        console.log(e);
+        req.status(406).send(e);
     }
 })

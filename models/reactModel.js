@@ -24,4 +24,4 @@ const reactSchema = mongoose.Schema(
 
 
 const React =  mongoose.model("React", reactSchema);
-module.exports = React;
+export { React } ;

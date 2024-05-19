@@ -3,9 +3,6 @@ import mongoose, { model } from 'mongoose';
 
 const commentSchema = mongoose.Schema(
     {
-        c_id:{
-            type:Number,
-        },
         c_body:{
             type:String,
             required:true,
@@ -27,10 +24,15 @@ const commentSchema = mongoose.Schema(
             type:Boolean,
             required:false,
             default:false,
-        }
+        },
+        c_date:{
+            type: Date,
+            required:true,
+            default: Date.now
+        },
     }
 )
 
 const Comment = mongoose.model("Comment", commentSchema);
 
-module.exports = Comment;
+export { Comment } ;

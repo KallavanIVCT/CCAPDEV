@@ -2,10 +2,6 @@ import mongoose from 'mongoose';
 
 const userSchema = mongoose.Schema(
     {
-        u_id:{
-            type:Number,
-            required:true,
-        },
         u_username: {
             type: String,
             required:true,
@@ -22,6 +18,11 @@ const userSchema = mongoose.Schema(
         },
         u_password:{
             type:String,
+            required:true,
+        },
+        u_date:{
+            type:Date,
+            default: Date.now,
             required:true,
         }
     }

@@ -3,10 +3,6 @@ import mongoose from 'mongoose';
 
 const postSchema = mongoose.Schema(
     {
-        p_id:{
-            type:Number,
-            required:true,
-        },
         p_title:{
             type:String,
             required:true,
@@ -16,8 +12,9 @@ const postSchema = mongoose.Schema(
             type:String,
             required:true,
         },
-        p_u_username:{
-            type:String,
+        p_u_OID:{
+            type:mongoose.Schema.Types.ObjectId,
+            ref: 'User',
             required:true,
         },
         p_tags:{
@@ -29,8 +26,13 @@ const postSchema = mongoose.Schema(
             required:false,
             default:false,
         },
+        p_date:{
+            type: Date,
+            required:true,
+            default: Date.now
+        }
     }
 )
 
 const Post = mongoose.model("Post", postSchema);
-module.exports = Post;
+export { Post } ;
