@@ -106,12 +106,88 @@
 
 
 
-.form-container{
+
+
+/* for creating posts */
+
+.for-center{
     display:flex;
+    align-items: center;
     justify-content: center;
-    align-items:center;
+    height: 100vh;
 }
 
+.post-form-container{
+    color:black;
+    background-color:aliceblue;
+    justify-content: center;
+    display:flex;
+    flex-direction:column;
+    width:30%;
+    padding:50px;
+}
+.post-form .input-box input{
+    width:100%;
+
+}
+
+.post-form .column-input-box{
+    display:flex;
+    flex-direction: row;
+    gap:10px;
+}
+
+
+.post-content-box{
+    height:300px;
+}
+
+
+/* CSS for making Login*/   
+.login-form-container{
+    padding:20px;
+    margin:0px 500px 0px 500px;
+    background-color: var(--slate100);
+    color:var(--slate1000);
+}
+.login-form{
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+    justify-content: start;
+
+}
+.login-form .input-box input{
+    width:100%;
+}
+.login-form .input-box button{
+    width:100%;
+}
 .form-label{
     background-color: var(--slate1000);
 }
+
+/* CSS for making Login*/   
+.register-form-container{
+    padding:20px;
+    margin:0px 500px 0px 500px;
+    background-color: var(--slate100);
+    color:var(--slate1000);
+}
+.register-form{
+    display:flex;
+    flex-direction: column;
+    gap:20px;
+    justify-content: start;
+
+}
+.register-form .input-box input{
+    width:100%;
+}
+.register-form .input-box button{
+    width:100%;
+}
+.form-label{
+    background-color: var(--slate1000);
+}
+
