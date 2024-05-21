@@ -91,3 +91,9 @@ input[type="button"]:hover{
     transform:translate(5px,-2px);
     cursor:pointer;
 }
+input:focus{
+    border:0px;
+    outline: 2px solid var(--slate1000);
+}
+input[type="text"]{
+}
