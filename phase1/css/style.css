@@ -1,5 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@100..900&display=swap');
 
+@keyframes blur{
+    from{
+        transform: translateY(-50px);
+        opacity:0;
+    }
+    to{
+        transform: translateY(0px);
+        opacity:1;
+    } 
+}
+.blur{
+    animation: blur 1s ease;
+}
+
+
+@keyframes blur-left{
+    from{
+        transform: translateX(-50px);
+        opacity:0;
+    }
+    to{
+        transform: translateX(0px);
+        opacity:1;
+    } 
+}
+.blur-left{
+    animation: blur-left 1s ease;
+}
+
+@keyframes blur-right{
+    from{
+        transform: translateX(50px);
+        opacity:0;
+    }
+    to{
+        transform: translateX(0px);
+        opacity:1;
+    } 
+}
+.blur-right{
+    animation: blur-right 1s ease;
+}
 
 
 .navbar
@@ -14,15 +56,60 @@
     box-sizing:border-box;
     color:var(--slate100);
 }
+
+/*Main Page*/
 .cards-container
 {
-    background-color:var(--slate1000);
-    display:grid;
-    grid-template-columns: repeat(3, 1fr);
+    border-radius:20px;
+    background-color:var(--slate970);
+    display:flex;
+    flex-direction: column;
     gap:20px;
-    padding:20px;
 
 }
+.img-div-post{
+    width:200px;
+    height:200px;
+}
+.img-post{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+}
+.title-post{
+    margin-right:10px;
+    font-size:1.5rem;
+}
+.date-post{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:rgb(137, 138, 155);
+    font-style:italic;    
+}
+.custom-select{
+    
+}
+.cards-top
+{
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    padding:10px;
+    border-bottom:5px solid var(--slate1100);
+    align-items: center;
+}
+
+.cards:hover
+{
+    transform:scale(1.05);
+    background-color:var(--slate1000);   
+}
+.cards
+{
+    padding:10px;
+    transition: transform 0.2s ease;
+    border-bottom:1px solid rgb(217, 205, 241);
+}
+
 .title
 {
     font-family: "Big Shoulders Text", sans-serif;
@@ -34,16 +121,10 @@
 .middle{
 
 }
-.cards:hover
-{
-    transform:scale(1.05);
-    background-color:var(--slate1000);   
-}
-.cards
-{
-    padding:10px;
-    transition: transform 0.2s ease;
-    border-bottom:5px solid var(--slate1100);
+.user-post{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color:rgb(137, 138, 155);
+    font-style:italic;
 }
 
 /*   DOWN BELOW FOR THE USER_PROFILE   */
