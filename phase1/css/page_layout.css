@@ -37,14 +37,13 @@ body
 }
   
 button{
-
+    display:inline-block;
     color: var(--button-text);
     background-color: var(--button-bg);
     border: 0px;
     transition: transform 0.2s ease;
     border-radius:5px;
-    height:20px;
-    
+    height:20px; 
 }
 button:hover
 {
@@ -75,4 +74,20 @@ select{
 }
 textarea{
     height:20px;
+}
+
+input[type="button"]{
+    color: var(--button-text);
+    background-color: var(--button-bg);
+    border: 0px;
+    transition: transform 0.2s ease;
+    border-radius:5px;
+    height:20px;
+    cursor:pointer; 
+}
+input[type="button"]:hover{
+    color: var(--slate100) !important;
+    background-color: var(--buttom-hover-bg);
+    transform:translate(5px,-2px);
+    cursor:pointer;
 }
