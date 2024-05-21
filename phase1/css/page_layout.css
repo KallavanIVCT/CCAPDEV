@@ -8,41 +8,50 @@
 --slate400: #a5b4fc;
 --slate500: #818cf8;
 --slate600: #6366f1;
---slate700: #4f46e5;
---slate800: #4338ca;
---slate900: #3730a3;
---slate950: #312e81;
---slate1000: #201135;
---slate1001: #0c0614;
---slate1100: #10061b;
+--slate700: #5646e5;
+--slate800: #556DE5;
+--slate900: #667CE8;
+--slate950: #2E3C80;
+--slate970: #1B1D2A;/*used for front divs*/
+--slate1000: #222D66;
+--slate1100: #11162B;/*  used for bodybackground  */
 --highlight1: #f792f3;
 --highlight2: #97F1F2;
-font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+--buttom-hover-bg: #556DE5;
+--button-text: #556DE5; /*used for button text */
+--button-bg: #1A224D; /*used for buttonbg */
 }
+/* <uniquifier>: Use a unique and descriptive class name
+// <weight>: Use a value from 100 to 900
+*/
+@import url('https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 body
 {
+    font-family: apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, sans-serif;
     min-height: 100vh;
 
     padding:0px;
     margin:0px;
-    background:linear-gradient(var(--slate1001),var(--slate1000),var(--slate950), var(--slate600));
+    background-color:var(--slate1100);
     color:var(--slate100);
 }
   
 button{
 
-    color: rgb(103, 103, 103);;
-    background-color: var(--highlight1);
+    color: var(--button-text);
+    background-color: var(--button-bg);
     border: 0px;
     transition: transform 0.2s ease;
     border-radius:5px;
+    height:20px;
     
 }
 button:hover
 {
-    color: var(--slate100);
-    background-color: var(--slate800);
+    color: var(--slate100) !important;
+    background-color: var(--buttom-hover-bg);
     transform:translate(5px,-2px);
 }
 
@@ -53,4 +62,13 @@ button:hover
 .margin-left-right
 {
     margin: 0px 50px 0px 50px;
+}
+
+a{
+    color: var(--button-text);
+    text-decoration:none;
+}
+a:hover{
+    color: var(--slate100);
+    text-decoration:none;
 }
