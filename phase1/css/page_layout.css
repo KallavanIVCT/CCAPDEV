@@ -1,5 +1,5 @@
 
-
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
 :root
 {
 --slate100: #eef2ff;
@@ -24,12 +24,12 @@
 /* <uniquifier>: Use a unique and descriptive class name
 // <weight>: Use a value from 100 to 900
 */
-@import url('https://fonts.googleapis.com/css2?family=Grandstander:ital,wght@0,100..900;1,100..900&display=swap');
 
 
 body
 {
-    font-family: apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, sans-serif;
+
+    font-family: "Source Sans 3", sans-serif;
     min-height: 100vh;
 
     padding:0px;
