@@ -150,21 +150,6 @@
 /* For Editing the user Profile*/
 
 
-
-
-
-
-/*Below are the post-container*/
-
-.main-post-container{
-    border:2px solid var(--slate500);
-    padding:20px;
-    margin: 0px 20px 0px 20px;
-}
-.main-post-title{
-    text-align:center;
-}
-
 .Update-form-container{
     padding:20px;
     margin:0px 500px 0px 500px;
@@ -196,6 +181,21 @@ input::file-selector-button{
 .form-profile-description{
     height:200px;
 }
+
+
+
+/*Below are the post-container*/
+
+.main-post-container{
+    border:2px solid var(--slate500);
+    padding:20px;
+    margin: 0px 20px 0px 20px;
+}
+.main-post-title{
+    text-align:center;
+}
+
+
 
 /* for creating posts */
 
