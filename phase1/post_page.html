@@ -7,7 +7,7 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Document</title>
+    <title id="postPageTitle">Post</title>
 </head>
 <body>
     <navbar class="navbar margin-down">
@@ -23,18 +23,123 @@
     <div class="main-post-container">
         <div class="post">
             <h1 class="main-post-title">The Title</h1>
+            <div class="authorContainer">
+                <img class="pfp" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg">
+                <div class="authorTextContainer">
+                    <p class="authorName">u/Author</p>
+                    <p class="dateText">February 2, 2024</p>
+                </div>
+            </div>
             <p class="main-post-description">Lorem ipsum dolor sit amet consectmet consectetur adipisicing elit. Veniam quimet consectetur adipisicing elit. Veniam quimet consectetur adipisicing elit. Veniam quimet consectetur adipisicing elit. Veniam quimet consectetur adipisicing elit. Veniam quimet consectetur adipisicing elit. Veniam quimet consectetur adipisicing elit. Veniam quimet consectetur adipisicing elit. Veniam quimet consectetur adipisicing elit. Veniam quimet consectetur adipisicing elit. Veniam quimet consectetur adipisicing elit. Veniam quimet consectetur adipisicing elit. Veniam quimet consectetur adipisicing elit. Veniam quimet consectetur adipisicing elit. Veniam quimet consectetur adipisicing elit. Veniam quivetur adipisicing elit. Veniam quidem molestias deserunt enim debitis, impedit pariatur soluta, eligendi perferendis, alias culpa quibusdam vitae magni ex. Magnam soluta nihil aut mollitia.</p>
-            <i class="fa-solid fa-thumbs-up"> 52132</i>
-            <i class="fa-solid fa-thumbs-down"> 3213152</i>
+            <img class="post-img" src="https://preview.redd.it/genshin-impact-version-4-7-preview-v0-stgcokjwyh2d1.jpeg?width=1080&crop=smart&auto=webp&s=0f20698460bf2da8aca1420bb2e6d62a9785c0a5">
+            <br>
+            <div class="tagsContainer">
+                <div class="tag">#Genshin_Impact</div>
+                <div class="tag">#4.7</div>
+            </div>
+            <br>
+            <i class="fa-solid fa-thumbs-up"></i>
+            <span> 123123</span>
+            <i class="fa-solid fa-thumbs-down"></i>
+            <span> 123123</span>
         </div>
         <div class="comments-container">
-            <h2>Comments Section</h2>
-            <div class="comments">Name:X Reply: linglingling</div>
-            <div class="comments">Name:X Reply: linglingling</div>
-            <div class="comments">Name:X Reply: linglingling</div>
-            <div class="comments">Name:X Reply: linglingling</div>
-            <div class="comments">Name:X Reply: linglingling</div>
+            <h2>Comments</h2>
+            <div class="createComment">
+                <div id="draftComment" contenteditable="true" placeholder="Write your comment here :3" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></div>
+                <div class="buttonsContainer">
+                    <button id="attachFilesComment">Attach Files</button>
+                    <button id="postComment">Post</button>
+                </div>
+            </div>
+            <div class="comment">
+                <div class="commentContainer">
+                    <img class="pfp" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg">
+                </div>
+                <div class="commentTextContainer">
+                    <h4>Name: x</h4>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius temporibus molestiae consequuntur ea asperiores, praesentium cupiditate illo nihil atque, deleniti doloremque eligendi maiores sunt commodi eaque accusamus dignissimos. Sint, numquam?</p>
+                    <div class="commentActionsContainer">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        <span> 123</span>
+                        <i class="fa-solid fa-thumbs-down"></i>
+                        <span> 123</span>
+                        <button class="replyButton" onclick="toggleReplyComment(this)">Reply</button>
+
+                        <div class="createComment replyComment">
+                            <div class="draftReplyComment" contenteditable="true" placeholder="Write your comment here :3" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></div>
+                            <div class="buttonsContainer">
+                                <button id="attachFilesComment">Attach Files</button>
+                                <button id="postComment">Post</button>
+                            </div>
+                        </div>
+
+                        <div class="comment">
+                            <div class="commentContainer">
+                                <img class="pfp" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg">
+                            </div>
+                            <div class="commentTextContainer">
+                                <h4>Name: x</h4>
+                                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius temporibus molestiae consequuntur ea asperiores, praesentium cupiditate illo nihil atque, deleniti doloremque eligendi maiores sunt commodi eaque accusamus dignissimos. Sint, numquam?</p>
+                                <div class="commentActionsContainer">
+                                    <i class="fa-solid fa-thumbs-up"></i>
+                                    <span> 123</span>
+                                    <i class="fa-solid fa-thumbs-down"></i>
+                                    <span> 123</span>
+                                    <button class="replyButton" onclick="toggleReplyComment(this)">Reply</button>
+            
+                                    <div class="createComment replyComment">
+                                        <div class="draftReplyComment" contenteditable="true" placeholder="Write your comment here :3" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></div>
+                                        <div class="buttonsContainer">
+                                            <button id="attachFilesComment">Attach Files</button>
+                                            <button id="postComment">Post</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>            
+                        </div>
+                    </div>
+                </div>            
+            </div>
+            <div class="comment">
+                <div class="commentContainer">
+                    <img class="pfp" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg">
+                </div>
+                <div class="commentTextContainer">
+                    <h4>Name: x</h4>
+                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius temporibus molestiae consequuntur ea asperiores, praesentium cupiditate illo nihil atque, deleniti doloremque eligendi maiores sunt commodi eaque accusamus dignissimos. Sint, numquam?</p>
+                    <div class="commentActionsContainer">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        <span> 123</span>
+                        <i class="fa-solid fa-thumbs-down"></i>
+                        <span> 123</span>
+                        <button class="replyButton" onclick="toggleReplyComment(this)">Reply</button>
+
+                        <div class="createComment replyComment">
+                            <div class="draftReplyComment" contenteditable="true" placeholder="Write your comment here :3" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></div>
+                            <div class="buttonsContainer">
+                                <button id="attachFilesComment">Attach Files</button>
+                                <button id="postComment">Post</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        textarea = document.querySelector("#draftComment");
+        textarea.addEventListener('input', autoResize, false);
+ 
+        function autoResize() {
+            this.style.height = 'auto';
+            this.style.height = Math.max(this.scrollHeight, this.offsetHeight) + 'px';
+        }
+
+        function toggleReplyComment(button) {
+            button.parentElement.getElementsByTagName("div")[0].style.display = (button.parentElement.getElementsByTagName("div")[0].style.display === 'block') ? 'none' : 'block';
+        }
+    </script>
 </body>
 </html>
