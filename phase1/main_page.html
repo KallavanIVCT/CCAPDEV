@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./css/page_layout.css">
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="page_layout.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="stars_bg.css">
     <title>Document</title>
 </head>
 <body>
@@ -19,7 +20,7 @@
     </navbar>
     <div class="blur-left cards-container" style="margin: 0px 300px 0px 300px;">
         <div class="cards-top">
-            <input type="button" onclick="location.href='create_post_page.html'" value="Add Post">
+            <button onclick = "togglePopup()">Add Post</button>
             <div class="description-post"><strong>POSTS</strong></div>
             <div style="display:flex; gap:10px">
                 <div class="search-post"><input type="text"></div>
@@ -37,7 +38,7 @@
             <div class="date-post"><strong>04/21</strong></div>
             <div class="description-post">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae ut iste obcaecati ullam illum earum at maiores ducimus quia repellendus, sed vero? Consequatur dignissimos sit nemo explicabo fugiat repellendus adipisci!</div>
             <div class="tags"><button style="margin-right:10px;">#Anime</button><button style="margin-right:10px;">#Manwha</button></div>
-            <div class="img-div-post"><img src="./css/genshin1.jpg" class="img-post"></div>
+            <div class="img-div-post"><img src="genshin1.jpg" class="img-post"></div>
             <br>
             <input type="button" onclick="location.href='post_page.html'" value="See More">
         </div>
@@ -45,7 +46,7 @@
             <span class="title-post"><strong>Title1</strong></span><span class="user-post">Ameriea</span>
             <div class="description-post">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae ut iste obcaecati ullam illum earum at maiores ducimus quia repellendus, sed vero? Consequatur dignissimos sit nemo explicabo fugiat repellendus adipisci!</div>
             <div class="tags"><button style="margin-right:10px;">#Anime</button><button style="margin-right:10px;">#Manwha</button></div>
-            <div class="img-div-post"><img src="./css/genshin2.jpg" class="img-post"></div>
+            <div class="img-div-post"><img src="genshin2.jpg" class="img-post"></div>
             <br>
             <input type="button" onclick="location.href='post_page.html'" value="See More">
         </div>
@@ -53,7 +54,7 @@
             <span class="title-post"><strong>Title1</strong></span><span class="user-post">Ameriea</span>
             <div class="description-post">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae ut iste obcaecati ullam illum earum at maiores ducimus quia repellendus, sed vero? Consequatur dignissimos sit nemo explicabo fugiat repellendus adipisci!</div>
             <div class="tags"><button style="margin-right:10px;">#Anime</button><button style="margin-right:10px;">#Manwha</button></div>
-            <div class="img-div-post"><img src="./css/genshin3.jpg" class="img-post"></div>
+            <div class="img-div-post"><img src="genshin3.jpg" class="img-post"></div>
             <br>
             <input type="button" onclick="location.href='post_page.html'" value="See More">
         </div>
@@ -61,11 +62,32 @@
             <span class="title-post"><strong>Title1</strong></span><span class="user-post">Ameriea</span>
             <div class="description-post">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae ut iste obcaecati ullam illum earum at maiores ducimus quia repellendus, sed vero? Consequatur dignissimos sit nemo explicabo fugiat repellendus adipisci!</div>
             <div class="tags"><button style="margin-right:10px;">#Anime</button><button style="margin-right:10px;">#Manwha</button></div>
-            <div class="img-div-post"><img src="./css/genshin1.jpg" class="img-post"></div>
+            <div class="img-div-post"><img src="genshin1.jpg" class="img-post"></div>
             <br>
             <input type="button" onclick="location.href='post_page.html'" value="See More">
         </div>
     </div>
 
+    <!--Create the post popout-->
+    <div class = "popup" id = "popup_js">
+    <div class="for-center">
+        <div class="blur-left post-form-container">
+            <h1><strong>Create Post</strong></h1>
+            <form class="post-form">
+                <div class="input-box">
+                    <div class = "close-btn" onclick="location.href = 'main_page.html'">&times;</div>
+                    <label>Title</label>
+                    <input type="text" placeholder="Enter Title">
+                </div>
+                <div class="input-box">
+                    <label>Content</label>
+                    <input type="text" placeholder="What's Happening!?" class="post-content-box">
+                </div>
+                <input type="button" onclick="location.href='main_page.html'" value="Create Post">
+            </form>
+        </div>
+    </div>
+</div>
+    <script src="modal.js"></script>
 </body>
 </html>

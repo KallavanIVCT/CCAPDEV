@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./css/page_layout.css">
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="page_layout.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="login_style.css">
     <title>Document</title>
 </head>
 <body>
@@ -19,10 +20,12 @@
     </navbar>
     <div class="blur profile-bar">
         <div>
-            <div class="profile-circle-holder"></div>
+            <div class="profile-circle-holder">
+              
+            </div>
             <div class="profile-details-container">
                 <div class="profile-username">John Cena</div>
-                <input type="button" class="profile-edit" onclick="location.href='edit_user_profile_page.html'" value="Edit">
+                <button onclick = "togglePopup()">Edit</button>
                 
             </div>
 
@@ -94,5 +97,33 @@
             </div>
         </div>
     </div>
+
+    <!-- popout -->
+    <div class = "popup" id = "popup_js">
+    <div class="blur-bottom login-form-container">
+        <div class = "close-btn" onclick="location.href ='user_profile_page.html'">&times;</div>
+        <h1 style="text-align: center;">Update Profile</h1>
+        <form class='Update-form'>
+            <div class="input-box">
+                <label>Email</label>
+                <input type="email">
+            </div>
+            <div class="input-box">
+                <label>Password</label>
+                <input type="password" class="password">
+            </div>
+            <div class="input-box">
+                <label>Profile Pic</label>
+                <input type="file" class="Profile Pic">
+            </div>
+            <div class="input-box">
+                <label>Description</label>
+                <input type="text" class="form-profile-description">
+            </div>
+            <input type="button" onclick="location.href='main_page.html'" value="Submit">
+        </form>      
+    </div>
+</div>
+<script src="modal.js"></script>
 </body>
 </html>

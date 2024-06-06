@@ -1,0 +1,95 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Text:wght@100..900&family=Source+Sans+3:ital,wght@0,200..900;1,200..900&display=swap');
+:root
+{
+--slate100: #eef2ff;
+--slate200: #e0e7ff;
+--slate300: #c7d2fe;
+--slate400: #a5b4fc;
+--slate500: #818cf8;
+--slate600: #6366f1;
+--slate700: #5646e5;
+--slate800: #556DE5;
+--slate900: #667CE8;
+--slate950: #2E3C80;
+--slate970: #1B1D2A;/*used for front divs*/
+--slate1000: #222D66;
+--slate1100: #11162B;/*  used for bodybackground  */
+--highlight1: #f792f3;
+--highlight2: #97F1F2;
+--buttom-hover-bg: #556DE5;
+--button-text: #556DE5; /*used for button text */
+--button-bg: #1A224D; /*used for buttonbg */
+}
+/* <uniquifier>: Use a unique and descriptive class name
+// <weight>: Use a value from 100 to 900
+*/
+
+
+body
+{
+    font-family: "Source Sans 3", sans-serif;
+    min-height: 100vh;
+    padding:0px;
+    margin:0px;
+    background:linear-gradient(to bottom right,  var(--slate1000),  var(--slate1100),var(--slate950));
+    color:var(--slate100);
+}
+  
+button{
+    display:inline-block;
+    color: var(--button-text);
+    background-color: var(--button-bg);
+    border: 0px;
+    transition: transform 0.2s ease;
+    border-radius:20px;
+    height:20px; 
+}
+button:hover
+{
+    color: var(--slate100) !important;
+    background-color: var(--buttom-hover-bg);
+    transform:translate(5px,-2px);
+}
+
+.margin-down
+{
+    margin: 0px 0px 20px 0px;
+}
+.margin-left-right
+{
+    margin: 0px 50px 0px 50px;
+}
+
+a{
+    color: var(--button-text);
+    text-decoration:none;
+}
+a:hover{
+    color: var(--slate100);
+    text-decoration:none;
+}
+
+textarea{
+    height:20px;
+}
+
+input[type="button"]{
+    color: var(--button-text);
+    background-color: var(--button-bg);
+    border: 0px;
+    transition: transform 0.2s ease;
+    border-radius:5px;
+    height:20px;
+    cursor:pointer; 
+}
+input[type="button"]:hover{
+    color: var(--slate100) !important;
+    background-color: var(--buttom-hover-bg);
+    transform:translate(5px,-2px);
+    cursor:pointer;
+}
+input:focus{
+    border:0px;
+    outline: 2px solid var(--slate1000);
+}
