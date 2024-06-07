@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/page_layout.css">
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="login_style.css">
     <title>Document</title>
 </head>
 <body>
     <navbar class="blur navbar margin-down">
-        <div class="subnav title">The Logo</div>
+        <div class="subnav title">Mihoyo-X</div>
+        <img src = "https://static.miraheze.org/houkai2ndwiki/thumb/0/06/MiHoYo_O_logo.webp/739px-MiHoYo_O_logo.webp.png"/>
         <div class="subnav buttons">
             <input type="button" onclick="location.href='user_profile_page.html'" value="Profile">
             <input type="button" onclick="location.href='register_page.html'" value="Logout">
@@ -24,7 +25,7 @@
             <button onclick = "togglePopup()">Add Post</button>
             <div class="description-post"><strong>POSTS</strong></div>
             <div style="display:flex; gap:10px">
-                <div class="search-post"><input type="text"></div>
+                <div class="search-post"><input type="text" class="search-bar"></div>
                 <div class="custom-select">
                     <select>
                         <option>Genshin Impact</option>
@@ -132,10 +133,17 @@
                         <div class = "close-btn" onclick="location.href = 'main_page.html'">&times;</div>
                         <label>Title</label>
                         <input type="text" placeholder="Enter Title">
+                        <select class = "selector">
+                            <option>Genshin Impact</option>
+                            <option>Honkai Star Rail</option>
+                            <option>Honkai Impact</option>
+                            <option>Zenless Zone Zero</option>
+                            <option>Mihoyo</option>
+                        </select>
                     </div>
                     <div class="input-box">
                         <label>Content</label>
-                        <input type="text" placeholder="What's Happening!?" class="post-content-box">
+                        <input type="text" placeholder="What's Happening!?" class="post-content-box"  contenteditable="true">
                     </div>
                     <input type="button" onclick="location.href='main_page.html'" value="Create Post">
                 </form>

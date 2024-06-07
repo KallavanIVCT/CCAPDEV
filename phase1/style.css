@@ -691,3 +691,16 @@ h1.main-post-title{
     color: white;
     font-size: 3rem;
 }
+.selector
+{
+    margin-top: 5%;
+    margin-bottom: 7%;
+    margin-left: 5%;
+}
+
+.search-bar:hover{
+    background-color:white;
+}
+.search-bar{
+    background-color:white;
+}
