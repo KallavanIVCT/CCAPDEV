@@ -13,14 +13,13 @@
         <div class="subnav title">The Logo</div>
         <div class="subnav">Middle Contents</div>
         <div class="subnav buttons">
-            <input type="button" onclick="location.href='login_page.html'" value="Login">
-            <input type="button" onclick="location.href='register_page.html'" value="Register">
             <input type="button" onclick="location.href='user_profile_page.html'" value="Profile">
+            <input type="button" onclick="location.href='logout.html'" value="Logout">
         </div>
     </navbar>
     <div class="blur-left cards-container" style="margin: 0px 300px 0px 300px;">
         <div class="cards-top">
-            <button onclick = "togglePopup()">Add Post</button>
+            <button onclick="togglePopup()">Add Post</button>
             <div class="description-post"><strong>POSTS</strong></div>
             <div style="display:flex; gap:10px">
                 <div class="search-post"><input type="text"></div>
@@ -28,13 +27,17 @@
                     <select>
                         <option>Anime</option>
                         <option>Manga</option>
-                        <option>Manwha</select>
+                        <option>Manwha</option>
                     </select>
                 </div>
             </div>
         </div>
         <div class="cards">
-            <span class="title-post"><strong>Title1</strong></span><span class="user-post">Ameriea</span>
+            <div style="display: flex; justify-content: space-between;">
+                <span class="title-post"><strong>Title1</strong></span>
+                <input type="button" value="Delete">
+            </div>
+            <span class="user-post">Ameriea</span>
             <div class="date-post"><strong>04/21</strong></div>
             <div class="description-post">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae ut iste obcaecati ullam illum earum at maiores ducimus quia repellendus, sed vero? Consequatur dignissimos sit nemo explicabo fugiat repellendus adipisci!</div>
             <div class="tags"><button style="margin-right:10px;">#Anime</button><button style="margin-right:10px;">#Manwha</button></div>
@@ -43,7 +46,11 @@
             <input type="button" onclick="location.href='post_page.html'" value="See More">
         </div>
         <div class="cards">
-            <span class="title-post"><strong>Title1</strong></span><span class="user-post">Ameriea</span>
+            <div style="display: flex; justify-content: space-between;">
+                <span class="title-post"><strong>Title1</strong></span>
+                <input type="button" value="Delete">
+            </div>
+            <span class="user-post">Ameriea</span>
             <div class="description-post">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae ut iste obcaecati ullam illum earum at maiores ducimus quia repellendus, sed vero? Consequatur dignissimos sit nemo explicabo fugiat repellendus adipisci!</div>
             <div class="tags"><button style="margin-right:10px;">#Anime</button><button style="margin-right:10px;">#Manwha</button></div>
             <div class="img-div-post"><img src="genshin2.jpg" class="img-post"></div>
@@ -51,7 +58,11 @@
             <input type="button" onclick="location.href='post_page.html'" value="See More">
         </div>
         <div class="cards">
-            <span class="title-post"><strong>Title1</strong></span><span class="user-post">Ameriea</span>
+            <div style="display: flex; justify-content: space-between;">
+                <span class="title-post"><strong>Title1</strong></span>
+                <input type="button" value="Delete">
+            </div>
+            <span class="user-post">Ameriea</span>
             <div class="description-post">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae ut iste obcaecati ullam illum earum at maiores ducimus quia repellendus, sed vero? Consequatur dignissimos sit nemo explicabo fugiat repellendus adipisci!</div>
             <div class="tags"><button style="margin-right:10px;">#Anime</button><button style="margin-right:10px;">#Manwha</button></div>
             <div class="img-div-post"><img src="genshin3.jpg" class="img-post"></div>
@@ -59,7 +70,11 @@
             <input type="button" onclick="location.href='post_page.html'" value="See More">
         </div>
         <div class="cards">
-            <span class="title-post"><strong>Title1</strong></span><span class="user-post">Ameriea</span>
+            <div style="display: flex; justify-content: space-between;">
+                <span class="title-post"><strong>Title1</strong></span>
+                <input type="button" value="Delete">
+            </div>
+            <span class="user-post">Ameriea</span>
             <div class="description-post">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vitae ut iste obcaecati ullam illum earum at maiores ducimus quia repellendus, sed vero? Consequatur dignissimos sit nemo explicabo fugiat repellendus adipisci!</div>
             <div class="tags"><button style="margin-right:10px;">#Anime</button><button style="margin-right:10px;">#Manwha</button></div>
             <div class="img-div-post"><img src="genshin1.jpg" class="img-post"></div>
@@ -69,25 +84,25 @@
     </div>
 
     <!--Create the post popout-->
-    <div class = "popup" id = "popup_js">
-    <div class="for-center">
-        <div class="blur-left post-form-container">
-            <h1><strong>Create Post</strong></h1>
-            <form class="post-form">
-                <div class="input-box">
-                    <div class = "close-btn" onclick="location.href = 'main_page.html'">&times;</div>
-                    <label>Title</label>
-                    <input type="text" placeholder="Enter Title">
-                </div>
-                <div class="input-box">
-                    <label>Content</label>
-                    <input type="text" placeholder="What's Happening!?" class="post-content-box">
-                </div>
-                <input type="button" onclick="location.href='main_page.html'" value="Create Post">
-            </form>
+    <div class="popup" id="popup_js">
+        <div class="for-center">
+            <div class="blur-left post-form-container">
+                <h1><strong>Create Post</strong></h1>
+                <form class="post-form">
+                    <div class="input-box">
+                        <div class="close-btn" onclick="location.href = 'main_page.html'">&times;</div>
+                        <label>Title</label>
+                        <input type="text" placeholder="Enter Title">
+                    </div>
+                    <div class="input-box">
+                        <label>Content</label>
+                        <input type="text" placeholder="What's Happening!?" class="post-content-box">
+                    </div>
+                    <input type="button" onclick="location.href='main_page.html'" value="Create Post">
+                </form>
+            </div>
         </div>
     </div>
-</div>
     <script src="modal.js"></script>
 </body>
 </html>
