@@ -379,9 +379,19 @@ h1
 }
 .post-content-box 
 {
+    color:black;
     height: 100px;
     resize: none;
     display: flex;
+}
+.post-content-box2
+{
+    color:black;
+    height: 200px;
+    width:85%;
+    resize: none;
+    display: flex;
+    border: 1px solid black;
 }
 .submit-button 
 {
@@ -702,5 +712,5 @@ h1.main-post-title{
     background-color:white;
 }
 .search-bar{
-    background-color:white;
+    background-color: white;
 }
