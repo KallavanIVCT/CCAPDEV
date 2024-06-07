@@ -686,3 +686,8 @@ p.draftReplyComment{
 .deleteCommentButton:hover{
     background-color: #661b1b;
 }
+
+h1.main-post-title{
+    color: white;
+    font-size: 3rem;
+}
