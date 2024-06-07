@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/page_layout.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title id="postPageTitle">Post</title>
+</head>
+<body>
+    <navbar class="navbar margin-down">
+        <div class="subnav title">The Logo</div>
+        <div class="subnav">Middle Contents</div>
+        <div class="subnav buttons">
+            <input type="button" onclick="location.href='login_page.html'" value="Login">
+            <input type="button" onclick="location.href='register_page.html'" value="Register">
+            <input type="button" onclick="location.href='user_profile_page.html'" value="Profile">
+        </div>
+    </navbar>
+    
+    <div class="main-post-container">
+        <div class="post">
+            <h1 class="main-post-title">7.3 Honkai Impact Update!</h1>
+            <div class="authorContainer">
+                <img class="pfp" src="./css/luocha.png">
+                <div class="authorTextContainer">
+                    <p class="authorName">AbominationOfYaoshi</p>
+                    <p class="dateText">February 2, 2024</p>
+                </div>
+            </div>
+            <p class="main-post-description">"Hey there, world!" This girl, born from the Sea of Data, is super curious about everything around her. On the journey of pursuing dreams, she will accompany you to experience all sorts of adventures and meet a bunch of interesting folks. By the way, if she swings by late at night, make sure to treat her to some barbecue.</p>
+            <img class="post-img" img src="./css/hi3rd.jpg">
+            <br>
+            <div class="tagsContainer">
+                <div class="tag">#HonkaiImpact</div>
+                <div class="tag">#7.3</div>
+            </div>
+            <br>
+            <i class="fa-solid fa-thumbs-up"></i>
+            <span> 123123</span>
+            <i class="fa-solid fa-thumbs-down"></i>
+            <span> 123123</span>
+        </div>
+        <div class="comments-container">
+            <h2>Comments</h2>
+            <div class="createComment">
+                <div id="draftComment" contenteditable="true" placeholder="Enter your comment here" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></div>
+                <div class="buttonsContainer">
+                    <button id="attachFilesComment">Attach Files</button>
+                    <button id="postComment">Post</button>
+                </div>
+            </div>
+
+            <div class="comment">
+                <div class="commentContainer">
+                    <img class="pfp" src="./css/pompom.webp">
+                </div>
+                <div class="commentTextContainer">
+                    <h4>TheConductor</h4>
+                    <p>Looking forward for the new meta valkyries!</p>
+                    <div class="buttonsContainer editCommentButtons">
+                        <button id="attachFilesComment">Attach Files</button>
+                        <button id="postComment" onclick="editCommentDiv(this)">Edit Comment</button>
+                    </div>
+
+                    <div class="commentActionsContainer">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        <span> 123</span>
+                        <i class="fa-solid fa-thumbs-down"></i>
+                        <span> 123</span>
+                        <button class="replyButton" onclick="toggleReplyComment(this)">Reply</button>
+                        <button onclick="editCommentDiv(this)">Edit</button>
+                        <button class="deleteCommentButton">Delete</button>
+
+                        <div class="createComment replyComment">
+                            <div class="draftReplyComment" contenteditable="true" placeholder="Enter your reply here" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></div>
+                            <div class="buttonsContainer">
+                                <button id="attachFilesComment">Attach Files</button>
+                                <button id="postComment">Reply</button>
+                            </div>
+                        </div>
+
+                        <div class="comment">
+                            <div class="commentContainer">
+                                <img class="pfp" src="./css/himeko.webp">
+                            </div>
+                            <div class="commentTextContainer">
+                                <h4>CoffeeLover</h4>
+                                <p>Use the code "HonkaiImpact73" for free 10 pulls!</p>
+                                <div class="commentActionsContainer">
+                                    <i class="fa-solid fa-thumbs-up"></i>
+                                    <span> 123</span>
+                                    <i class="fa-solid fa-thumbs-down"></i>
+                                    <span> 123</span>
+                                    <button class="replyButton" onclick="toggleReplyComment(this)">Reply</button>
+            
+                                    <div class="createComment replyComment">
+                                        <div class="draftReplyComment" contenteditable="true" placeholder="Enter your reply here" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></div>
+                                        <div class="buttonsContainer">
+                                            <button id="attachFilesComment">Attach Files</button>
+                                            <button id="postComment">Post</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>            
+                        </div>
+                    </div>
+                </div>            
+            </div>
+            <div class="comment">
+                <div class="commentContainer">
+                    <img class="pfp" src="./css/zoro.webp">
+                </div>
+                <div class="commentTextContainer">
+                    <h4>Zoro</h4>
+                    <p>Hello everyone, I think I'm lost, can you tell me where the Grand line is?</p>
+                    <div class="commentActionsContainer">
+                        <i class="fa-solid fa-thumbs-up"></i>
+                        <span> 123</span>
+                        <i class="fa-solid fa-thumbs-down"></i>
+                        <span> 123</span>
+                        <button class="replyButton" onclick="toggleReplyComment(this)">Reply</button>
+
+                        <div class="createComment replyComment">
+                            <div class="draftReplyComment" contenteditable="true" placeholder="Enter your reply here" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></div>
+                            <div class="buttonsContainer">
+                                <button id="attachFilesComment">Attach Files</button>
+                                <button id="postComment">Post</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="modal.js"></script>
+</body>
+</html>
