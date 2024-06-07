@@ -324,6 +324,9 @@ input::file-selector-button{
 
 .post-content-box{
     height:300px;
+    color:var(--slate1000);
+    background-color: white;
+    border: 1px solid var(--slate1000);
 }
 
 
@@ -352,7 +355,7 @@ input::file-selector-button{
     background-color: var(--slate1000);
 }
 
-/* CSS for making Login*/   
+/* CSS for making Register*/   
 .register-form-container{
     padding:20px;
     margin:0px 500px 0px 500px;
@@ -375,3 +378,4 @@ input::file-selector-button{
 .form-label{
     background-color: var(--slate1000);
 }
+

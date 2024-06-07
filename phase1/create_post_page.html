@@ -10,7 +10,6 @@
 <body>
     <navbar class="blur navbar margin-down">
         <div class="subnav title">The Logo</div>
-        <div class="subnav">Middle Contents</div>
         <div class="subnav buttons">
             <input type="button" onclick="location.href='login_page.html'" value="Login">
             <input type="button" onclick="location.href='register_page.html'" value="Register">
@@ -25,22 +24,19 @@
                     <label>Title</label>
                     <input type="text" placeholder="Enter Title">
                 </div>
+                <label>Tag</label>
+                <select>
+                    <option>Genshin Impact</option>
+                    <option>Honkai Star Rail</option>
+                    <option>Honkai Impact</option>
+                    <option>Zenless Zone Zero</option>
+                    <option>Mihoyo</option>
+                </select>
                 <div class="input-box">
                     <label>Content</label>
-                    <input type="text" placeholder="Enter Content" class="post-content-box">
+                    <div class="post-content-box" contenteditable="true" placeholder="Enter your reply here" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></div>
                 </div>
-                <!--
-                <div class="column-input-box">
-                    <div class="input-box">
-                        <label>First Name</label>
-                        <input type="text" placeholder="Enter First Name" >
-                    </div>
-                    <div class="input-box">
-                        <label>Last Name</label>
-                        <input type="text" placeholder="Enter Last Name">
-                    </div>
-                </div>
-                -->
+
                 <input type="button" onclick="location.href='main_page.html'" value="Create Post">
             </form>
         </div>

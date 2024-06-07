@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/page_layout.css">
     <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <link rel="stylesheet" type="text/css" href="login_style.css">
     <title>Document</title>
 </head>
 <body>
     <navbar class="blur navbar margin-down">
         <div class="subnav title">The Logo</div>
-        <div class="subnav">Middle Contents</div>
         <div class="subnav buttons">
             <input type="button" onclick="location.href='user_profile_page.html'" value="Profile">
             <input type="button" onclick="location.href='register_page.html'" value="Logout">
@@ -21,15 +21,21 @@
 
     <div class="blur-left cards-container" style="margin: 0px 300px 0px 300px;">
         <div class="cards-top">
-            <input type="button" onclick="location.href='create_post_page.html'" value="Add Post">
+            <button onclick = "togglePopup()">Add Post</button>
             <div class="description-post"><strong>POSTS</strong></div>
             <div style="display:flex; gap:10px">
                 <div class="search-post"><input type="text"></div>
                 <div class="custom-select">
                     <select>
-                        <option>Anime</option>
-                        <option>Manga</option>
-                        <option>Manwha</option>
+                        <option>Genshin Impact</option>
+                        <option>Honkai Star Rail</option>
+                        <option>Honkai Impact</option>
+                        <option>Zenless Zone Zero</option>
+                        <option>Mihoyo</option>
+                    </select>
+                    <select>
+                        <option>Hottest</option>
+                        <option>Newest</option>
                     </select>
                 </div>
             </div>
@@ -47,7 +53,7 @@
             <div class="description-post">〓Compensation Details〓<br><br>
                 Maintenance Compensation: Primogems ×300 (60 Primogems per hour the servers are down)<br>
                 Issue Fix Compensation: Primogems ×300 (please refer to the relevant compensation mail for more details)<br><br></div>
-            <div class="tags"><button style="margin-right:10px;">#Genshin_Impact</button><button style="margin-right:10px;">#4.7</button></div>
+            <div class="tags"><button style="margin-right:10px;">#Genshin Impact</button></div>
             <div class="img-div-post"><img src="https://preview.redd.it/genshin-impact-version-4-7-preview-v0-stgcokjwyh2d1.jpeg?width=1080&crop=smart&auto=webp&s=0f20698460bf2da8aca1420bb2e6d62a9785c0a5" class="img-post"></div>
             <br>
             <input type="button" onclick="location.href='post_page_1.html'" value="See More">
@@ -62,7 +68,7 @@
             </div>
             <span class="user-post">miHoYo</span>
             <div class="description-post">A centralized platform for your favorite miHoYo games!</div>
-            <div class="tags"><button style="margin-right:10px;">#Anime</button></div>
+            <div class="tags"><button style="margin-right:10px;">#Mihoyo</button></div>
             <div class="img-div-post"><img src="https://preview.redd.it/fb23w8kkihpc1.png?width=1594&format=png&auto=webp&s=7c35b9afa11ad76c8e18692a9d3aa00a81febb0e" class="img-post"></div>
             <br>
             <input type="button" onclick="location.href='post_page_2.html'" value="See More">
@@ -77,7 +83,7 @@
             </div>
             <span class="user-post">AbominationOfYaoshi</span>
             <div class="description-post">"Hey there, world!" This girl, born from the Sea of Data, is super curious about everything around her. On the journey of pursuing dreams, she will accompany you to experience all sorts of adventures and meet a bunch of interesting folks. By the way, if she swings by late at night, make sure to treat her to some barbecue.</div>
-            <div class="tags"><button style="margin-right:10px;">#Anime</button><button style="margin-right:10px;">#Manwha</button></div>
+            <div class="tags"><button style="margin-right:10px;">#Honkai Impact</button></div>
             <div class="img-div-post"><img src="./css/hi3rd.jpg" class="img-post"></div>
             <br>
             <input type="button" onclick="location.href='post_page_3.html'" value="See More">
@@ -94,7 +100,7 @@
             <div class="description-post">The reflection of Penacony cast upon the deep. The "Nightmare" professed by The Family. However, what people don't know is that this primordial Memory Zone is the true form of the Dreamscape.
 
             </div>
-            <div class="tags"><button style="margin-right:10px;">#Anime</button><button style="margin-right:10px;">#Manwha</button></div>
+            <div class="tags"><button style="margin-right:10px;">#Honkai Star Rail</button>></div>
             <div class="img-div-post"><img src="./css/starrail1.jpg" class="img-post"></div>
             <br>
             <input type="button" onclick="location.href='post_page_4.html'" value="See More">
@@ -109,13 +115,34 @@
             </div>
             <span class="user-post">Tuonto</span>
             <div class="description-post">Zenless Zone Zero is an upcoming free-to-play urban fantasy action role-playing game developed and published by miHoYo in mainland China, with global publishing by Cognosphere, d/b/a HoYoverse. It is scheduled for release on Microsoft Windows, iOS, Android and PlayStation 5, on July 4, 2024!</div>
-            <div class="tags"><button style="margin-right:10px;">#Anime</button><button style="margin-right:10px;">#Manwha</button></div>
+            <div class="tags"><button style="margin-right:10px;">#Zenless Zone Zero</button>></div>
             <div class="img-div-post"><img src="./css/zzz1.jpg" class="img-post"></div>
             <br>
             <input type="button" onclick="location.href='post_page_5.html'" value="See More">
         </div>
     </div>
 
+    
+    <div class = "popup" id = "popup_js">
+        <div class="for-center">
+            <div class="blur-left post-form-container">
+                <h1><strong>Create Post</strong></h1>
+                <form class="post-form">
+                    <div class="input-box">
+                        <div class = "close-btn" onclick="location.href = 'main_page.html'">&times;</div>
+                        <label>Title</label>
+                        <input type="text" placeholder="Enter Title">
+                    </div>
+                    <div class="input-box">
+                        <label>Content</label>
+                        <input type="text" placeholder="What's Happening!?" class="post-content-box">
+                    </div>
+                    <input type="button" onclick="location.href='main_page.html'" value="Create Post">
+                </form>
+            </div>
+        </div>
+    </div>
     <script src="modal.js"></script>
+    
 </body>
 </html>
