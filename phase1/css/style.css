@@ -58,11 +58,10 @@
 
 .navbar
 {
-    background-color:var(--slate970);
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    display:flex;
+    flex-direction: column;
     height:8%;
     padding:20px;
     box-sizing:border-box;
@@ -97,9 +96,7 @@
     color:rgb(137, 138, 155);
     font-style:italic;    
 }
-.custom-select{
-    
-}
+
 .cards-top
 {
     display:flex;
@@ -129,9 +126,6 @@
     font-weight: 300;
     font-style: normal;
     font-size:2rem; 
-}
-.middle{
-
 }
 .user-post{
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -169,12 +163,14 @@
     height:120px;
     position:relative;
     bottom:20px;
-    background-image: url(fur.jpg);
+    background-image: url(https://th.bing.com/th/id/OIP.Il94Ml51vJH0_ORjl49rYgHaJ4?w=142&h=189&c=7&r=0&o=5&pid=1.7);
     background-size:cover;
 }
-.navbar-img{
-    background-image: url("1335810.png");
-    background-size:cover;
+
+.navbar > img
+{
+    width: 70px;
+    color: blue;
 }
 .profile-username{
     position:relative;
@@ -244,12 +240,20 @@
 
 /* For Editing the user Profile*/
 
+.for-center-update{
+    display: flex;
+    justify-content: center;
+}
 
-.Update-form-container{
-    padding:20px;
-    margin:0px 500px 0px 500px;
+
+.Update-form-container
+{
+    display: flex;
+    align-self:center;
+    flex-direction: column;
     background-color: var(--slate100);
     color:var(--slate1000);
+    padding:100px;
 }
 .Update-form{
     display:flex;
@@ -274,7 +278,7 @@ input::file-selector-button{
     border: none;
 }
 .form-profile-description{
-    height:200px;
+    height:100px;
 }
 
 
@@ -283,6 +287,7 @@ input::file-selector-button{
 
 .main-post-container{
     border:2px solid var(--slate500);
+    background-color: var(--slate970);
     padding:20px;
     margin: 0px 20px 0px 20px;
 }
@@ -294,88 +299,557 @@ input::file-selector-button{
 
 /* for creating posts */
 
-.for-center{
+.create-post-form{
     display:flex;
+    flex-direction: column;
+    gap:20px;
+}
+
+.create-post-textarea{
+    width:1000px;
+    height:200px;
+    border: 1px solid var(--slate1100)
+}
+.title 
+{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.for-center 
+{
+    margin-left: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;  
+    margin-top: 10%;
+}
+
+.for-center-create
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin:0px 600px 0px 600px;
+    color: var(--slate1100);
+}
+.popup 
+{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: rgba(14, 12, 28, 0.7);
+    z-index:1;
+    display: none;
+}
+.popup.active
+{
+   
+    display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
 }
-
-.post-form-container{
+.popup.active .for-center
+{
+    transition:all 300ms ease-in-out;
+    transform: translate(-50%, -50%) scale(1);
+}
+.close-btn:hover 
+{
+    background-color: rgb(67, 63, 63); 
+    color: white; 
+}
+.close-btn 
+{
+    font-size: 24px; 
+    color: black; 
+    cursor: pointer; 
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+    width: 24px; 
+    height: 24px; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    background-color: white; 
+    border-radius: 50%;
+    border: 1px solid black; 
+}
+/* Form Container Styling */
+.post-form-container 
+{
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 100%;
+  
+}
+h1 
+{
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+}
+.input-box 
+{
+    margin-bottom: 15px;
+}
+.input-box label 
+{
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+.input-box input,
+.input-box textarea 
+{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+}
+.input-box input:focus,
+.input-box textarea:focus 
+{
+    border-color: #1da1f2;
+}
+.post-content-box 
+{
     color:black;
-    background-color:aliceblue;
+    height: 100px;
+    resize: none;
+    display: flex;
+}
+.post-content-box2
+{
+    color:black;
+    height: 200px;
+    width:85%;
+    resize: none;
+    display: flex;
+    border: 1px solid black;
+}
+.submit-button 
+{
+    display: block;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #1da1f2;
+    color: #ffffff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover 
+{
+    background-color: #0d95e8;
+}
+
+.blur 
+{
+    backdrop-filter: blur(10px);
+}
+
+.margin-down 
+{
+    margin-bottom: 20px;
+}
+.blur-left 
+{
+    backdrop-filter: blur(5px);
+}
+
+
+
+/* Post page css */
+
+.tagsContainer {
+    display: inline-flex;
+}
+
+.tag{
+    margin: 5px;
+    padding: 5px;
+    border-radius: 1px 12px;
+    background-color: var(--slate800);
+}
+
+.tag :hover{
+    cursor: pointer;
+}
+
+.post{
+    width: 100%;
+    height: auto;
+
+}
+
+.post-img{
+    height: auto;
+    width: 50%;
+    max-width: 100%;
+}
+
+.createComment {
+    display: flex;
     justify-content: center;
-    display:flex;
-    flex-direction:column;
-    width:30%;
-    padding:50px;
-}
-.post-form .input-box input{
-    width:100%;
-
+    align-items: center;
+    flex-direction: column;   
+    border-bottom: 2px solid var(--slate100);
+    padding-bottom: 32px;  
 }
 
-.post-form .column-input-box{
-    display:flex;
-    flex-direction: row;
-    gap:10px;
+#draftComment {
+    width: 90%;
+    min-height: 12vh;
+    box-sizing: border-box;
+    background-color: var(--slate1100);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 10px;
+    color: var(--slate100);
+    resize: none;
+    border-width: 2px;
+    border-color: var(--slate100);
+    border-style: solid;
+    outline: none;
+    overflow: hidden;
+    resize: none;
 }
 
+/*for #draftComment placeholder text*/
+[contenteditable][placeholder]:empty:before {
+    content: attr(placeholder);
+    position: absolute;
+    color: gray;
+    background-color: transparent;
+  }
 
-.post-content-box{
-    height:300px;
-    color:var(--slate1000);
+.buttonsContainer {
+    width: 90%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+}
+
+.buttonsContainer button{
+    background-color: var(--slate1100);
+    height: 35px;
+    border-radius: 0px;
+    width: 50%;
+    border: 2px solid var(--slate100);
+    border-top: transparent;
+    font-weight: bold;
+}
+
+.buttonsContainer button:hover{
+    background-color: var(--button-hover-bg);
+    transform: none;
+}
+
+#attachFilesComment{
+    border-bottom-left-radius: 15px;
+    border-right: 2px;
+}
+
+#postComment{
+    border-bottom-right-radius: 15px;
+}
+
+.comment{
+    margin: 5px;
+    height: auto;
+    padding: 3px;
+    display: flex;
+}
+
+.authorContainer p, .comment i{
+    margin: 0px;
+    margin-left: 0px;
+}
+
+.commentBody{
+    margin-left: 55px;
+}
+
+.pfp{
+    height: 75%;
+    width: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.authorContainer{
+    margin: 10px;
+    height: 10vh;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.authorTextContainer p{
+    padding: 0px;
+    margin: 0px;
+}
+
+.authorName{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.dateText{
+    font-size: 12px;
+}
+
+.commentContainer{
+    height: 5vh;
+    margin-bottom: 0px;
+    padding-top: 12px;
+}
+
+.replyButton{
+    background-color: var(--button-bg);
+    padding: 3px;
+}
+
+.replyComment{
+    border-bottom: none;
+    margin-top: 12px;
+    margin-bottom: 0px;
+    display: none;
+}
+
+.draftReplyComment{
+    width: 90%;
+    min-height: 4vh;
+    box-sizing: border-box;
+    background-color: var(--slate1100);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    padding: 10px;
+    color: var(--slate100);
+    resize: none;
+    border-width: 2px;
+    border-color: var(--slate100);
+    border-style: solid;
+    outline: none;
+    overflow: hidden;
+    resize: none;
+}
+
+.fa-solid.fa-thumbs-up, .fa-solid.fa-thumbs-down{
+    margin: 3px;
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.fa-solid.fa-thumbs-up:hover, .fa-solid.fa-thumbs-down:hover{
+    cursor: pointer;
+    background-color: var(--slate500);
+}
+
+.editCommentButtons{
+    display: none;
+}
+
+p.draftReplyComment{
+    margin-bottom: 0px;
+}
+
+.deleteCommentButton{
+    background-color: #661b1b;
+    color: red;
+}
+
+.deleteCommentButton:hover{
+    background-color: #661b1b;
+}
+
+h1.main-post-title{
+    color: white;
+    font-size: 3rem;
+}
+.search-bar:hover{
+    background-color:white;
+}
+.search-bar{
     background-color: white;
-    border: 1px solid var(--slate1000);
 }
 
 
-/* CSS for making Login*/   
-.login-form-container{
-    padding:20px;
-    margin:0px 500px 0px 500px;
+
+
+/* ALL LOGIN AND REGISTER */
+
+.main 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.sticky-footer 
+{
+    position:fixed;
+    width:100%;
+    bottom:0;
+    background-color: var(--slate970);
+    color: var(--slate100);
+    text-align: center;
+    padding: 10px;
+}
+
+.register-prompt 
+{
+    text-align: center;
+    margin: 20px 0;
+    color: var(--slate100);
+    margin-top: 3%;
+}
+
+.register-prompt a 
+{
+    color: var(--highlight1);
+    text-decoration: none;
+}
+
+.register-prompt a:hover 
+{
+    color: var(--highlight2);
+}
+
+
+.login-form-container 
+{
+    width: 300px;
+    height: 400px;
+    max-width: 500px;
+    border-radius: 10px; 
+    padding: 20px;
+    box-shadow: 10px 10px 20px 5px rgba(11, 11, 25, 2);
+    border: 2px solid rgb(222, 100, 191);
     background-color: var(--slate100);
     color:var(--slate1000);
 
 }
-.login-form{
-    display:flex;
-    flex-direction: column;
-    gap:20px;
-    justify-content: start;
 
-}
-.login-form .input-box input{
-    width:100%;
-}
-.login-form .input-box button{
-    width:100%;
-}
-.form-label{
-    background-color: var(--slate1000);
-}
-
-/* CSS for making Register*/   
-.register-form-container{
-    padding:20px;
-    margin:0px 500px 0px 500px;
+.update-profile-container 
+{
+    border-radius: 10px; 
+    padding: 50px;
+    box-shadow: 10px 10px 20px 5px rgba(11, 11, 25, 2);
+    border: 2px solid rgb(222, 100, 191);
     background-color: var(--slate100);
     color:var(--slate1000);
-}
-.register-form{
-    display:flex;
-    flex-direction: column;
-    gap:20px;
-    justify-content: start;
 
 }
-.register-form .input-box input{
+
+
+
+.login-form .input-box-register
+{
+    margin-bottom: 15px;
+    border-bottom: 3px solid rgb(223, 225, 243);
+    border-radius: 2px;
+   
+}
+.login-form .input-box-login
+{
+    margin-bottom: 15px;
+    border-bottom: 3px solid rgb(223, 225, 243);
+    border-radius: 2px;
+   
+}
+
+/*remove ba to?*/
+.login-form {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.login-form .input-box-register input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px; 
+    box-sizing: border-box;
+}
+
+.login-form .input-box-login input {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px; 
+    box-sizing: border-box;
+}
+
+
+.main input[type="email"], input[type="password"], textarea 
+{
+    border: none;
+    outline: none;
+    border-bottom: 1px solid #ccc; 
+}
+.input-box-login
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+.input-box-register
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+}
+.input-box-register > img
+{
+    width: 20px;
+    height: 20px;
+    opacity: 0.5;
+    color: grey;
+}
+.input-box-login > img
+{
+    width: 20px;
+    height: 20px;
+    opacity: 0.5;
+    color: grey;
+}
+
+
+
+.logregbutton{
+    color: var(--slate500);
+    background-color: var(--slate800);
+    border: 0px;
+    transition: transform 0.2s ease;
+    border-radius:5px;
+    height:20px;
+    cursor:pointer;
     width:100%;
 }
-.register-form .input-box button{
-    width:100%;
-}
-.form-label{
-    background-color: var(--slate1000);
+.logregbutton:hover{
+    color: var(--slate100) !important;
+    background-color: var(--button-hover-bg);
+    transform:translate(5px,-2px);
+    cursor:pointer;
 }
 

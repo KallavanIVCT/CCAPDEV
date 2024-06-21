@@ -3,9 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="page_layout.css">
-    <link rel="stylesheet" type="text/css" href="login_style.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <link rel="stylesheet" type="text/css" href="./css/page_layout.css">
+    <link rel="stylesheet" type="text/css" href="./css/animation.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
     <title>Login</title>
 </head>
 <body>
@@ -32,27 +33,30 @@
         </div>-->
     </navbar>
 
-    <main>
+    <div class="main">
         <div class="blur-bottom login-form-container">
             <h1 style="text-align: center;">Login</h1>
             <form class='login-form'>
-                <div class="input-box">
+                <div class="input-box-login">
                     <img src = "https://static.vecteezy.com/system/resources/previews/000/646/268/original/email-symbol-icon-vector.jpg"/>
 
-                    <input type="email" placeholder="Email" class = "answer_box">
+                    <input type="email" placeholder="Email">
                 </div>
-                <div class="input-box">
+                <div class="input-box-login">
                     <img src = "https://icon-library.com/images/password-icon-png/password-icon-png-4.jpg"/>
-                    <input type="password"  placeholder="Password"  class = "answer_box">
+                    <input type="password"  placeholder="Password">
                 </div>
-                    <input type="button" onclick="location.href='main_page.html'" value="LOGIN" class = "login_but">
-            </form>      
+                <input type="button" onclick="location.href='main_page.html'" value="LOGIN" class="logregbutton">
+                </form>                      
+                
         </div>
+        <br>
+
 
         <div class="register-prompt">
             Don't have an account yet? Click <a href="register_page.html">here</a> to register.
         </div>
-    </main>
+    </div>
 
     <footer class="sticky-footer">
         <div class="footer-content">

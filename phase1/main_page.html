@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./css/page_layout.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" type="text/css" href="login_style.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+
     <title>Document</title>
 </head>
 <body>
@@ -125,26 +125,24 @@
 
     
     <div class = "popup" id = "popup_js">
-        <div class="for-center">
+        <div class="for-center-create">
             <div class="blur-left post-form-container">
                 <h1><strong>Create Post</strong></h1>
-                <form class="post-form">
-                    <div class="input-box">
+                <form class="create-post-form">
                         <div class = "close-btn" onclick="location.href = 'main_page.html'">&times;</div>
                         <label>Title</label>
-                        <input type="text" placeholder="Enter Title">
-                        <select class = "selector">
+                        <input type="text" placeholder="Enter Title" class="create-select-tag" style="width:50%">
+                        <label>Tag</label>
+                        <select style="width:50%">
                             <option>Genshin Impact</option>
                             <option>Honkai Star Rail</option>
                             <option>Honkai Impact</option>
                             <option>Zenless Zone Zero</option>
                             <option>Mihoyo</option>
                         </select>
-                    </div>
-                    <div class="input-box">
                         <label>Content</label>
-                        <div placeholder="What's Happening!?" class="post-content-box2"  contenteditable="true"></div>
-                    </div>
+                    <textarea class="create-post-textarea"></textarea>
+                    <input type="file" style="width:50%">
                     <input type="button" onclick="location.href='main_page.html'" value="Create Post">
                 </form>
             </div>
