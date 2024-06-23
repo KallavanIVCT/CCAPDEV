@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./css/page_layout.css">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <navbar class="blur navbar navbar-img" style="height:200px;">
+        <div class="subnav title"><div class=TITLEE onclick="location.href ='main_page.html'">Mihoyo-X</div></div>
+        <img src = "https://static.miraheze.org/houkai2ndwiki/thumb/0/06/MiHoYo_O_logo.webp/739px-MiHoYo_O_logo.webp.png"/>
+        <div class="subnav buttons">
+            <input type="button" onclick="location.href='login_page.html'" value="Login">
+            <input type="button" onclick="location.href='register_page.html'" value="Register">
+            <input type="button" onclick="location.href='user_profile_page.html'" value="Profile">
+            <input type="button" onclick="location.href='login_page.html'" value="logout">
+        </div>
+    </navbar>
+    <div class="blur profile-bar">
+        <div>
+            <div class="profile-circle-holder">
+              
+            </div>
+            <div class="profile-details-container">
+                <div class="profile-username">Tuonto</div>
+                <button onclick = "togglePopup()">Edit</button>
+                
+            </div>
+
+        </div>
+     
+        <div class="description-container">
+            <p class="profile-description">Hello You cant see meeiee.</p>
+        </div>
+        
+
+    </div>
+    <div class="profile-container2">
+        <div class="blur-left profile-post-container">
+            <div class="profile-post-header">
+                <div class="title-post"><strong>POSTS</strong></div>
+            </div>            
+            <div class="cards">
+                <div class="title-post"><strong>Genshin Impact 4.7 Update Information!</strong></div>
+                <div class="description-post">
+                    〓Compensation Details〓<br><br>
+                    Maintenance Compensation: Primogems ×300 (60 Primogems per hour the servers are down)<br>
+                    Issue Fix Compensation: Primogems ×300 (please refer to the relevant compensation mail for more details)<br><br>
+    
+                    〓Scope of Compensation〓<br>
+                    Maintenance Compensation: Travelers who have reached Adventure Rank 5 or above by 2024/06/05 06:00 (UTC+8).<br><br>
+    
+                    Compensation must be claimed before the end of Version 4.7.<br><br>
+    
+                    Issue Fix Compensation: Travelers who reach Adventure Rank 5 or above by 2024/06/05 06:00 (UTC+8).<br><br>
+    
+                    Please log in and claim your compensation before 2024/06/08 06:00 (UTC+8).<br><br>
+    
+                    Our developers will distribute compensation to Travelers via in-game mail within 5 hours after the update maintenance is finished. The mail will expire after 30 days, so don't forget to claim the attached compensation in time.<br><br>
+    
+                    〓Update Schedule〓<br><br>
+                    Update maintenance begins 2024/06/05 06:00 (UTC+8) and is estimated to take 5 hours.                    
+                </div>
+                <input type="button" onclick="location.href='update_post_page.html'" value="Update">
+                <button class="more">Delete</button>
+            </div>
+            <div class="cards">
+                <div class="title-post"><strong>Zenless Zone Zero Release date!</strong></div>
+                <div class="description-post">Zenless Zone Zero is an upcoming free-to-play urban fantasy action role-playing game developed and published by miHoYo in mainland China, with global publishing by Cognosphere, d/b/a HoYoverse. It is scheduled for release on Microsoft Windows, iOS, Android and PlayStation 5, on July 4, 2024!</p></div>
+                <input type="button" onclick="location.href='update_post_page.html'" value="Update">
+                <button class="more">Delete</button>
+            </div>
+        </div>
+        <div class="blur-right comments-container">
+            <div class="comment-container" style="padding:10px;">
+                <div class="profile-comment-header"><strong>Comments</strong></div>
+            </div>
+
+            <div class="comment-container">
+                <div class="comments">Tuonto: Sekai de ichiban ohime-sama</div>
+                <a href="post_page_1.html">Link to Post</a href>
+            </div>
+            <div class="comment-container">
+                <div class="comments">Tuonto: Oratrice Mecanique d'Analyse Cardinale</div>
+                <a href="post_page_1.html">Link to Post</a href>
+            </div> 
+        </div>
+    </div>
+
+    <!-- popout -->
+    <div class = "popup" id = "popup_js">
+    <div class="blur-bottom update-profile-container">
+        <div class = "close-btn" onclick="location.href ='user_profile_page.html'">&times;</div>
+        <h1 style="text-align: center;">Update Profile</h1>
+        <form class='Update-form'>
+            <div class="input-box">
+                <label>Email</label>
+                <input type="email">
+            </div>
+            <div class="input-box">
+                <label>Password</label>
+                <input type="password" class="password">
+            </div>
+            <div class="input-box">
+                <label>Profile Pic</label>
+                <input type="file" class="Profile Pic">
+            </div>
+            <div class="input-box">
+                <label>Description</label>
+                <input type="text" class="form-profile-description">
+            </div>
+            <input type="button" onclick="location.href='main_page.html'" value="Submit">
+        </form>      
+    </div>
+</div>
+<script src="modal.js"></script>
+</body>
+</html>

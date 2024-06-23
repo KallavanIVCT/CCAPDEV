@@ -1,0 +1,116 @@
+.circles
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+@keyframes animate 
+{
+   0%
+    {
+        opacity: 1;
+        border-radius: 0;
+        transform: translateY(0) rotate(0deg);
+    }
+   100%
+    {
+        opacity: 0;
+        border-radius: 50%;
+        transform: translateY(-1000px) rotate(720deg);  
+    }    
+}
+ 
+.circles div
+{
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height:30px;
+    background: rgba(116, 111, 111, 0.5);
+    bottom: -50px;
+    animation: animate 25s linear infinite;
+}
+.circles div:nth-child(1)
+{
+    left: 10%;
+    width: 80px;
+    height: 30px;
+    animation-delay: 0s; 
+}
+.circles div:nth-child(2)
+{
+    left: 20%;
+    width: 80px;
+    height: 30px;
+    animation-delay: 2s; 
+    animation-duration: 15s;
+}
+.circles div:nth-child(3)
+{
+    left: 50%;
+    width: 100px;
+    height: 20px;
+    animation-delay: 4s; 
+    animation-duration: 13s; 
+}
+.circles div:nth-child(4)
+{
+    left: 80%;
+    width: 30px;
+    height: 15px;
+    animation-delay: 3s; 
+    animation-duration: 17s; 
+}
+.circles div:nth-child(5)
+{
+    left: 32%;
+    width: 100px;
+    height: 20px;
+    animation-delay: 4s; 
+    animation-duration: 13s; 
+}
+.circles div:nth-child(6)
+{
+    left: 55%;
+    width: 100px;
+    height: 20px;
+    animation-delay: 3s; 
+    animation-duration: 15s; 
+}
+.circles div:nth-child(7)
+{
+    left: 76%;
+    width: 100px;
+    height: 20px;
+    animation-delay: 2s; 
+    animation-duration: 11s; 
+}
+.circles div:nth-child(8)
+{
+    left: 69%;
+    width: 100px;
+    height: 20px;
+    animation-delay: 1s; 
+    animation-duration: 17s; 
+}
+.circles div:nth-child(9)
+{
+    left: 32%;
+    width: 100px;
+    height: 20px;
+    animation-delay: 2s; 
+    animation-duration: 13s; 
+}
+.circles div:nth-child(10)
+{
+    left: 11%;
+    width: 100px;
+    height: 20px;
+    animation-delay: 1s; 
+    animation-duration: 16s; 
+}

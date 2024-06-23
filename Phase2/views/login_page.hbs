@@ -1,0 +1,53 @@
+
+    <div class = "circles">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    
+    <navbar class="blur navbar margin-down">
+        <div class="subnav title">Mihoyo-X</div></br>
+        <img src = "https://static.miraheze.org/houkai2ndwiki/thumb/0/06/MiHoYo_O_logo.webp/739px-MiHoYo_O_logo.webp.png"/>
+         <!--<div class="subnav">The Logo</div>
+        <div class="subnav buttons">
+            <input type="button" onclick="location.href='login_page.html'" value="Login">
+            <input type="button" onclick="location.href='register_page.html'" value="Register">
+        </div>-->
+    </navbar>
+
+    <div class="main">
+        <div class="blur-bottom login-form-container">
+            <h1 style="text-align: center;">Login</h1>
+            <form class='login-form' name="main-login-form" action="/api/user/login" method="POST">
+                <div class="input-box-login">
+                    <img src = "https://static.vecteezy.com/system/resources/previews/000/646/268/original/email-symbol-icon-vector.jpg"/>
+
+                    <input type="text" placeholder="username" name="username">
+                </div>
+                <div class="input-box-login">
+                    <img src = "https://icon-library.com/images/password-icon-png/password-icon-png-4.jpg"/>
+                    <input type="password"  placeholder="Password" name="password">
+                </div>
+                <input type="submit" value="LOGIN" class="logregbutton" id="submit-form-button">
+                </form>                      
+        </div>
+        <br>
+
+
+        <div class="register-prompt">
+            Don't have an account yet? Click <a href="register_page.html">here</a> to register.
+        </div>
+    </div>
+
+    <footer class="sticky-footer">
+        <div class="footer-content">
+            &copy; 2024 Your Company. All rights reserved.
+        </div>
+    </footer>

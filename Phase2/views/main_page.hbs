@@ -1,0 +1,72 @@
+{{#if isLoggedIn}}
+    {{> header_logged}}
+{{else}}
+    {{> header}}
+{{/if}}
+
+<div class="blur-left cards-container" style="margin: 0px 300px 0px 300px;">
+    <div class="cards-top">
+        <button onclick = "togglePopup()">Add Post</button>
+        <div class="description-post"><strong>POSTS</strong></div>
+        <div style="display:flex; gap:10px">
+            <div class="search-post"><input type="text" class="search-bar"></div>
+            <div class="custom-select">
+                <select>
+                    <option>Genshin Impact</option>
+                    <option>Honkai Star Rail</option>
+                    <option>Honkai Impact</option>
+                    <option>Zenless Zone Zero</option>
+                    <option>Mihoyo</option>
+                </select>
+                <select>
+                    <option>Hottest</option>
+                    <option>Newest</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="cards">
+        <div style="display: flex; justify-content: space-between;">
+            <span class="title-post"><strong>Genshin Impact 4.7 Update Information!</strong></span>
+            <input type="button" value="Delete">
+        </div>
+        <span class="user-post">Tuonto</span>
+        <div class="date-post"><strong>04/02</strong></div>
+        <div class="description-post">〓Compensation Details〓<br><br>
+            Maintenance Compensation: Primogems ×300 (60 Primogems per hour the servers are down)<br>
+            Issue Fix Compensation: Primogems ×300 (please refer to the relevant compensation mail for more details)<br><br></div>
+        <div class="tags"><button style="margin-right:10px;">#Genshin Impact</button></div>
+        <div class="img-div-post"><img src="https://preview.redd.it/genshin-impact-version-4-7-preview-v0-stgcokjwyh2d1.jpeg?width=1080&crop=smart&auto=webp&s=0f20698460bf2da8aca1420bb2e6d62a9785c0a5" class="img-post"></div>
+        <br>
+        <input type="button" onclick="location.href='post_page_1.html'" value="See More">
+    </div>
+
+
+<div class = "popup" id = "popup_js">
+    <div class="for-center-create">
+        <div class="blur-left post-form-container">
+            <h1><strong>Create Post</strong></h1>
+            <form class="create-post-form">
+                    <div class = "close-btn" onclick="location.href = 'main_page.html'">&times;</div>
+                    <label>Title</label>
+                    <input type="text" placeholder="Enter Title" class="create-select-tag" style="width:50%">
+                    <label>Tag</label>
+                    <select style="width:50%">
+                        <option>Genshin Impact</option>
+                        <option>Honkai Star Rail</option>
+                        <option>Honkai Impact</option>
+                        <option>Zenless Zone Zero</option>
+                        <option>Mihoyo</option>
+                    </select>
+                    <label>Content</label>
+                <textarea class="create-post-textarea"></textarea>
+                <input type="file" style="width:50%">
+                <input type="button" onclick="location.href='main_page.html'" value="Create Post">
+            </form>
+        </div>
+    </div>
+</div>
+<script src="modal.js"></script>
