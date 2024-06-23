@@ -16,25 +16,29 @@
             <input type="button" onclick="location.href='user_profile_page.html'" value="Profile">
         </div>
     </navbar>
-    <div class="for-center">
-        <div class="blur-left post-form-container">
+    <div class="for-center-update">
+        <div class="blur-left Update-form-container">
             <h1><strong>Update Post</strong></h1>
-            <form class="post-form">
+            <form class="Update-form">
                 <div class="input-box">
                     <label>Title</label>
                     <input type="text" placeholder="Enter Title">
                 </div>
-                <label>Tag</label>
-                <select>
-                    <option>Genshin Impact</option>
-                    <option>Honkai Star Rail</option>
-                    <option>Honkai Impact</option>
-                    <option>Zenless Zone Zero</option>
-                    <option>Mihoyo</option>
-                </select>
+                <div>
+                    <label>Tag</label>
+                    <select>
+                        <option>Genshin Impact</option>
+                        <option>Honkai Star Rail</option>
+                        <option>Honkai Impact</option>
+                        <option>Zenless Zone Zero</option>
+                        <option>Mihoyo</option>
+                    </select>
+                </div>
+
                 <div class="input-box">
                     <label>Content</label>
-                    <div class="post-content-box" contenteditable="true" placeholder="Enter your reply here" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></div>
+                    <input type="text" placeholder="Enter-Content">
+                    <input type="file">
                 </div>
 
                 <input type="button" onclick="location.href='main_page.html'" value="Update Post">

@@ -32,7 +32,7 @@ body
     min-height: 100vh;
     padding:0px;
     margin:0px;
-    background-color:var(--slate1100);
+    background:linear-gradient(to bottom right,  var(--slate1000),  var(--slate1100),var(--slate950));
     color:var(--slate100);
 }
   
@@ -95,10 +95,6 @@ input:focus{
     border:0px;
     outline: 2px solid var(--slate1000);
 }
-input[type="text"]{
-}
-
-
 
 .main-logo{
     width:80px;
