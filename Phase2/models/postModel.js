@@ -19,7 +19,7 @@ const postSchema = mongoose.Schema(
         },
         p_tags:{
             type:String,
-            enum: ['anime', 'manga', 'movies', 'politics'],
+            enum: ['Genshin Impact', 'Honkai Star Rail', 'Honkai Impact', 'Zenless Zone Zero', 'Mihoyo'],
             required:false,
         },
         p_has_been_edited:{
@@ -31,6 +31,16 @@ const postSchema = mongoose.Schema(
             type: Date,
             required:true,
             default: Date.now
+        },
+        p_image:{
+            p_filename:{
+                type: String,
+                required:false,
+            },
+            p_filepath:{
+                type:String,
+                required:false,
+            }
         }
     }
 )

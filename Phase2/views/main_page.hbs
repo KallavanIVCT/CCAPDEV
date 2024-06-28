@@ -27,22 +27,21 @@
     </div>
 
 
-
+    {{#each postdetails}}
     <div class="cards">
         <div style="display: flex; justify-content: space-between;">
-            <span class="title-post"><strong>Genshin Impact 4.7 Update Information!</strong></span>
+            <span class="title-post"><strong>{{p_title}}</strong></span>
             <input type="button" value="Delete">
         </div>
-        <span class="user-post">Tuonto</span>
-        <div class="date-post"><strong>04/02</strong></div>
-        <div class="description-post">〓Compensation Details〓<br><br>
-            Maintenance Compensation: Primogems ×300 (60 Primogems per hour the servers are down)<br>
-            Issue Fix Compensation: Primogems ×300 (please refer to the relevant compensation mail for more details)<br><br></div>
-        <div class="tags"><button style="margin-right:10px;">#Genshin Impact</button></div>
-        <div class="img-div-post"><img src="https://preview.redd.it/genshin-impact-version-4-7-preview-v0-stgcokjwyh2d1.jpeg?width=1080&crop=smart&auto=webp&s=0f20698460bf2da8aca1420bb2e6d62a9785c0a5" class="img-post"></div>
+        <span class="user-post">{{p_u_OID.u_username}}</span>
+        <div class="date-post"><strong>{{p_date}}</strong></div>
+        <div class="description-post">{{p_body}}<br><br></div>
+        <div class="tags"><button style="margin-right:10px;">{{p_tags}}</button></div>
+        <div class="img-div-post"><img src="/{{p_image.p_filepath}}" class="img-post"></div>
         <br>
-        <input type="button" onclick="location.href='post_page_1.html'" value="See More">
+        <input type="button" onclick="navigateToPostPage('{{_id}}')" value="See More">
     </div>
+    {{/each}}
 
 
 <div class = "popup" id = "popup_js">
@@ -69,4 +68,13 @@
         </div>
     </div>
 </div>
-<script src="modal.js"></script>
+<script src="/common/modal.js"></script>
+
+<script>
+function navigateToPostPage(id) {
+    const url = `/api/post/getPost/${id}`;
+    window.location.href = url;
+}
+
+
+</script>

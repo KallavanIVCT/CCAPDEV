@@ -28,17 +28,20 @@ router.post('/createUser', async (req,res)=>{
 
 
 router.post('/login', async(req,res)=>{
-    const {username, password} = req.body
-    try{
-        const username_exist = await User.findOne({u_username: username, u_password: password});
-        if(username_exist){
-            res.redirect('/api/page/main_page/?isLoggedIn=true')
-        }else{
-            res.status(409).json("Username does not exist");
-        }
-    }catch(e){
-        res.status(409).json("ERROR");
-    }
+    /* should verify  if user exist, if it exist render the /api/post/getPost and send the username and password baka lang magamit*/
+})
+
+
+router.get('/login', (req,res)=>{
+    res.render('login_page',{
+        layout: 'index',
+    })
+})
+
+router.get('/register', (req,res)=>{
+    res.render('register_page',{
+        layout: 'index',
+    })
 })
 
 

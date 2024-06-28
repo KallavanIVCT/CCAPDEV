@@ -2,6 +2,22 @@ const express = require('express');
 const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const multer = require('multer');
+
+
+const storage = multer.diskStorage({
+    destination:(req,file,cb)=>{
+        cb(null,"uploads/");
+    },
+    filename: (req,file,cb)=>{
+        cb(null,Date.now()+file.originalname);
+    },
+});
+
+const upload = multer({storage: storage});
+
+module.exports = {upload};
+
 
 
 const postRoute = require('./controllers/post_route.js')
@@ -25,7 +41,8 @@ server.engine('hbs', handlebars.engine({
 }));
 
 server.use(express.static('public'));
-
+server.use('/uploads', express.static(__dirname + '/uploads'));
+server.use(express.static('uploads'));
 
 
 server.listen(3000,()=>{
@@ -44,7 +61,7 @@ mongoose.connect("mongodb://localhost:27017/CCAPDEV")
 
 
 server.get('/', (req,res)=>{
-    res.redirect('/api/page/main_page')
+    res.redirect('/api/post/getPost')
 })
 
 

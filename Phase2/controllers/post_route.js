@@ -1,12 +1,17 @@
 
 const Post = require('../models/postModel.js');
+const User = require('../models/userModel.js');
 const express = require('express');
+const nodemon = require('nodemon');
 
 const router = express.Router();
 
+const {upload} = require('../app.js');
 
-router.post('/createPost', async (req,res)=>{
+
+router.post('/createPost', upload.single('image'), async (req,res)=>{
     const {id, title, body, tags} = req.body;
+    const {filename, path: filepath} = req.file;
     try{
         if (!id || !title || !body){ //no need to check tags since not required
             req.status(405).send("incomplete fields");
@@ -17,6 +22,10 @@ router.post('/createPost', async (req,res)=>{
                 p_body: body,
                 p_u_OID: id,
                 p_tags: tags, // if tags undefined mongo auto handles this
+                p_image:{
+                    p_filename: filename,
+                    p_filepath: filepath,
+                }
             })
             return res.status(404).json({"result": "succesfully"})
         }
@@ -28,10 +37,18 @@ router.post('/createPost', async (req,res)=>{
 })
 router.get('/getPost', async (req,res)=>{
 
+    const isLoggedIn = req.query.isLoggedIn === 'true';
+    console.log(isLoggedIn);
     try{
-        const result = await Post.find({})
+
+        const result = await Post.find({}).populate('p_u_OID').lean(); //lean is to make mongoose object to js objects, populate is putting objects in the p_u_OID
         if(result){
-            res.status(200).json(result);
+            
+            res.render('main_page',{
+                layout:'index',
+                postdetails:result,
+                isLoggedIn: isLoggedIn,
+            })
         }else{
             res.status(404).send("no post found")
         }
@@ -41,6 +58,31 @@ router.get('/getPost', async (req,res)=>{
         return res.status(406).send(e);
     }
 })
+
+
+router.get('/getPost/:id', async(req,res)=>{
+    const {id} = req.params;
+    console.log(id);
+    try{
+        const result = await Post.findById(id).populate('p_u_OID').lean();
+        console.log(result);
+        if (result){
+            res.render('post_page',{
+                layout:'index',
+                postdetails:result,
+        
+            })
+        }else{
+            res.status(404).send("no post found");
+        }
+    }
+    catch(e){
+        console.log(e);
+        return res.status(406).send(e);
+    }
+
+})
+
 
 router.patch('/updatePost', async(req,res)=>{
     
