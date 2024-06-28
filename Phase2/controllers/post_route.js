@@ -37,11 +37,25 @@ router.post('/createPost', upload.single('image'), async (req,res)=>{
 })
 router.get('/getPost', async (req,res)=>{
 
+
+
     const isLoggedIn = req.query.isLoggedIn === 'true';
     console.log(isLoggedIn);
+
+    let query = {}
+
+    const sort = req.query.sort || 'p_date';
+    const tags = req.query.tags
+
+    if(tags){
+        query.p_tags = tags;
+    }
+
+
+
     try{
 
-        const result = await Post.find({}).populate('p_u_OID').lean(); //lean is to make mongoose object to js objects, populate is putting objects in the p_u_OID
+        const result = await Post.find(query).sort(sort).populate('p_u_OID').lean(); //lean is to make mongoose object to js objects, populate is putting objects in the p_u_OID
         if(result){
             
             res.render('main_page',{
@@ -63,6 +77,7 @@ router.get('/getPost', async (req,res)=>{
 router.get('/getPost/:id', async(req,res)=>{
     const {id} = req.params;
     console.log(id);
+
     try{
         const result = await Post.findById(id).populate('p_u_OID').lean();
         console.log(result);
