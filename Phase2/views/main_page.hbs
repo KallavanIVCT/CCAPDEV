@@ -8,22 +8,26 @@
     <div class="cards-top">
         <button onclick = "togglePopup()">Add Post</button>
         <div class="description-post"><strong>POSTS</strong></div>
-        <div style="display:flex; gap:10px">
-            <div class="search-post"><input type="text" class="search-bar"></div>
-            <div class="custom-select">
-                <select>
-                    <option>Genshin Impact</option>
-                    <option>Honkai Star Rail</option>
-                    <option>Honkai Impact</option>
-                    <option>Zenless Zone Zero</option>
-                    <option>Mihoyo</option>
-                </select>
-                <select>
-                    <option>Hottest</option>
-                    <option>Newest</option>
-                </select>
+        <form name="main-login-form" action="/api/post/getPost" method="GET">
+            <div style="display:flex; gap:10px">
+                <div class="search-post">
+                    <input type="text" class="search-bar" name="query"></div>
+                <div class="custom-select">
+                    <select name="tags">
+                        <option>Genshin Impact</option>
+                        <option>Honkai Star Rail</option>
+                        <option>Honkai Impact</option>
+                        <option>Zenless Zone Zero</option>
+                        <option>Mihoyo</option>
+                    </select>
+                    <select name="sort">
+                        <option value="p_rating">Hottest</option>
+                        <option value="p_date">Newest</option>
+                    </select>
+                </div>
+                <input type="submit">
             </div>
-        </div>
+        </form>
     </div>
 
 

@@ -1,5 +1,6 @@
 
 const mongoose = require('mongoose');
+const User = require('./userModel');
 
 const postSchema = mongoose.Schema(
     {
@@ -41,7 +42,31 @@ const postSchema = mongoose.Schema(
                 type:String,
                 required:false,
             }
-        }
+        },
+        upvotes:{
+            type:Number,
+            required:true,
+            default:0,
+        },
+        downvotes:{
+            type:Number,
+            required:true,
+            default:0,
+        },
+        reacted_by:[{
+            user:{
+                type:mongoose.Schema.Types.ObjectId,
+                ref:'User',
+                required:false,
+            },
+            reactType:{
+                type:String,
+                enum:['upvote','downvote'],
+                required:false,
+            }
+
+        }]
+
     }
 )
 

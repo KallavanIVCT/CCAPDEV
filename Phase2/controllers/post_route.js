@@ -40,12 +40,18 @@ router.get('/getPost', async (req,res)=>{
 
 
     const isLoggedIn = req.query.isLoggedIn === 'true';
+    const sort = req.query.sort || 'p_date';
+    const tags = req.query.tags
+
+    /*
     console.log(isLoggedIn);
+    console.log(tags);
+    console.log(sort);
+    */
 
     let query = {}
 
-    const sort = req.query.sort || 'p_date';
-    const tags = req.query.tags
+
 
     if(tags){
         query.p_tags = tags;
@@ -76,11 +82,9 @@ router.get('/getPost', async (req,res)=>{
 
 router.get('/getPost/:id', async(req,res)=>{
     const {id} = req.params;
-    console.log(id);
 
     try{
         const result = await Post.findById(id).populate('p_u_OID').lean();
-        console.log(result);
         if (result){
             res.render('post_page',{
                 layout:'index',
@@ -98,6 +102,71 @@ router.get('/getPost/:id', async(req,res)=>{
 
 })
 
+
+router.post('/reactPost', async(req,res)=>{
+    const {post_id,user_id} = req.body;
+    const {UP} = req.body;
+
+    console.log("post_id:",post_id)
+    console.log("UP:",UP)
+    console.log("user_id:",user_id)
+
+    //what to do if user upvotes
+    // check first if he has upvoted or downvoted
+
+    const userVotedPost = await Post.findOne({_id:post_id, reacted_by: {$elemMatch: {user: user_id}}});
+
+    //find is basically  const foundElement = array.find(element => condition);
+    if(userVotedPost){
+        const result = userVotedPost.reacted_by.find(react => react.user.equals(user_id));
+
+        console.log("What user voted previously", result.reactType);
+
+        if(result.reactType === 'upvote' && UP === 'upvote'){ // if user has already upvoted and he wants to upvote
+
+            const updatedPost = await Post.updateOne({_id: post_id, },
+            {
+                $inc: { upvotes: -1 },
+                $pull: { reacted_by: { user: user_id} }, // Remove user reaction (if upvote exists)
+            })
+        }
+        if(result.reactType === 'downvote' && UP === 'downvote'){ // if user has already downvoted and he wants to downvote
+            const updatedPost = await Post.updateOne({_id: post_id, },
+                {
+                    $inc: { downvotes: -1 }, 
+                    $pull: { reacted_by: { user: user_id } },
+                })
+        }
+        if (result.reactType === 'upvote' && UP === 'downvote'){ // if user previously upvoted now he wants to downvote
+            const updatedPost = await Post.updateOne({_id: post_id, 'reacted_by.user': user_id, 'reacted_by.reactType': 'upvote' },
+                {
+                    $set: {'reacted_by.$.reactType': UP},
+                    $inc: { downvotes: 1, upvotes: -1 },
+                })
+        }
+        if (result.reactType === 'downvote' && UP === 'upvote'){
+            const updatedPost = await Post.updateOne({_id: post_id, 'reacted_by.user': user_id, 'reacted_by.reactType': 'downvote' },
+                {
+                    $set: {'reacted_by.$.reactType': UP},
+                    $inc: { downvotes: -1, upvotes: 1 },
+                })
+        }
+    }
+    else{
+        if (UP === 'upvote'){
+            const newVotePost = await Post.findByIdAndUpdate(post_id, { $push: {reacted_by: {user:user_id, reactType: 'upvote'}},
+            $inc: {upvotes: 1}},
+            {new:true},
+        );
+        }
+        if (UP === 'downvote'){
+            const newVotePost = await Post.findByIdAndUpdate(post_id, { $push: {reacted_by: {user:user_id, reactType: 'downvote'}},
+                $inc: {downvotes: 1}},
+            {new:true});
+        }
+    }
+
+})
 
 router.patch('/updatePost', async(req,res)=>{
     
