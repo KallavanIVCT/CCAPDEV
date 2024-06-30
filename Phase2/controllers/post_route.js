@@ -53,15 +53,23 @@ router.get('/getPost', async (req,res)=>{
 
 
 
-    if(tags){
+    if(tags && tags !== 'All'){
         query.p_tags = tags;
     }
+    let sorting = {}
+
+    if (sort === 'upvotes'){
+        sorting.upvotes = -1;
+    }else{
+        sorting.p_date = 1;
+    }
+    console.log(sort);
 
 
 
     try{
 
-        const result = await Post.find(query).sort(sort).populate('p_u_OID').lean(); //lean is to make mongoose object to js objects, populate is putting objects in the p_u_OID
+        const result = await Post.find(query).sort(sorting).populate('p_u_OID').lean(); //lean is to make mongoose object to js objects, populate is putting objects in the p_u_OID
         if(result){
             
             res.render('main_page',{

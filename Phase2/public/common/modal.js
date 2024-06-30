@@ -3,6 +3,10 @@ function togglePopup()
     document.getElementById("popup_js").classList.toggle("active");
 }
 
+function hidePopup(){
+    document.getElementById("popup_js").classList.remove("active");
+}
+
 function toggleReplyComment(button) {
     button.parentElement.getElementsByTagName("div")[0].style.display = (button.parentElement.getElementsByTagName("div")[0].style.display === 'block') ? 'none' : 'block';
 }

@@ -19,9 +19,10 @@
                         <option>Honkai Impact</option>
                         <option>Zenless Zone Zero</option>
                         <option>Mihoyo</option>
+                        <option>All</option>
                     </select>
                     <select name="sort">
-                        <option value="p_rating">Hottest</option>
+                        <option value="upvotes">Hottest</option>
                         <option value="p_date">Newest</option>
                     </select>
                 </div>
@@ -52,22 +53,22 @@
     <div class="for-center-create">
         <div class="blur-left post-form-container">
             <h1><strong>Create Post</strong></h1>
-            <form class="create-post-form">
-                    <div class = "close-btn" onclick="location.href = 'main_page.html'">&times;</div>
-                    <label>Title</label>
-                    <input type="text" placeholder="Enter Title" class="create-select-tag" style="width:50%">
-                    <label>Tag</label>
-                    <select style="width:50%">
+            <form class="create-post-form" name="create-post-form">
+                <div class = "close-btn" onclick="hidePopup()">&times;</div>
+                <label>Title</label>
+                <input type="text" placeholder="Enter Title" class="create-select-tag" style="width:50%" name="title">
+                <label>Tag</label>
+                    <select style="width:50%" name="tag">
                         <option>Genshin Impact</option>
                         <option>Honkai Star Rail</option>
                         <option>Honkai Impact</option>
                         <option>Zenless Zone Zero</option>
                         <option>Mihoyo</option>
                     </select>
-                    <label>Content</label>
-                <textarea class="create-post-textarea"></textarea>
+                <label>Content</label>
+                <textarea class="create-post-textarea" name="body"></textarea>
                 <input type="file" style="width:50%">
-                <input type="button" onclick="location.href='main_page.html'" value="Create Post">
+                <input type="submit" onclick="location.href='main_page.html'" value="Create Post">
             </form>
         </div>
     </div>
