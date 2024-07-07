@@ -1,4 +1,5 @@
 const User = require('../models/userModel.js');
+const Post = require('../models/postModel.js');
 const express = require('express');
 
 const router = express.Router();
@@ -29,6 +30,17 @@ router.post('/createUser', async (req,res)=>{
 
 router.post('/login', async(req,res)=>{
     /* should verify  if user exist, if it exist render the /api/post/getPost and send the username and password baka lang magamit*/
+    const {username, password} = req.body
+    try{
+        const username_exist = await User.findOne({u_username: username, u_password: password});
+        if(username_exist){
+            res.redirect('/api/post/getPost/?isLoggedIn=true')
+        }else{
+            res.status(409).json("Username does not exist");
+        }
+    }catch(e){
+        res.status(409).json("ERROR");
+    }
 })
 
 
@@ -45,8 +57,26 @@ router.get('/register', (req,res)=>{
 })
 
 
+// This is when the user clicks the profile button at the header it will redirect here
+router.get('/profile', async (req,res)=>{
+
+    //const {id} = req.params;// wag muna gamitin since hardcoded daw sabi ni sir ung specific user
+    const {isLoggedIn} = req.query;
+    let id = '66776c6fb5909970e7f38836';
+
+    const resultPost = await Post.find({p_u_OID: id}).lean();
+    // const resultComment (mark)
 
 
+
+    res.render('user_profile_page',{
+        layout: 'index',
+        posts: resultPost,
+        isLoggedIn: isLoggedIn
+        // comment,
+
+    })
+})
 
 
 

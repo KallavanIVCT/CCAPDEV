@@ -1,0 +1,12 @@
+{{#if message}}
+  <div class="success-message">
+    {{message}}
+  </div>
+{{/if}}
+
+
+<script>
+  setTimeout(function() {
+    window.location.href = "/api/post/getPost"; // Redirect to the main page after 2 seconds (adjust as needed)
+  }, 2000);
+</script>

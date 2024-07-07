@@ -7,6 +7,43 @@ function hidePopup(){
     document.getElementById("popup_js").classList.remove("active");
 }
 
+
+$(document).ready(function() {
+  
+    // Attach a click event listener to the document
+    $(document).on('click', '#update', function(event) {
+        console.log("KDOAKD");
+        let item = $(this);
+        $('#popup_js2').toggleClass('active'); // Toggle the 'active' class for visibility
+      }
+    )
+
+    $(document).on('click', '#close-btn', function(e){
+        $('#popup_js2').toggleClass('active');
+    })
+
+    // Attach a click event listener to the document
+    $(document).on('click', '#delete', function(event) {
+        console.log("KDOAKD");
+        let item = $(this);
+        $('#popup_js3').toggleClass('active'); // Toggle the 'active' class for visibility
+      }
+    )
+
+    $(document).on('click', '#close-btn2', function(e){
+        $('#popup_js3').toggleClass('active');
+    })
+
+    }
+);
+
+
+
+
+
+
+
+
 function toggleReplyComment(button) {
     button.parentElement.getElementsByTagName("div")[0].style.display = (button.parentElement.getElementsByTagName("div")[0].style.display === 'block') ? 'none' : 'block';
 }

@@ -10,6 +10,7 @@ const {upload} = require('../app.js');
 
 
 router.post('/createPost', upload.single('image'), async (req,res)=>{
+    
     const {id, title, body, tags} = req.body;
     const {filename, path: filepath} = req.file;
     try{
@@ -27,7 +28,10 @@ router.post('/createPost', upload.single('image'), async (req,res)=>{
                     p_filepath: filepath,
                 }
             })
-            return res.status(404).json({"result": "succesfully"})
+            res.render('success',{
+                layout:'index',
+                message: true,
+            })
         }
     
     } catch (e){
@@ -63,7 +67,6 @@ router.get('/getPost', async (req,res)=>{
     }else{
         sorting.p_date = 1;
     }
-    console.log(sort);
 
 
 

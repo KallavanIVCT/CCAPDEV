@@ -6,7 +6,9 @@
 
 <div class="blur-left cards-container" style="margin: 0px 300px 0px 300px;">
     <div class="cards-top">
+        {{#if isLoggedIn}}
         <button onclick = "togglePopup()">Add Post</button>
+        {{/if}}
         <div class="description-post"><strong>POSTS</strong></div>
         <form name="main-login-form" action="/api/post/getPost" method="GET">
             <div style="display:flex; gap:10px">
@@ -36,7 +38,6 @@
     <div class="cards">
         <div style="display: flex; justify-content: space-between;">
             <span class="title-post"><strong>{{p_title}}</strong></span>
-            <input type="button" value="Delete">
         </div>
         <span class="user-post">{{p_u_OID.u_username}}</span>
         <div class="date-post"><strong>{{p_date}}</strong></div>
@@ -53,12 +54,12 @@
     <div class="for-center-create">
         <div class="blur-left post-form-container">
             <h1><strong>Create Post</strong></h1>
-            <form class="create-post-form" name="create-post-form">
+            <form class="create-post-form" name="create-post-form" action="/api/post/createPost" method="POST" enctype="multipart/form-data">
                 <div class = "close-btn" onclick="hidePopup()">&times;</div>
                 <label>Title</label>
                 <input type="text" placeholder="Enter Title" class="create-select-tag" style="width:50%" name="title">
                 <label>Tag</label>
-                    <select style="width:50%" name="tag">
+                    <select style="width:50%" name="tags">
                         <option>Genshin Impact</option>
                         <option>Honkai Star Rail</option>
                         <option>Honkai Impact</option>
@@ -66,9 +67,10 @@
                         <option>Mihoyo</option>
                     </select>
                 <label>Content</label>
+                <input type="hidden" name="id" value="66776c6fb5909970e7f38836"> <!-- this is hardcoded for now sir said since ala pa sessions -->
                 <textarea class="create-post-textarea" name="body"></textarea>
-                <input type="file" style="width:50%">
-                <input type="submit" onclick="location.href='main_page.html'" value="Create Post">
+                <input type="file" style="width:50%" name="image">
+                <input type="submit" value="submit">
             </form>
         </div>
     </div>

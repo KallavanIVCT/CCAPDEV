@@ -1,23 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./css/page_layout.css">
-    <link rel="stylesheet" type="text/css" href="./css/style.css">
-    <title>Document</title>
-</head>
-<body>
-    <navbar class="blur navbar navbar-img" style="height:200px;">
-        <div class="subnav title"><div class=TITLEE onclick="location.href ='main_page.html'">Mihoyo-X</div></div>
-        <img src = "https://static.miraheze.org/houkai2ndwiki/thumb/0/06/MiHoYo_O_logo.webp/739px-MiHoYo_O_logo.webp.png"/>
-        <div class="subnav buttons">
-            <input type="button" onclick="location.href='login_page.html'" value="Login">
-            <input type="button" onclick="location.href='register_page.html'" value="Register">
-            <input type="button" onclick="location.href='user_profile_page.html'" value="Profile">
-            <input type="button" onclick="location.href='login_page.html'" value="logout">
-        </div>
-    </navbar>
+{{#if isLoggedIn}}
+    {{> header_logged}}
+{{else}}
+    {{> header}}
+{{/if}}
+
     <div class="blur profile-bar">
         <div>
             <div class="profile-circle-holder">
@@ -29,8 +15,7 @@
                 
             </div>
 
-        </div>
-     
+        </div> 
         <div class="description-container">
             <p class="profile-description">Hello You cant see meeiee.</p>
         </div>
@@ -41,37 +26,15 @@
         <div class="blur-left profile-post-container">
             <div class="profile-post-header">
                 <div class="title-post"><strong>POSTS</strong></div>
-            </div>            
-            <div class="cards">
-                <div class="title-post"><strong>Genshin Impact 4.7 Update Information!</strong></div>
-                <div class="description-post">
-                    〓Compensation Details〓<br><br>
-                    Maintenance Compensation: Primogems ×300 (60 Primogems per hour the servers are down)<br>
-                    Issue Fix Compensation: Primogems ×300 (please refer to the relevant compensation mail for more details)<br><br>
-    
-                    〓Scope of Compensation〓<br>
-                    Maintenance Compensation: Travelers who have reached Adventure Rank 5 or above by 2024/06/05 06:00 (UTC+8).<br><br>
-    
-                    Compensation must be claimed before the end of Version 4.7.<br><br>
-    
-                    Issue Fix Compensation: Travelers who reach Adventure Rank 5 or above by 2024/06/05 06:00 (UTC+8).<br><br>
-    
-                    Please log in and claim your compensation before 2024/06/08 06:00 (UTC+8).<br><br>
-    
-                    Our developers will distribute compensation to Travelers via in-game mail within 5 hours after the update maintenance is finished. The mail will expire after 30 days, so don't forget to claim the attached compensation in time.<br><br>
-    
-                    〓Update Schedule〓<br><br>
-                    Update maintenance begins 2024/06/05 06:00 (UTC+8) and is estimated to take 5 hours.                    
-                </div>
-                <input type="button" onclick="location.href='update_post_page.html'" value="Update">
-                <button class="more">Delete</button>
             </div>
+            {{#each posts}}
             <div class="cards">
-                <div class="title-post"><strong>Zenless Zone Zero Release date!</strong></div>
-                <div class="description-post">Zenless Zone Zero is an upcoming free-to-play urban fantasy action role-playing game developed and published by miHoYo in mainland China, with global publishing by Cognosphere, d/b/a HoYoverse. It is scheduled for release on Microsoft Windows, iOS, Android and PlayStation 5, on July 4, 2024!</p></div>
-                <input type="button" onclick="location.href='update_post_page.html'" value="Update">
-                <button class="more">Delete</button>
+                <div class="title-post"><strong>{{p_title}}</strong></div>
+                <div class="description-post"> {{p_body}}</div>
+                <button id="update">Update</button>
+                <button class="more" id="delete">Delete</button>
             </div>
+            {{/each}}
         </div>
         <div class="blur-right comments-container">
             <div class="comment-container" style="padding:10px;">
@@ -115,6 +78,74 @@
         </form>      
     </div>
 </div>
-<script src="modal.js"></script>
-</body>
-</html>
+
+<div class = "popup" id = "popup_js2">
+        <div class="for-center-create">
+        <div class="blur-left post-form-container">
+            <!--
+            <h1><strong>Update Post</strong></h1>
+            
+            <form class="create-post-form" name="create-post-form" action="/api/post/createPost" method="POST" enctype="multipart/form-data">
+                
+                <div class = "close-btn" id="close-btn">&times;</div>
+                <label>Title</label>
+                <input type="text" placeholder="Enter Title" class="create-select-tag" style="width:50%" name="title">
+                <label>Tag</label>
+                    <select style="width:50%" name="tags">
+                        <option>Genshin Impact</option>
+                        <option>Honkai Star Rail</option>
+                        <option>Honkai Impact</option>
+                        <option>Zenless Zone Zero</option>
+                        <option>Mihoyo</option>
+                    </select>
+                <label>Content</label>
+                <input type="hidden" name="id" value="66776c6fb5909970e7f38836">
+                <textarea class="create-post-textarea" name="body"></textarea>
+                <input type="file" style="width:50%" name="image">
+                <input type="submit" value="submit">
+                
+            </form>
+            -->
+            <div class = "close-btn" id="close-btn">&times;</div>
+            <h1> <strong>This feature is Coming Soon! Wait for Updates!</strong></h1>
+        </div>
+    </div>
+</div>
+
+
+<div class = "popup" id = "popup_js3">
+        <div class="for-center-create">
+        <div class="blur-left post-form-container">
+            <!--
+            <h1><strong>Update Post</strong></h1>
+            
+            <form class="create-post-form" name="create-post-form" action="/api/post/createPost" method="POST" enctype="multipart/form-data">
+                
+                <div class = "close-btn" id="close-btn">&times;</div>
+                <label>Title</label>
+                <input type="text" placeholder="Enter Title" class="create-select-tag" style="width:50%" name="title">
+                <label>Tag</label>
+                    <select style="width:50%" name="tags">
+                        <option>Genshin Impact</option>
+                        <option>Honkai Star Rail</option>
+                        <option>Honkai Impact</option>
+                        <option>Zenless Zone Zero</option>
+                        <option>Mihoyo</option>
+                    </select>
+                <label>Content</label>
+                <input type="hidden" name="id" value="66776c6fb5909970e7f38836">
+                <textarea class="create-post-textarea" name="body"></textarea>
+                <input type="file" style="width:50%" name="image">
+                <input type="submit" value="submit">
+                
+            </form>
+            -->
+            <div class = "close-btn" id="close-btn2">&times;</div>
+            <h1> <strong>This feature is Coming Soon! Wait for Updates!</strong></h1>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="/common/modal.js"></script>
