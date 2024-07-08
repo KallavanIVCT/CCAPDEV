@@ -3,27 +3,31 @@ const Post = require('../models/postModel.js');
 const express = require('express');
 
 const router = express.Router();
+//const bcrypt = require('bcrypt'); MCO3 Implement 
 
+// create a register that will be sent and process it to go to the mongoodb database
 router.post('/createUser', async (req,res)=>{
     const {username, password, displayname, birthdate} = req.body;
-    // place verification if username is already existing nope
-
-    try{
-        let username_exist = await User.findOne({u_username: username}).exec();
-        if (username_exist){
-            return res.status(409).json("Username already exist")
-
-        }else{
-            const user = await User.create({
-                u_username: username,
-                u_password: password,
-                u_birthdate: Date(birthdate),
-                u_displayname: displayname,
-            })
+    
+    try {
+        let username_exist = await User.findOne({ u_username: username }).exec();
+        if (username_exist) {
+            return res.status(409).json("Username already exists");
         }
+
+        // MCO3 Implement 
+        //const hashedPassword = await bcrypt.hash(password, 10);
+
+        const user = await User.create({
+            u_username: username,
+            u_password: hashedPassword,
+            u_birthdate: new Date(birthdate), 
+            u_displayname: displayname,
+        });
 
     }catch(e){
         console.log(e);
+        res.status(500).json({ error: "Internal server error" });
     }
 })
 
