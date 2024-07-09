@@ -11,13 +11,14 @@ const commentSchema = mongoose.Schema(
             type:String,
             required:true,
         },
-        c_p_id:{
+        c_post_id:{
             type:Number,
             required:true,
         },
         c_parentComment:{
-            type:String,
-            required:false,
+            type:mongoose.Schema.Types.ObjectId,
+            ref: 'Comment',
+            required: false,
         },
         c_has_been_edited:{
             type:Boolean,
@@ -29,9 +30,18 @@ const commentSchema = mongoose.Schema(
             required:true,
             default: Date.now
         },
+        c_image:{
+            c_filename:{
+                type: String,
+                required:false,
+            },
+            c_filepath:{
+                type:String,
+                required:false,
+            }
+        },
     }
 )
 
 const Comment = mongoose.model("Comment", commentSchema);
-
 module.exports = Comment;

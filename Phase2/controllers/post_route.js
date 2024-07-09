@@ -1,6 +1,7 @@
 
 const Post = require('../models/postModel.js');
 const User = require('../models/userModel.js');
+const Comment = require('../models/commentModel.js');
 const express = require('express');
 const nodemon = require('nodemon');
 
@@ -96,11 +97,16 @@ router.get('/getPost/:id', async(req,res)=>{
 
     try{
         const result = await Post.findById(id).populate('p_u_OID').lean();
+        //TODO MCO3: Filter comments by post_id
+        const comments = [{
+            c_body:'asdasdadssadasd', c_username:'qmork', c_post_id:id, c_parentComment: null, c_has_been_edited: true, c_Date: new Date(), c_image: null
+        },{ c_body:'dasdasdasdas', c_username:'qmork', c_post_id:id, c_parentComment: null, c_has_been_edited: false, c_Date: new Date(), c_image: null
+        }];
         if (result){
             res.render('post_page',{
                 layout:'index',
                 postdetails:result,
-        
+                commentdetails:comments,
             })
         }else{
             res.status(404).send("no post found");

@@ -8,7 +8,10 @@ const router = express.Router();
 // create a register that will be sent and process it to go to the mongoodb database
 router.post('/createUser', async (req,res)=>{
     const {username, password, displayname, birthdate} = req.body;
-    
+    console.log(username);
+    console.log(password);
+    console.log(displayname);
+    console.log(birthdate);
     try {
         let username_exist = await User.findOne({ u_username: username }).exec();
         if (username_exist) {
@@ -20,10 +23,12 @@ router.post('/createUser', async (req,res)=>{
 
         const user = await User.create({
             u_username: username,
-            u_password: hashedPassword,
+            u_password: password,
             u_birthdate: new Date(birthdate), 
             u_displayname: displayname,
         });
+
+        res.redirect('/api/user/login');
 
     }catch(e){
         console.log(e);
