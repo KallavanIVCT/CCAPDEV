@@ -32,13 +32,6 @@
             <i class="fa-solid fa-thumbs-down downvote-icon"></i>
             <span class="upvote-count">{{postdetails.downvotes}}</span>
 
-
-
-
-
-
-
-
         </div>
         <div class="comments-container">
             <h2>Comments</h2>
@@ -46,7 +39,7 @@
                 <div id="draftComment" contenteditable="true" placeholder="Enter your comment here" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></div>
                 <div class="buttonsContainer">
                     <button id="attachFilesComment">Attach Files</button>
-                    <button id="postComment">Post</button>
+                    <button id="postComment" onclick="window.alert('To Be Done')">Post</button>
                 </div>
             </div>
             {{#each commentdetails}}

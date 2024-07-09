@@ -633,6 +633,13 @@ h1
     display: none;
 }
 
+.commentTextContainer{
+    float: none;
+    flex-grow: 1;
+    overflow: auto;
+    word-wrap: break-word;
+}
+
 .draftReplyComment{
     width: 90%;
     min-height: 4vh;

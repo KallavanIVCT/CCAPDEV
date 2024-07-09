@@ -47,6 +47,7 @@ router.get('/getPost', async (req,res)=>{
     const isLoggedIn = req.query.isLoggedIn === 'true';
     const sort = req.query.sort || 'p_date';
     const tags = req.query.tags
+    const searchquery = req.query.query;
 
     /*
     console.log(isLoggedIn);
@@ -55,13 +56,12 @@ router.get('/getPost', async (req,res)=>{
     */
 
     let query = {}
-
-
-
-    if(tags && tags !== 'All'){
+    if(tags && tags !== 'All')
+    {
         query.p_tags = tags;
     }
-    let sorting = {}
+    query.p_title = {$regex: searchquery, $options: 'i'};
+    let sorting = {};
 
     if (sort === 'upvotes'){
         sorting.upvotes = -1;
@@ -91,37 +91,21 @@ router.get('/getPost', async (req,res)=>{
     }
 })
 
-function sortCommentsIntoTree(comments){
-    for (let i = 0; i < comments.length; i++){
-        if (comments[i].c_parentComment === null){
-            comments[i].indentLevel = 0;
-        } else {
-            comments[i].indentLevel = getIndentationLevel(comments[i]);
-        }
-    }
-}
-
-function getIndentationLevel(comment, level = 0) {
-    if (!comment) {
-      return level; // Handle base case (no comment or root comment)
-    }
-  
-    level++; // Increment for child comment
-    return Math.max(level, getIndentationLevel(comment.parentComment, level)); // Recursively calculate indentation
-}
+//Dummy data for comments, remove in MCO3
+const comments = [{
+    c_id: 123, c_body:'asdasdadssadasd', c_username:'qmork', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: null, c_has_been_edited: true, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["qmork","focalors","gravityzero","lyney"], c_dislikes: ["kirae","kallavan","tuonto"]
+},{ c_id: 124, c_body:'dasdasdasdas', c_username:'gravityzero', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: 123, c_has_been_edited: false, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["gravityzero", "focalors", "kallavan", "lyney"], c_dislikes: ["qmork", "kirae", "tuonto"]
+},{ c_id: 125, c_body:'boowomp', c_username:'qmork', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: null, c_has_been_edited: false, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["tuonto", "kallavan", "kirae", "gravityzero", "qmork"], c_dislikes: ["focalors", "lyney"]
+},{ c_id: 126, c_body:'heehee', c_username:'kirae', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: 124, c_has_been_edited: false, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["lyney"], c_dislikes: ["focalors", "kirae", "gravityzero", "kallavan", "tuonto", "qmork"]
+},{ c_id: 127, c_body:'dasdasdasdas', c_username:'focalors', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: 126, c_has_been_edited: true, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["kirae", "qmork", "lyney"], c_dislikes: ["focalors", "gravityzero", "kallavan", "tuonto"]
+},{ c_id: 128, c_body:'womp womp womp', c_username:'kallavan', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: 124, c_has_been_edited: true, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["kallavan", "focalors", "qmork"], c_dislikes: ["kirae", "tuonto", "gravityzero", "lyney"]
+}];
 
 router.get('/getPost/:id', async(req,res)=>{
     const {id} = req.params;
 
     try{
         const result = await Post.findById(id).populate('p_u_OID').lean();
-        const comments = [{
-            c_id: 123, c_body:'asdasdadssadasd', c_username:'qmork', c_post_id:id, c_parentComment: null, c_has_been_edited: true, c_Date: (new Date()).toISOString().split('T')[0], c_image: null
-        },{ c_id: 124, c_body:'dasdasdasdas', c_username:'qmork', c_post_id:id, c_parentComment: 123, c_has_been_edited: false, c_Date: (new Date()).toISOString().split('T')[0], c_image: null
-        },{ c_id: 125, c_body:'boowomp', c_username:'qmork', c_post_id:id, c_parentComment: null, c_has_been_edited: false, c_Date: (new Date()).toISOString().split('T')[0], c_image: null
-        },{ c_id: 126, c_body:'heehee', c_username:'qmork', c_post_id:id, c_parentComment: 124, c_has_been_edited: false, c_Date: (new Date()).toISOString().split('T')[0], c_image: null
-        },{ c_id: 127, c_body:'dasdasdasdas', c_username:'qmork', c_post_id:id, c_parentComment: 126, c_has_been_edited: true, c_Date: (new Date()).toISOString().split('T')[0], c_image: null
-        }];
 
         //Sort comments table
         const commentMap = new Map();
@@ -131,14 +115,26 @@ router.get('/getPost/:id', async(req,res)=>{
         });
 
         const nestedComments = [];
-        comments.forEach(comment => {
-            if (comment.c_parentComment) {
-                const parent = commentMap.get(comment.c_parentComment);
-                parent.replies.push(comment);
+        for (let i = 0; i < comments.length; i++) {
+            if (comments[i].c_parentComment) {
+                const parent = commentMap.get(comments[i].c_parentComment);
+                parent.replies.push(comments[i]);
             } else {
-                nestedComments.push(comment);
+                nestedComments.push(comments[i]);
             }
-        });
+
+            comments[i].c_numLikes = comments[i].c_likes.length;
+            comments[i].c_numDislikes = comments[i].c_dislikes.length;
+
+            //TODO for MCO3: Check if Session is the Author of the comment
+            if (comments[i].c_username === "qmork") {
+                comments[i].c_isAuthor = true;
+            } else {
+                comments[i].c_isAuthor = false;
+            }
+        }
+
+        console.log(JSON.stringify(nestedComments, null, 2));
 
         if (result){
             res.render('post_page',{
@@ -281,7 +277,11 @@ router.delete('/deletePost/:id', async(req,res)=>{
     }
 })
 
-
+//TODO MCO2: Server-side AJAX for React Comments
+router.post('/reactComment', function(req, res){
+    const c_id = Number(req.body.c_id);
+    comments.findOne({id: c_id}, function(){});
+});
 
 
 

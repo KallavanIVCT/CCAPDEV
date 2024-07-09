@@ -37,7 +37,10 @@ $(document).ready(function() {
     }
 );
 
+//TODO MCO2: Client-side AJAX Comment React
+$(document).ready(function(){
 
+});
 
 
 
