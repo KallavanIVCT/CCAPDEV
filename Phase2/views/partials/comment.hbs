@@ -1,15 +1,18 @@
 <div class="comment">
     <div class="commentContainer">
-        <img class="pfp" name="profilePicture" src="/{{commentdetails.c_image.c_filepath}}">
+        {{#if c_image}}
+        <img class="pfp" name="profilePicture" src="/{{c_image.c_filepath}}">
+        {{else}}
+        <img class="pfp" name="profilePicture" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg">
+        {{/if}}
     </div>
-    <!--https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg-->
     <div class="commentTextContainer">
-        <h4 name="username">{{commentdetails.c_username}}</h4>
-        <span name="date">{{commentdetails.c_date}}</span>
-        {{#if commentdetails.c_has_been_edited}}
+        <h4 name="username">{{c_username}}</h4>
+        <span name="date">{{c_Date}}</span>
+        {{#if c_has_been_edited}}
         <span>Edited</span><br>
         {{/if}}
-        <p name="commentText">{{commentdetails.c_body}}</p>
+        <p name="commentText">{{c_body}}</p>
         <div class="buttonsContainer editCommentButtons">
             <button id="attachFilesComment">Attach Files</button>
             <button id="postComment" onclick="editCommentDiv(this)">Edit Comment</button>
@@ -24,10 +27,8 @@
             <button class="deleteCommentButton">Delete</button>
         </div>
 
-        {{#if commentReply}}
-            {{#each commentReply}}
+        {{#each replies}}
             {{> comment this}}
-            {{/each}}
-        {{/if}}
+        {{/each}}
     </div>
 </div>

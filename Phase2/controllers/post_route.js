@@ -91,22 +91,60 @@ router.get('/getPost', async (req,res)=>{
     }
 })
 
+function sortCommentsIntoTree(comments){
+    for (let i = 0; i < comments.length; i++){
+        if (comments[i].c_parentComment === null){
+            comments[i].indentLevel = 0;
+        } else {
+            comments[i].indentLevel = getIndentationLevel(comments[i]);
+        }
+    }
+}
+
+function getIndentationLevel(comment, level = 0) {
+    if (!comment) {
+      return level; // Handle base case (no comment or root comment)
+    }
+  
+    level++; // Increment for child comment
+    return Math.max(level, getIndentationLevel(comment.parentComment, level)); // Recursively calculate indentation
+}
 
 router.get('/getPost/:id', async(req,res)=>{
     const {id} = req.params;
 
     try{
         const result = await Post.findById(id).populate('p_u_OID').lean();
-        //TODO MCO3: Filter comments by post_id
         const comments = [{
-            c_body:'asdasdadssadasd', c_username:'qmork', c_post_id:id, c_parentComment: null, c_has_been_edited: true, c_Date: new Date(), c_image: null
-        },{ c_body:'dasdasdasdas', c_username:'qmork', c_post_id:id, c_parentComment: null, c_has_been_edited: false, c_Date: new Date(), c_image: null
+            c_id: 123, c_body:'asdasdadssadasd', c_username:'qmork', c_post_id:id, c_parentComment: null, c_has_been_edited: true, c_Date: (new Date()).toISOString().split('T')[0], c_image: null
+        },{ c_id: 124, c_body:'dasdasdasdas', c_username:'qmork', c_post_id:id, c_parentComment: 123, c_has_been_edited: false, c_Date: (new Date()).toISOString().split('T')[0], c_image: null
+        },{ c_id: 125, c_body:'boowomp', c_username:'qmork', c_post_id:id, c_parentComment: null, c_has_been_edited: false, c_Date: (new Date()).toISOString().split('T')[0], c_image: null
+        },{ c_id: 126, c_body:'heehee', c_username:'qmork', c_post_id:id, c_parentComment: 124, c_has_been_edited: false, c_Date: (new Date()).toISOString().split('T')[0], c_image: null
+        },{ c_id: 127, c_body:'dasdasdasdas', c_username:'qmork', c_post_id:id, c_parentComment: 126, c_has_been_edited: true, c_Date: (new Date()).toISOString().split('T')[0], c_image: null
         }];
+
+        //Sort comments table
+        const commentMap = new Map();
+        comments.forEach(comment => {
+            comment.replies = [];
+            commentMap.set(comment.c_id, comment);
+        });
+
+        const nestedComments = [];
+        comments.forEach(comment => {
+            if (comment.c_parentComment) {
+                const parent = commentMap.get(comment.c_parentComment);
+                parent.replies.push(comment);
+            } else {
+                nestedComments.push(comment);
+            }
+        });
+
         if (result){
             res.render('post_page',{
                 layout:'index',
                 postdetails:result,
-                commentdetails:comments,
+                commentdetails:nestedComments,
             })
         }else{
             res.status(404).send("no post found");
