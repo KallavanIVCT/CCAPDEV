@@ -5,7 +5,6 @@ const router = express.Router();
 
 const {upload} = require('../app.js');
 
-/*
 router.post('/createComment', async (req,res)=>{
     
     const {comment_uid, post_id, text, parentComment} = req.body;
@@ -27,13 +26,13 @@ router.post('/createComment', async (req,res)=>{
                 c_post_id: post_id,
                 c_parentComment: c_parent_comment,
             })
-            res.status(200);
+            return res.status(200).send("success");
         }
     
     } catch (e){
         console.log(e);
         return res.status(406).send(e);
     }
-})*/
+})
 
 module.exports = router;

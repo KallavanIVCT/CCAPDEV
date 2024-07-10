@@ -96,6 +96,7 @@ router.get('/getPost', async (req,res)=>{
 })
 
 //Dummy data for comments, remove in MCO3
+/*
 const comments = [{
     c_id: 123, c_body:'asdasdadssadasd', c_username:'qmork', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: null, c_has_been_edited: true, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["qmork","focalors","gravityzero","lyney"], c_dislikes: ["kirae","kallavan","tuonto"]
 },{ c_id: 124, c_body:'dasdasdasdas', c_username:'gravityzero', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: 123, c_has_been_edited: false, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["gravityzero", "focalors", "kallavan", "lyney"], c_dislikes: ["qmork", "kirae", "tuonto"]
@@ -103,61 +104,67 @@ const comments = [{
 },{ c_id: 126, c_body:'heehee', c_username:'kirae', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: 124, c_has_been_edited: false, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["lyney"], c_dislikes: ["focalors", "kirae", "gravityzero", "kallavan", "tuonto", "qmork"]
 },{ c_id: 127, c_body:'dasdasdasdas', c_username:'focalors', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: 126, c_has_been_edited: true, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["kirae", "qmork", "lyney"], c_dislikes: ["focalors", "gravityzero", "kallavan", "tuonto"]
 },{ c_id: 128, c_body:'womp womp womp', c_username:'kallavan', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: 124, c_has_been_edited: true, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["kallavan", "focalors", "qmork"], c_dislikes: ["kirae", "tuonto", "gravityzero", "lyney"]
-}];
+}];*/
 
-router.get('/getPost/:id', async(req,res)=>{
-    const {id} = req.params;
-    const{isLoggedIn}= req.query;
+router.get('/getPost/:id', async(req, res) => {
+    const { id } = req.params;
+    const { isLoggedIn } = req.query;
 
-    try{
+    try {
         const result = await Post.findById(id).populate('p_u_OID').lean();
+        const comments = await Comment.find({ c_post_id: result._id }).populate('c_u_OID').lean();
 
-        //Sort comments table
+        console.log(result._id);
+        console.log(JSON.stringify(comments, null, 2));
+
+        // Sort comments table
         const commentMap = new Map();
         comments.forEach(comment => {
             comment.replies = [];
-            commentMap.set(comment.c_id, comment);
+            commentMap.set(comment._id.toString(), comment); // Ensure the key is a string
         });
 
         const nestedComments = [];
-        for (let i = 0; i < comments.length; i++) {
-            if (comments[i].c_parentComment) {
-                const parent = commentMap.get(comments[i].c_parentComment);
-                parent.replies.push(comments[i]);
+        comments.forEach(comment => {
+            if (comment.c_parentComment) {
+                const parent = commentMap.get(comment.c_parentComment.toString());
+                if (parent) {
+                    parent.replies.push(comment);
+                } else {
+                    // If parent comment is not found, push it to top level (optional based on your requirements)
+                    nestedComments.push(comment);
+                }
             } else {
-                nestedComments.push(comments[i]);
+                nestedComments.push(comment);
             }
 
-            comments[i].c_numLikes = comments[i].c_likes.length;
-            comments[i].c_numDislikes = comments[i].c_dislikes.length;
+            comment.c_numLikes = comment.c_likes.length;
+            comment.c_numDislikes = comment.c_dislikes.length;
 
-            //TODO for MCO3: Check if Session is the Author of the comment
-            if (comments[i].c_username === "qmork") {
-                comments[i].c_isAuthor = true;
-            } else {
-                comments[i].c_isAuthor = false;
-            }
-        }
+            comment.c_date = comment.c_date.toISOString().split('T')[0];
+
+            // TODO for MCO3: Check if Session is the Author of the comment
+            comment.c_isAuthor = (comment.c_username === "qmork");
+        });
 
         console.log(JSON.stringify(nestedComments, null, 2));
 
-        if (result){
-            res.render('post_page',{
-                layout:'index',
-                postdetails:result,
-                commentdetails:nestedComments,
+        if (result) {
+            res.render('post_page', {
+                layout: 'index',
+                postdetails: result,
+                commentdetails: nestedComments,
                 isLoggedIn: isLoggedIn,
-            })
-        }else{
+            });
+        } else {
             res.status(404).send("no post found");
         }
-    }
-    catch(e){
+    } catch (e) {
         console.log(e);
         return res.status(406).send(e);
     }
+});
 
-})
 
 
 router.post('/reactPost', async(req,res)=>{
@@ -288,43 +295,6 @@ router.post('/reactComment', function(req, res){
     const c_id = Number(req.body.c_id);
     comments.findOne({id: c_id}, function(){});
 });
-
-
-
-
-
-
-router.post('/createComment', async (req,res)=>{
-    
-    const {comment_uid, post_id, text, parentComment} = req.body;
-    try{
-        console.log(comment_uid);
-        if (!text){ 
-            res.status(405).send("incomplete fields");
-        }
-        else{
-            let c_parent_comment;
-            if (parentComment)
-                c_parent_comment = parentComment;
-            else
-                c_parent_comment = null;
-            
-            const result = await Comment.create({
-                c_u_OID: comment_uid,
-                c_body: text,
-                c_post_id: post_id,
-                c_parentComment: c_parent_comment,
-            })
-            res.status(200);
-        }
-    
-    } catch (e){
-        console.log(e);
-        return res.status(406).send(e);
-    }
-})
-
-
 
 
 module.exports = router;
