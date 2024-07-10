@@ -15,7 +15,10 @@ router.post('/createUser', async (req,res)=>{
     try {
         let username_exist = await User.findOne({ u_username: username }).exec();
         if (username_exist) {
-            return res.status(409).json("Username already exists");
+            res.render('register_page',{
+                layout: 'index',
+                res: "invalid, username already taken",
+            });
         }
 
         // MCO3 Implement 
@@ -85,6 +88,29 @@ router.get('/profile', async (req,res)=>{
         layout: 'index',
         posts: resultPost,
         isLoggedIn: isLoggedIn
+        // comment,
+
+    })
+})
+
+
+// This is when the user clicks the another persons profile
+router.get('/profile/:id', async (req,res)=>{
+
+    //const {id} = req.params;// wag muna gamitin since hardcoded daw sabi ni sir ung specific user
+    const {id} = req.params;
+    const {isLoggedIn} = req.query;
+
+
+    const resultPost = await Post.find({p_u_OID: id}).lean();
+    // const resultComment (mark)
+
+
+
+    res.render('user_profile_page',{
+        layout: 'index',
+        posts: resultPost,
+        isLoggedIn: isLoggedIn,
         // comment,
 
     })

@@ -7,10 +7,15 @@ const userSchema = mongoose.Schema(
             required:true,
             unique:true,
         },
-        u_profilepic: {
-            data:ArrayBuffer,
-            type:String,
-            required:false,
+        p_image:{
+            p_filename:{
+                type: String,
+                required:false,
+            },
+            p_filepath:{
+                type:String,
+                required:false,
+            }
         },
         u_description:{
             type: String,

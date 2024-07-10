@@ -10,10 +10,19 @@
         <div class="post" data-post-id="{{postdetails._id}}">
             <h1 class="main-post-title">{{postdetails.p_title}}</h1>
             <div class="authorContainer">
-                {{#if c_image}}
-                <img class="pfp" name="profilePicture" src="/{{c_image.c_filepath}}">
+
+                {{#if isLoggedIn}}
+                    {{#if c_image}}
+                        <img class="pfp" name="profilePicture" src="/{{c_image.c_filepath}}" onclick="window.location.href='/api/user/profile/{{postdetails._id}}?isLoggedIn=true';">
+                    {{else}}
+                        <img class="pfp" name="profilePicture" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg" onclick="window.location.href='/api/user/profile/{{postdetails._id}}?isLoggedIn=true';">
+                    {{/if}}
                 {{else}}
-                <img class="pfp" name="profilePicture" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg">
+                    {{#if c_image}}
+                        <img class="pfp" name="profilePicture" src="/{{c_image.c_filepath}}" onclick="window.location.href='/api/user/profile/{{postdetails._id}}'">
+                    {{else}}
+                        <img class="pfp" name="profilePicture" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg" onclick="window.location.href='/api/user/profile/{{postdetails._id}}';">
+                    {{/if}}
                 {{/if}}
                 <div class="authorTextContainer">
                     <p class="authorName">{{postdetails.p_u_OID.u_username}}</p>
@@ -30,11 +39,17 @@
             </div>
             <br>
 
-
+            {{#if isLoggedIn}}
             <i class="fa-solid fa-thumbs-up upvote-icon"></i>
             <span class="downvote-count">{{postdetails.upvotes}}</span>
             <i class="fa-solid fa-thumbs-down downvote-icon"></i>
             <span class="upvote-count">{{postdetails.downvotes}}</span>
+            {{else}}
+            <i class="fa-solid fa-thumbs-up"></i>
+            <span class="downvote-count">{{postdetails.upvotes}}</span>
+            <i class="fa-solid fa-thumbs-down"></i>
+            <span class="upvote-count">{{postdetails.downvotes}}</span>
+            {{/if}}
 
         </div>
         <div class="comments-container">
