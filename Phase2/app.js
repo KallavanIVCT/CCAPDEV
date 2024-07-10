@@ -22,7 +22,7 @@ module.exports = {upload};
 
 const postRoute = require('./controllers/post_route.js')
 const userRoute = require('./controllers/user_route.js')
-const commentRoute = require('./controllers/react_route.js')
+const commentRoute = require('./controllers/comment_route.js')
 const reactRoute = require('./controllers/user_route.js')
 const pageRoute = require('./controllers/page_route.js');
 

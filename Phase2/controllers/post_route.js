@@ -294,5 +294,37 @@ router.post('/reactComment', function(req, res){
 
 
 
+router.post('/createComment', async (req,res)=>{
+    
+    const {comment_uid, post_id, text, parentComment} = req.body;
+    try{
+        console.log(comment_uid);
+        if (!text){ 
+            res.status(405).send("incomplete fields");
+        }
+        else{
+            let c_parent_comment;
+            if (parentComment)
+                c_parent_comment = parentComment;
+            else
+                c_parent_comment = null;
+            
+            const result = await Comment.create({
+                c_u_OID: comment_uid,
+                c_body: text,
+                c_post_id: post_id,
+                c_parentComment: c_parent_comment,
+            })
+            res.status(200);
+        }
+    
+    } catch (e){
+        console.log(e);
+        return res.status(406).send(e);
+    }
+})
+
+
+
 
 module.exports = router;

@@ -20,18 +20,20 @@
             <div class="commentActionsContainer">
             <i class="fa-solid fa-thumbs-up" id="like_{{c_id}}"></i>
             <span name="numLikes"> {{c_numLikes}}</span>
-            <i class="fa-solid fa-thumbs-down" id="dislike_{{c_id}}"></i>
+            <i class="fa-solid fa-thumbs-down" id="dislike_{{c_id}}"></i>                                                                         
             <span name="numDislikes"> {{c_numDislikes}}</span>
+            {{#if isLoggedIn}}
             <button class="replyButton" onclick="toggleReplyComment(this)">Reply</button>
             {{#if c_isAuthor}}
             <button onclick="editCommentDiv(this)">Edit</button>
             <button class="deleteCommentButton" onclick="window.alert('To Be Done')">Delete</button>
             {{/if}}
+            {{/if}}
 
             <div class="createComment replyComment">
                 <div class="draftReplyComment" contenteditable="true" placeholder="Enter your reply here" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></div>
                 <div class="buttonsContainer">
-                    <button id="attachFilesComment">Attach Files</button>
+                    <button id="attachFilesComment" onclick="window.alert('To Be Done')">Attach Files</button>
                     <button id="postComment" onclick="window.alert('To Be Done')">Reply</button>
                 </div>
             </div>

@@ -57,8 +57,8 @@
             <div class="createComment">
                 <div id="draftComment" contenteditable="true" placeholder="Enter your comment here" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></div>
                 <div class="buttonsContainer">
-                    <button id="attachFilesComment">Attach Files</button>
-                    <button id="postComment" onclick="window.alert('To Be Done')">Post</button>
+                    <button id="attachFilesComment" onclick="window.alert('To Be Done')">Attach Files</button>
+                    <button id="postComment">Post</button>
                 </div>
             </div>
             {{#each commentdetails}}
