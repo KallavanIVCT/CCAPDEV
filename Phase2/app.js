@@ -20,10 +20,9 @@ module.exports = {upload};
 
 
 
-const postRoute = require('./controllers/post_route.js')
-const userRoute = require('./controllers/user_route.js')
-const commentRoute = require('./controllers/comment_route.js')
-const reactRoute = require('./controllers/user_route.js')
+const postRoute = require('./controllers/post_route.js');
+const userRoute = require('./controllers/user_route.js');
+const commentRoute = require('./controllers/comment_route.js');
 const pageRoute = require('./controllers/page_route.js');
 
 /* npm i express-handlebars express body-parser mongoose */
@@ -72,6 +71,5 @@ server.use("/api/page", pageRoute);
 server.use("/api/post", postRoute);
 server.use("/api/user", userRoute);
 server.use("/api/comment", commentRoute);
-server.use("/api/react", reactRoute);
 
 

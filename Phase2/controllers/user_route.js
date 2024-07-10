@@ -75,7 +75,7 @@ router.get('/profile', async (req,res)=>{
 
     //const {id} = req.params;// wag muna gamitin since hardcoded daw sabi ni sir ung specific user
     const {isLoggedIn} = req.query;
-    let id = '66776c6fb5909970e7f38836';
+    let id = '668e4fe66e207fb7d10519f1';
 
     const resultPost = await Post.find({p_u_OID: id}).lean();
     const userPost = await User.findById(id).lean();

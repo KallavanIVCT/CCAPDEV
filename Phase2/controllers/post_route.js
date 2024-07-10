@@ -102,9 +102,10 @@ router.get('/getPost/:id', async(req, res) => {
     try {
         const result = await Post.findById(id).populate('p_u_OID').lean();
         const comments = await Comment.find({ c_post_id: result._id }).populate('c_u_OID').lean();
-
+        /*
         console.log(result._id);
         console.log(JSON.stringify(comments, null, 2));
+        */
 
         // Sort comments table
         const commentMap = new Map();
@@ -133,9 +134,9 @@ router.get('/getPost/:id', async(req, res) => {
             comment.c_date = comment.c_date.toISOString().split('T')[0];
 
             // TODO for MCO3: Check if Session is the Author of the comment
-            comment.c_isAuthor = (comment.c_username === "qmork");
+            comment.c_isAuthor = (comment.c_u_OID.u_username === "A");
+            console.log(comment.c_isAuthor);
         });
-
         console.log(JSON.stringify(nestedComments, null, 2));
 
         if (result) {
@@ -159,10 +160,11 @@ router.get('/getPost/:id', async(req, res) => {
 router.post('/reactPost', async(req,res)=>{
     const {post_id,user_id} = req.body;
     const {UP} = req.body;
-
+    /*
     console.log("post_id:",post_id)
     console.log("UP:",UP)
     console.log("user_id:",user_id)
+    */
 
     //what to do if user upvotes
     // check first if he has upvoted or downvoted

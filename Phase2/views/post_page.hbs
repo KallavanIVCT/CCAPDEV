@@ -61,9 +61,16 @@
                     <button id="postComment">Post</button>
                 </div>
             </div>
-            {{#each commentdetails}}
-                {{> comment this}}
-            {{/each}}
+            {{#if isLoggedIn}}
+                {{#each commentdetails}}
+                    {{> comment this isLoggedIn=true}}
+                {{/each}}
+            {{else}}
+                {{#each commentdetails}}
+                    {{> comment this }}
+                {{/each}}
+            {{/if}}
+
         </div>
     </div>
 

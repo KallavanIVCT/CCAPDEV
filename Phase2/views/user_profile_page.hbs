@@ -7,7 +7,6 @@
     <div class="blur profile-bar">
         <div>
             <div class="profile-circle-holder">
-              
             </div>
             <div class="profile-details-container">
                 <div class="profile-username">{{user.u_username}}</div>
@@ -62,30 +61,32 @@
 
     <!-- popout -->
     <div class = "popup" id = "popup_js">
-    <div class="blur-bottom update-profile-container">
-        <div class = "close-btn" onclick="window.location.reload();">&times;</div>
-        <h1 style="text-align: center;">Update Profile</h1>
-        <form class='Update-form'>
-            <div class="input-box">
-                <label>Email</label>
-                <input type="email">
-            </div>
-            <div class="input-box">
-                <label>Password</label>
-                <input type="password" class="password">
-            </div>
-            <div class="input-box">
-                <label>Profile Pic</label>
-                <input type="file" class="Profile Pic">
-            </div>
-            <div class="input-box">
-                <label>Description</label>
-                <input type="text" class="form-profile-description">
-            </div>
-            <input type="button" onclick="location.href='main_page.html'" value="Submit">
-        </form>      
+        
+        <div class="blur-bottom update-profile-container">
+            <h1 style="text-align: center;">Update Profile</h1>
+            <form class='Update-form'>
+                
+                <div class="input-box">
+                    <label>Email</label>
+                    <input type="email">
+                    <div class = "close-btn" onclick="window.location.reload();">&times;</div>
+                </div>
+                <div class="input-box">
+                    <label>Password</label>
+                    <input type="password" class="password">
+                </div>
+                <div class="input-box">
+                    <label>Profile Pic</label>
+                    <input type="file" class="Profile Pic">
+                </div>
+                <div class="input-box">
+                    <label>Description</label>
+                    <input type="text" class="form-profile-description">
+                </div>
+                <input type="button" onclick="location.href='main_page.html'" value="Submit">
+            </form>      
+        </div>
     </div>
-</div>
 
 <!-- popup for  UPDATE BUTTON-->
 <div class = "popup" id = "popup_js2">

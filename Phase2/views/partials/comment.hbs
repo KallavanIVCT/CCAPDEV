@@ -1,6 +1,6 @@
 <div class="comment">
     <div class="commentContainer">
-        {{#if c_image}}
+        {{#if c_image.c_filepath}}
         <img class="pfp" name="profilePicture" src="/{{c_image.c_filepath}}">
         {{else}}
         <img class="pfp" name="profilePicture" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg">
@@ -23,11 +23,11 @@
             <i class="fa-solid fa-thumbs-down" id="dislike_{{c_id}}"></i>                                                                         
             <span name="numDislikes"> {{c_numDislikes}}</span>
             {{#if isLoggedIn}}
-            <button class="replyButton" onclick="toggleReplyComment(this)">Reply</button>
-            {{#if c_isAuthor}}
-            <button onclick="editCommentDiv(this)">Edit</button>
-            <button class="deleteCommentButton" onclick="window.alert('To Be Done')">Delete</button>
-            {{/if}}
+                <button class="replyButton" onclick="toggleReplyComment(this)">Reply</button>
+                {{#if c_isAuthor}}
+                    <button onclick="editCommentDiv(this)">Edit</button>
+                    <button class="deleteCommentButton" onclick="window.alert('To Be Done')">Delete</button>
+                {{/if}}
             {{/if}}
 
             <div class="createComment replyComment">
@@ -38,9 +38,14 @@
                 </div>
             </div>
         </div>
-
-        {{#each replies}}
-            {{> comment this}}
-        {{/each}}
+        {{#if isLoggedIn}}
+            {{#each replies}}
+                {{> comment this isLoggedIn=true}}
+            {{/each}}
+        {{else}}
+            {{#each replies}}
+                {{> comment this}}
+            {{/each}}
+        {{/if}}
     </div>
 </div>
