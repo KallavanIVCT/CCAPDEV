@@ -7,11 +7,11 @@ const {upload} = require('../app.js');
 
 router.post('/createComment', async (req,res)=>{
     
-    const {comment_uid, post_id, text, parentComment} = req.body;
+    const {comment_uid, post_id, commentText, parentComment} = req.body;
     try{
         console.log(comment_uid);
-        if (!text){ 
-            res.status(405).send("incomplete fields");
+        if (!commentText){ 
+            
         }
         else{
             let c_parent_comment;
@@ -22,13 +22,15 @@ router.post('/createComment', async (req,res)=>{
             
             const result = await Comment.create({
                 c_u_OID: comment_uid,
-                c_body: text,
+                c_body: commentText,
                 c_post_id: post_id,
                 c_parentComment: c_parent_comment,
             })
-            return res.status(200).send("success");
+            res.render('success',{
+                layout:'index',
+                message: true,
+            })
         }
-    
     } catch (e){
         console.log(e);
         return res.status(406).send(e);

@@ -136,7 +136,8 @@ router.get('/getPost/:id', async(req, res) => {
             comment.c_isAuthor = (comment.c_u_OID.u_username === "A");
             console.log(comment.c_isAuthor);
         });
-        console.log(JSON.stringify(nestedComments, null, 2));
+
+        //console.log(JSON.stringify(nestedComments, null, 2));
 
         if (result) {
             res.render('post_page', {
