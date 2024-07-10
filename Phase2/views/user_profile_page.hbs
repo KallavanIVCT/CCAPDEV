@@ -10,14 +10,14 @@
               
             </div>
             <div class="profile-details-container">
-                <div class="profile-username">Tuonto</div>
+                <div class="profile-username">{{user.u_username}}</div>
                 <button onclick = "togglePopup()">Edit</button>
                 
             </div>
 
         </div> 
         <div class="description-container">
-            <p class="profile-description">Hello You cant see meeiee.</p>
+            <p class="profile-description">{{user.u_description}}</p>
         </div>
         
 
@@ -63,7 +63,7 @@
     <!-- popout -->
     <div class = "popup" id = "popup_js">
     <div class="blur-bottom update-profile-container">
-        <div class = "close-btn" onclick="location.href ='user_profile_page.html'">&times;</div>
+        <div class = "close-btn" onclick="window.location.reload();">&times;</div>
         <h1 style="text-align: center;">Update Profile</h1>
         <form class='Update-form'>
             <div class="input-box">

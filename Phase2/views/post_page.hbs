@@ -13,15 +13,15 @@
 
                 {{#if isLoggedIn}}
                     {{#if c_image}}
-                        <img class="pfp" name="profilePicture" src="/{{c_image.c_filepath}}" onclick="window.location.href='/api/user/profile/{{postdetails._id}}?isLoggedIn=true';">
+                        <img class="pfp" name="profilePicture" src="/{{c_image.c_filepath}}" onclick="window.location.href='/api/user/profile/{{postdetails.p_u_OID._id}}?isLoggedIn=true';">
                     {{else}}
-                        <img class="pfp" name="profilePicture" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg" onclick="window.location.href='/api/user/profile/{{postdetails._id}}?isLoggedIn=true';">
+                        <img class="pfp" name="profilePicture" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg" onclick="window.location.href='/api/user/profile/{{postdetails.p_u_OID._id}}?isLoggedIn=true';">
                     {{/if}}
                 {{else}}
                     {{#if c_image}}
-                        <img class="pfp" name="profilePicture" src="/{{c_image.c_filepath}}" onclick="window.location.href='/api/user/profile/{{postdetails._id}}'">
+                        <img class="pfp" name="profilePicture" src="/{{c_image.c_filepath}}" onclick="window.location.href='/api/user/profile/{{postdetails.p_u_OID._id}}'">
                     {{else}}
-                        <img class="pfp" name="profilePicture" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg" onclick="window.location.href='/api/user/profile/{{postdetails._id}}';">
+                        <img class="pfp" name="profilePicture" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg" onclick="window.location.href='/api/user/profile/{{postdetails.p_u_OID._id}}';">
                     {{/if}}
                 {{/if}}
                 <div class="authorTextContainer">

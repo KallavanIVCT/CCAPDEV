@@ -9,10 +9,7 @@ const router = express.Router();
 // create a register that will be sent and process it to go to the mongoodb database
 router.post('/createUser', async (req,res)=>{
     const {username, password, displayname, birthdate} = req.body;
-    console.log(username);
-    console.log(password);
-    console.log(displayname);
-    console.log(birthdate);
+
     try {
         let username_exist = await User.findOne({ u_username: username }).exec();
         if (username_exist) {
@@ -78,20 +75,20 @@ router.get('/profile', async (req,res)=>{
 
     //const {id} = req.params;// wag muna gamitin since hardcoded daw sabi ni sir ung specific user
     const {isLoggedIn} = req.query;
-    let id = '668ccd48463f3ef61ee1b659';
+    let id = '66776c6fb5909970e7f38836';
 
     const resultPost = await Post.find({p_u_OID: id}).lean();
+    const userPost = await User.findById(id).lean();
     // const resultComment (mark)
     const comments = await Comment.find({ c_u_OID: id }).populate('c_post_id').sort({ c_date: -1 }).lean();
-
-
 
     res.render('user_profile_page',{
         layout: 'index',
         posts: resultPost,
         isLoggedIn: isLoggedIn,
         comments: comments,
-
+        user: userPost,
+        
     })
 })
 
@@ -175,22 +172,25 @@ router.delete('/deleteUser/:id', async (req,res)=>{
 // This is when the user clicks the another persons profile
 router.get('/profile/:id', async (req,res)=>{
 
-    //const {id} = req.params;// wag muna gamitin since hardcoded daw sabi ni sir ung specific user
     const {id} = req.params;
+    console.log(id);
     const {isLoggedIn} = req.query;
-
-
     const resultPost = await Post.find({p_u_OID: id}).lean();
+    const userPost = await User.findById(id).lean();
     // const resultComment (mark)
+    const comments = await Comment.find({ c_u_OID: id }).populate('c_post_id').sort({ c_date: -1 }).lean();
 
-
+    console.log(comments);
+    console.log(resultPost);
+    console.log(userPost);
 
     res.render('user_profile_page',{
         layout: 'index',
         posts: resultPost,
         isLoggedIn: isLoggedIn,
-        // comment,
-
+        comments: comments,
+        user: userPost,
+        
     })
 })
 
