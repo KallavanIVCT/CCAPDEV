@@ -1,5 +1,6 @@
 const User = require('../models/userModel.js');
 const Post = require('../models/postModel.js');
+const Comment = require('../models/commentModel.js');
 const express = require('express');
 
 const router = express.Router();
@@ -77,18 +78,19 @@ router.get('/profile', async (req,res)=>{
 
     //const {id} = req.params;// wag muna gamitin since hardcoded daw sabi ni sir ung specific user
     const {isLoggedIn} = req.query;
-    let id = '66776c6fb5909970e7f38836';
+    let id = '668ccd48463f3ef61ee1b659';
 
     const resultPost = await Post.find({p_u_OID: id}).lean();
     // const resultComment (mark)
+    const comments = await Comment.find({ c_u_OID: id }).populate('c_post_id').sort({ c_date: -1 }).lean();
 
 
 
     res.render('user_profile_page',{
         layout: 'index',
         posts: resultPost,
-        isLoggedIn: isLoggedIn
-        // comment,
+        isLoggedIn: isLoggedIn,
+        comments: comments,
 
     })
 })

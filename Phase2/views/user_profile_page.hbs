@@ -42,14 +42,21 @@
             </div>
 
             <!--Edit here comments -->
+            {{#if isLogged_in}}
+            {{#each comments}}
+                <div class="comment-container">
+                    <div class="comments">{{c_body}}</div>
+                    <a href="/api/post/getPost/{{c_post_id}}?isLoggedIn=true">Link to Post</a>
+                </div>
+            {{/each}}
+            {{else}}
+            {{#each comments}}
             <div class="comment-container">
-                <div class="comments">Tuonto: Sekai de ichiban ohime-sama</div>
-                <a href="post_page_1.html">Link to Post</a href>
+                <div class="comments">{{c_body}}</div>
+                <a href="/api/post/getPost/{{c_post_id}}">Link to Post</a>
             </div>
-            <div class="comment-container">
-                <div class="comments">Tuonto: Oratrice Mecanique d'Analyse Cardinale</div>
-                <a href="post_page_1.html">Link to Post</a href>
-            </div> 
+            {{/each}}
+            {{/if}}
         </div>
     </div>
 

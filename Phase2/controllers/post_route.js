@@ -95,17 +95,6 @@ router.get('/getPost', async (req,res)=>{
     }
 })
 
-//Dummy data for comments, remove in MCO3
-/*
-const comments = [{
-    c_id: 123, c_body:'asdasdadssadasd', c_username:'qmork', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: null, c_has_been_edited: true, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["qmork","focalors","gravityzero","lyney"], c_dislikes: ["kirae","kallavan","tuonto"]
-},{ c_id: 124, c_body:'dasdasdasdas', c_username:'gravityzero', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: 123, c_has_been_edited: false, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["gravityzero", "focalors", "kallavan", "lyney"], c_dislikes: ["qmork", "kirae", "tuonto"]
-},{ c_id: 125, c_body:'boowomp', c_username:'qmork', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: null, c_has_been_edited: false, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["tuonto", "kallavan", "kirae", "gravityzero", "qmork"], c_dislikes: ["focalors", "lyney"]
-},{ c_id: 126, c_body:'heehee', c_username:'kirae', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: 124, c_has_been_edited: false, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["lyney"], c_dislikes: ["focalors", "kirae", "gravityzero", "kallavan", "tuonto", "qmork"]
-},{ c_id: 127, c_body:'dasdasdasdas', c_username:'focalors', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: 126, c_has_been_edited: true, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["kirae", "qmork", "lyney"], c_dislikes: ["focalors", "gravityzero", "kallavan", "tuonto"]
-},{ c_id: 128, c_body:'womp womp womp', c_username:'kallavan', c_post_id: "668ccdb2463f3ef61ee1b665", c_parentComment: 124, c_has_been_edited: true, c_Date: (new Date()).toISOString().split('T')[0], c_image: null, c_likes: ["kallavan", "focalors", "qmork"], c_dislikes: ["kirae", "tuonto", "gravityzero", "lyney"]
-}];*/
-
 router.get('/getPost/:id', async(req, res) => {
     const { id } = req.params;
     const { isLoggedIn } = req.query;
