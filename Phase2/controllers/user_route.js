@@ -94,27 +94,6 @@ router.get('/profile', async (req,res)=>{
 })
 
 
-// This is when the user clicks the another persons profile
-router.get('/profile/:id', async (req,res)=>{
-
-    //const {id} = req.params;// wag muna gamitin since hardcoded daw sabi ni sir ung specific user
-    const {id} = req.params;
-    const {isLoggedIn} = req.query;
-
-
-    const resultPost = await Post.find({p_u_OID: id}).lean();
-    // const resultComment (mark)
-
-
-
-    res.render('user_profile_page',{
-        layout: 'index',
-        posts: resultPost,
-        isLoggedIn: isLoggedIn,
-        // comment,
-
-    })
-})
 
 
 
@@ -191,6 +170,27 @@ router.delete('/deleteUser/:id', async (req,res)=>{
 })
 
 
+// This is when the user clicks the another persons profile
+router.get('/profile/:id', async (req,res)=>{
+
+    //const {id} = req.params;// wag muna gamitin since hardcoded daw sabi ni sir ung specific user
+    const {id} = req.params;
+    const {isLoggedIn} = req.query;
+
+
+    const resultPost = await Post.find({p_u_OID: id}).lean();
+    // const resultComment (mark)
+
+
+
+    res.render('user_profile_page',{
+        layout: 'index',
+        posts: resultPost,
+        isLoggedIn: isLoggedIn,
+        // comment,
+
+    })
+})
 
 
 module.exports = router;
