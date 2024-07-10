@@ -10,7 +10,11 @@
         <div class="post" data-post-id="{{postdetails._id}}">
             <h1 class="main-post-title">{{postdetails.p_title}}</h1>
             <div class="authorContainer">
-                <img class="pfp" src="https://via.placeholder.com/300x150"> 
+                {{#if c_image}}
+                <img class="pfp" name="profilePicture" src="/{{c_image.c_filepath}}">
+                {{else}}
+                <img class="pfp" name="profilePicture" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg">
+                {{/if}}
                 <div class="authorTextContainer">
                     <p class="authorName">{{postdetails.p_u_OID.u_username}}</p>
                     <p class="dateText">{{postdetails.p_date}}</p>

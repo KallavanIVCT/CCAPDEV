@@ -45,7 +45,10 @@ router.post('/login', async(req,res)=>{
         if(username_exist){
             res.redirect('/api/post/getPost/?isLoggedIn=true')
         }else{
-            res.status(409).json("Username does not exist");
+            res.render('login_page',{
+                layout: 'index',
+                res: "invalid, try again",
+            });
         }
     }catch(e){
         res.status(409).json("ERROR");

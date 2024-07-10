@@ -60,7 +60,11 @@ router.get('/getPost', async (req,res)=>{
     {
         query.p_tags = tags;
     }
-    query.p_title = {$regex: searchquery, $options: 'i'};
+    if (searchquery)
+    {
+        query.p_title = {$regex: searchquery, $options: 'i'};
+    }
+
     let sorting = {};
 
     if (sort === 'upvotes'){
@@ -103,6 +107,7 @@ const comments = [{
 
 router.get('/getPost/:id', async(req,res)=>{
     const {id} = req.params;
+    const{isLoggedIn}= req.query;
 
     try{
         const result = await Post.findById(id).populate('p_u_OID').lean();
@@ -141,6 +146,7 @@ router.get('/getPost/:id', async(req,res)=>{
                 layout:'index',
                 postdetails:result,
                 commentdetails:nestedComments,
+                isLoggedIn: isLoggedIn,
             })
         }else{
             res.status(404).send("no post found");
