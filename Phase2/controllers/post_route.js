@@ -70,7 +70,7 @@ router.get('/getPost', async (req,res)=>{
     if (sort === 'upvotes'){
         sorting.upvotes = -1;
     }else{
-        sorting.p_date = 1;
+        sorting.p_date = -1;
     }
 
 
@@ -111,7 +111,7 @@ router.get('/getPost/:id', async(req, res) => {
         const commentMap = new Map();
         comments.forEach(comment => {
             comment.replies = [];
-            commentMap.set(comment._id.toString(), comment); // Ensure the key is a string
+            commentMap.set(comment._id.toString(), comment);
         });
 
         const nestedComments = [];
@@ -121,7 +121,6 @@ router.get('/getPost/:id', async(req, res) => {
                 if (parent) {
                     parent.replies.push(comment);
                 } else {
-                    // If parent comment is not found, push it to top level (optional based on your requirements)
                     nestedComments.push(comment);
                 }
             } else {
