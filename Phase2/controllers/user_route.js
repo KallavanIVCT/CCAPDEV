@@ -44,7 +44,9 @@ router.post('/login', async(req,res)=>{
     try{
         const username_exist = await User.findOne({u_username: username, u_password: password});
         if(username_exist){
-            res.redirect('/api/post/getPost/?isLoggedIn=true')
+            req.session.login_user = username_exist._id;
+            req.session.login_id = req.sessionID;
+            res.redirect('/api/post/getPost')
         }else{
             res.render('login_page',{
                 layout: 'index',
@@ -74,18 +76,17 @@ router.get('/register', (req,res)=>{
 router.get('/profile', async (req,res)=>{
 
     //const {id} = req.params;// wag muna gamitin since hardcoded daw sabi ni sir ung specific user
-    const {isLoggedIn} = req.query;
-    let id = '668e4fe66e207fb7d10519f1';
+    const login_id = req.session.login_user ? req.session.login_user : null;
+    //console.log(login_id);
 
-    const resultPost = await Post.find({p_u_OID: id}).lean();
-    const userPost = await User.findById(id).lean();
-    // const resultComment (mark)
-    const comments = await Comment.find({ c_u_OID: id }).populate('c_post_id').sort({ c_date: -1 }).lean();
+    const resultPost = await Post.find({p_u_OID: login_id}).lean();
+    const userPost = await User.findById(login_id).lean();
+    const comments = await Comment.find({ c_u_OID: login_id }).populate('c_post_id').sort({ c_date: -1 }).lean();
 
     res.render('user_profile_page',{
         layout: 'index',
         posts: resultPost,
-        isLoggedIn: isLoggedIn,
+        login_id: login_id,
         comments: comments,
         user: userPost,
         
@@ -173,21 +174,21 @@ router.delete('/deleteUser/:id', async (req,res)=>{
 router.get('/profile/:id', async (req,res)=>{
 
     const {id} = req.params;
-    console.log(id);
-    const {isLoggedIn} = req.query;
+    //console.log(id);
+    const login_id = req.session.login_user ? JSON.stringify(req.session.login_user) : null;
     const resultPost = await Post.find({p_u_OID: id}).lean();
     const userPost = await User.findById(id).lean();
     // const resultComment (mark)
     const comments = await Comment.find({ c_u_OID: id }).populate('c_post_id').sort({ c_date: -1 }).lean();
 
-    console.log(comments);
-    console.log(resultPost);
-    console.log(userPost);
+    //console.log(comments);
+    //console.log(resultPost);
+    //console.log(userPost);
 
     res.render('user_profile_page',{
         layout: 'index',
         posts: resultPost,
-        isLoggedIn: isLoggedIn,
+        login_id: login_id,
         comments: comments,
         user: userPost,
         

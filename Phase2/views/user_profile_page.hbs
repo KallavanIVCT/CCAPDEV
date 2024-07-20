@@ -1,4 +1,4 @@
-{{#if isLoggedIn}}
+{{#if login_id}}
     {{> header_logged}}
 {{else}}
     {{> header}}
@@ -41,13 +41,14 @@
             </div>
 
             <!--Edit here comments -->
-            {{#if isLogged_in}}
+            {{#if login_id}}
             {{#each comments}}
                 <div class="comment-container">
                     <div class="comments">{{c_body}}</div>
-                    <a href="/api/post/getPost/{{c_post_id}}?isLoggedIn=true">Link to Post</a>
+                    <a href="/api/post/getPost/{{c_post_id}}">Link to Post</a>
                 </div>
             {{/each}}
+            <!--
             {{else}}
             {{#each comments}}
             <div class="comment-container">
@@ -56,6 +57,7 @@
             </div>
             {{/each}}
             {{/if}}
+            -->
         </div>
     </div>
 

@@ -1,4 +1,4 @@
-{{#if isLoggedIn}}
+{{#if login_id}}
     {{> header_logged}}
 {{else}}
     {{> header}}
@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <div class="blur-left cards-container" style="margin: 0px 300px 0px 300px;">
     <div class="cards-top">
-        {{#if isLoggedIn}}
+        {{#if login_id}}
         <button onclick = "togglePopup()">Add Post</button>
         {{/if}}
         <div class="description-post"><strong>POSTS</strong></div>
@@ -46,10 +46,8 @@
         <div class="tags"><button style="margin-right:10px;">{{p_tags}}</button></div>
         <div class="img-div-post"><img src="/{{p_image.p_filepath}}" class="img-post"></div>
         <br>
-        {{#if ../isLoggedIn}}
+        {{#if ../login_id}}
             <input type="button" onclick="navigateToPostPageLogged('{{_id}}')" value="See More">
-        {{else}}
-            <input type="button" onclick="navigateToPostPage('{{_id}}')" value="See More">
         {{/if}}
             <i class="fa-solid fa-thumbs-up upvote-icon"></i>
             <span class="downvote-count">{{upvotes}}</span>
@@ -76,7 +74,7 @@
                         <option>Mihoyo</option>
                     </select>
                 <label>Content</label>
-                <input type="hidden" name="id" value="668e4fe66e207fb7d10519f1"> <!-- this is hardcoded for now sir said since ala pa sessions User A-->
+                <!--<input type="hidden" name="id" value={{login_id}}>  this is hardcoded for now sir said since ala pa sessions User A-->
                 <textarea class="create-post-textarea" name="body"></textarea>
                 <input type="file" style="width:50%" name="image">
                 <input type="submit" value="submit">
@@ -87,12 +85,8 @@
 <script src="/common/modal.js"></script>
 
 <script>
-function navigateToPostPage(id) {
-    const url = `/api/post/getPost/${id}`;
-    window.location.href = url;
-}
 function navigateToPostPageLogged(id) {
-    const url = `/api/post/getPost/${id}/?isLoggedIn=true`;
+    const url = `/api/post/getPost/${id}`;
     window.location.href = url;
 }
 

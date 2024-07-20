@@ -20,6 +20,13 @@ module.exports = {upload};
 
 
 
+
+
+
+
+
+
+
 const postRoute = require('./controllers/post_route.js');
 const userRoute = require('./controllers/user_route.js');
 const commentRoute = require('./controllers/comment_route.js');
@@ -31,6 +38,24 @@ const server = express();
 
 server.use(express.json()); 
 server.use(express.urlencoded({ extended: true }));
+
+
+
+
+const session = require('express-session');
+const mongoStore = require('connect-mongodb-session')(session);
+
+server.use(session({
+    secret: 'a secret fruit',
+    saveUninitialized: true, 
+    resave: false,
+    store: new mongoStore({ 
+      uri: "mongodb://localhost:27017",
+      collection: 'mySession',
+      expires: 1000*60*60 // 1 hour
+    })
+  }));
+  
 
 
 

@@ -9,7 +9,7 @@ router.post('/createComment', async (req,res)=>{
     
     const {comment_uid, post_id, commentText, parentComment} = req.body;
     try{
-        console.log(comment_uid);
+        //console.log(comment_uid);
         if (!commentText){ 
             
         }

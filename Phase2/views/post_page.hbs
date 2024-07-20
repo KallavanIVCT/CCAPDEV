@@ -1,4 +1,4 @@
-{{#if isLoggedIn}}
+{{#if login_id}}
     {{> header_logged}}
 {{else}}
     {{> header}}
@@ -11,17 +11,11 @@
             <h1 class="main-post-title">{{postdetails.p_title}}</h1>
             <div class="authorContainer">
 
-                {{#if isLoggedIn}}
-                    {{#if c_image}}
-                        <img class="pfp" name="profilePicture" src="/{{c_image.c_filepath}}" onclick="window.location.href='/api/user/profile/{{postdetails.p_u_OID._id}}?isLoggedIn=true';">
-                    {{else}}
-                        <img class="pfp" name="profilePicture" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg" onclick="window.location.href='/api/user/profile/{{postdetails.p_u_OID._id}}?isLoggedIn=true';">
-                    {{/if}}
-                {{else}}
+                {{#if login_id}}
                     {{#if c_image}}
                         <img class="pfp" name="profilePicture" src="/{{c_image.c_filepath}}" onclick="window.location.href='/api/user/profile/{{postdetails.p_u_OID._id}}'">
                     {{else}}
-                        <img class="pfp" name="profilePicture" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg" onclick="window.location.href='/api/user/profile/{{postdetails.p_u_OID._id}}';">
+                        <img class="pfp" name="profilePicture" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg" onclick="window.location.href='/api/user/profile/{{postdetails.p_u_OID._id}}'">
                     {{/if}}
                 {{/if}}
                 <div class="authorTextContainer">
@@ -39,7 +33,7 @@
             </div>
             <br>
 
-            {{#if isLoggedIn}}
+            {{#if login_id}}
             <i class="fa-solid fa-thumbs-up upvote-icon"></i>
             <span class="downvote-count">{{postdetails.upvotes}}</span>
             <i class="fa-solid fa-thumbs-down downvote-icon"></i>
@@ -61,23 +55,25 @@
                     <button id="attachFilesComment" onclick="window.alert('To Be Done')">Attach Files</button>
                     <button id="postComment">Post</button>
                 </div>
-                <input type="hidden" name="comment_uid" value="668ccd48463f3ef61ee1b659"> <!-- this is hardcoded for now sir said since ala pa sessions -->
+                <input type="hidden" name="comment_uid" value={{login_id}}> <!-- this is hardcoded for now sir said since ala pa sessions -->
                 <input type="hidden" name="post_id" value="{{postdetails._id}}"> <!-- this is hardcoded for now sir said since ala pa sessions -->
                 <input type="hidden" name="parentComment"> <!-- this is hardcoded for now sir said since ala pa sessions -->
             </div>
             </form>
-            {{#if isLoggedIn}}
+            {{#if login_id}}
                 {{#each commentdetails}}
-                    {{> comment this isLoggedIn=true}}
+                    {{> comment this login_id=true}}
                 {{/each}}
             {{else}}
                 {{#each commentdetails}}
                     {{> comment this }}
                 {{/each}}
             {{/if}}
-
         </div>
     </div>
-
+    <script>
+        let userfromSession = "{{login_id}}";
+        console.log("USERUSERUSER" + userfromSession );
+    </script>
     <script src="/common/modal.js"></script>
     <script src="/common/post_page.js"></script>

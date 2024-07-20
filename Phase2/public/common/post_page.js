@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded',function(){
     const upvoteNum = document.getElementsByClassName('upvote-count')
 
 
-    user_id = '66776c6fb5909970e7f38836';
+    user_id = userfromSession;
     
     upvoteIcon[0].addEventListener('click', async()=>{
         const post = document.getElementsByClassName('post');

@@ -22,12 +22,14 @@
             <span name="numLikes"> {{c_numLikes}}</span>
             <i class="fa-solid fa-thumbs-down" id="dislike_{{c_id}}"></i>                                                                         
             <span name="numDislikes"> {{c_numDislikes}}</span>
-            {{#if isLoggedIn}}
+            {{#if login_id}}
                 <button class="replyButton" onclick="toggleReplyComment(this)">Reply</button>
+                <div> NIGAGAIAIIAA</div>
                 {{#if c_isAuthor}}
                     <button onclick="editCommentDiv(this)">Edit</button>
                     <button class="deleteCommentButton" onclick="window.alert('To Be Done')">Delete</button>
                 {{/if}}
+            {{else}}
             {{/if}}
 
             <form name="create-comment" action="/api/comment/createComment" method="post">
@@ -38,14 +40,14 @@
                     <button id="postComment">Reply</button>
                 </div>
             </div>
-            <input type="hidden" name="comment_uid" value="668ccd48463f3ef61ee1b659"> <!-- this is hardcoded for now sir said since ala pa sessions -->
+            <input type="hidden" name="comment_uid" value={{login_id}}> <!-- this is hardcoded for now sir said since ala pa sessions -->
             <input type="hidden" name="post_id" value="{{c_post_id}}"> <!-- this is hardcoded for now sir said since ala pa sessions -->
             <input type="hidden" name="parentComment" value="{{_id}}"> <!-- this is hardcoded for now sir said since ala pa sessions -->
             </form>
         </div>
-        {{#if isLoggedIn}}
+        {{#if login_id}}
             {{#each replies}}
-                {{> comment this isLoggedIn=true}}
+                {{> comment this login_id=true}}
             {{/each}}
         {{else}}
             {{#each replies}}

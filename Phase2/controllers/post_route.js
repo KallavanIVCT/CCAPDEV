@@ -12,17 +12,18 @@ const {upload} = require('../app.js');
 
 router.post('/createPost', upload.single('image'), async (req,res)=>{
     
-    const {id, title, body, tags} = req.body;
+    const {title, body, tags} = req.body;
     const {filename, path: filepath} = req.file;
+    const login_id = req.session.login_user ? req.session.login_user : null;
     try{
-        if (!id || !title || !body){ //no need to check tags since not required
+        if (!login_id || !title || !body){ //no need to check tags since not required
             req.status(405).send("incomplete fields");
         }
         else{
             const result = await Post.create({
                 p_title: title,
                 p_body: body,
-                p_u_OID: id,
+                p_u_OID: login_id,
                 p_tags: tags, // if tags undefined mongo auto handles this
                 p_image:{
                     p_filename: filename,
@@ -43,8 +44,8 @@ router.post('/createPost', upload.single('image'), async (req,res)=>{
 router.get('/getPost', async (req,res)=>{
 
 
-
-    const isLoggedIn = req.query.isLoggedIn === 'true';
+    // if this has value then there is session if no then no sessions are available
+    const login_id = req.session.login_user ? JSON.stringify(req.session.login_user) : null;
     const sort = req.query.sort || 'p_date';
     const tags = req.query.tags
     const searchquery = req.query.query;
@@ -72,9 +73,11 @@ router.get('/getPost', async (req,res)=>{
     }else{
         sorting.p_date = -1;
     }
-
-
-
+    /*
+    if (req.session.login_user){
+        console.log(JSON.stringify(req.session.login_user));
+    }
+    */
     try{
 
         const result = await Post.find(query).sort(sorting).populate('p_u_OID').lean(); //lean is to make mongoose object to js objects, populate is putting objects in the p_u_OID
@@ -83,7 +86,7 @@ router.get('/getPost', async (req,res)=>{
             res.render('main_page',{
                 layout:'index',
                 postdetails:result,
-                isLoggedIn: isLoggedIn,
+                login_id: login_id,
             })
         }else{
             res.status(404).send("no post found")
@@ -97,8 +100,16 @@ router.get('/getPost', async (req,res)=>{
 
 router.get('/getPost/:id', async(req, res) => {
     const { id } = req.params;
-    const { isLoggedIn } = req.query;
+    const login_id = req.session.login_user ? JSON.stringify(req.session.login_user) : null;
+    const login_id2 = req.session.login_user ? req.session.login_user : null;
+    let usernameX = null;
+    if (login_id2){
+        const theUser = await User.findOne({_id: login_id2});
+        usernameX = theUser.u_username;
+    }
+    //console.log("username"  + usernameX);
 
+    //console.log("login" + login_id);
     try {
         const result = await Post.findById(id).populate('p_u_OID').lean();
         const comments = await Comment.find({ c_post_id: result._id }).populate('c_u_OID').lean();
@@ -133,8 +144,8 @@ router.get('/getPost/:id', async(req, res) => {
             comment.c_date = comment.c_date.toISOString().split('T')[0];
 
             // TODO for MCO3: Check if Session is the Author of the comment
-            comment.c_isAuthor = (comment.c_u_OID.u_username === "A");
-            console.log(comment.c_isAuthor);
+            comment.c_isAuthor = (comment.c_u_OID.u_username === usernameX); //usernameX is the session
+            //console.log(comment.c_isAuthor);
         });
 
         //console.log(JSON.stringify(nestedComments, null, 2));
@@ -144,7 +155,7 @@ router.get('/getPost/:id', async(req, res) => {
                 layout: 'index',
                 postdetails: result,
                 commentdetails: nestedComments,
-                isLoggedIn: isLoggedIn,
+                login_id: login_id,
             });
         } else {
             res.status(404).send("no post found");
@@ -175,7 +186,7 @@ router.post('/reactPost', async(req,res)=>{
     if(userVotedPost){
         const result = userVotedPost.reacted_by.find(react => react.user.equals(user_id));
 
-        console.log("What user voted previously", result.reactType);
+        //console.log("What user voted previously", result.reactType);
 
         if(result.reactType === 'upvote' && UP === 'upvote'){ // if user has already upvoted and he wants to upvote
 
