@@ -77,6 +77,7 @@ router.get('/profile', async (req,res)=>{
 
     //const {id} = req.params;// wag muna gamitin since hardcoded daw sabi ni sir ung specific user
     const login_id = req.session.login_user ? req.session.login_user : null;
+
     //console.log(login_id);
 
     const resultPost = await Post.find({p_u_OID: login_id}).lean();
@@ -89,6 +90,7 @@ router.get('/profile', async (req,res)=>{
         login_id: login_id,
         comments: comments,
         user: userPost,
+        hasPrivelage: true,
         
     })
 })
@@ -176,8 +178,19 @@ router.get('/profile/:id', async (req,res)=>{
     const {id} = req.params;
     //console.log(id);
     const login_id = req.session.login_user ? JSON.stringify(req.session.login_user) : null;
+    const login_id2 = req.session.login_user ? req.session.login_user : null;
+
+
+    let hasPrivelage =false;
+
     const resultPost = await Post.find({p_u_OID: id}).lean();
     const userPost = await User.findById(id).lean();
+    console.log(id);
+    console.log(login_id);
+    if (login_id2 == id){
+        hasPrivelage = true;
+    }
+
     // const resultComment (mark)
     const comments = await Comment.find({ c_u_OID: id }).populate('c_post_id').sort({ c_date: -1 }).lean();
 
@@ -191,6 +204,7 @@ router.get('/profile/:id', async (req,res)=>{
         login_id: login_id,
         comments: comments,
         user: userPost,
+        hasPrivelage: hasPrivelage,
         
     })
 })

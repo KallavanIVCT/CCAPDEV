@@ -10,7 +10,9 @@
             </div>
             <div class="profile-details-container">
                 <div class="profile-username">{{user.u_username}}</div>
-                <button onclick = "togglePopup()">Edit</button>
+                {{#if hasPrivelage}}
+                    <button onclick = "togglePopup()">Edit</button>
+                {{/if}}
                 
             </div>
 
@@ -28,10 +30,15 @@
             </div>
             {{#each posts}}
             <div class="cards">
-                <div class="title-post"><strong>{{p_title}}</strong></div>
+                <a href="/api/post/getPost/{{_id}}" style="color:white">
+                    <div class="title-post"><strong>{{p_title}}</strong></div>
+                </a>
                 <div class="description-post"> {{p_body}}</div>
-                <button id="update">Update</button>
-                <button class="more" id="delete">Delete</button>
+                {{#if ../hasPrivelage}}
+                    <button id="update">Update</button>
+                    <input type="hidden" class="post-id" value="{{_id}}">
+                    <button class="delbutton" id="delete">Delete</button>
+                {{/if}}
             </div>
             {{/each}}
         </div>
@@ -95,9 +102,7 @@
         <div class="for-center-create">
         <div class="blur-left post-form-container">
             <h1><strong>Update Post</strong></h1>
-            
-            <form class="create-post-form" name="create-post-form" action="/api/post/createPost" method="POST" enctype="multipart/form-data">
-                
+            <form class="create-post-form" id="update-form-form" name="update-post-form">
                 <div class = "close-btn" id="close-btn">&times;</div>
                 <label>Title</label>
                 <input type="text" placeholder="Enter Title" class="create-select-tag" style="width:50%" name="title">
@@ -110,10 +115,11 @@
                         <option>Mihoyo</option>
                     </select>
                 <label>Content</label>
-                <input type="hidden" name="id" value="66776c6fb5909970e7f38836">
+                <input type="hidden" name="user_id" value={{login_id}}>
+                <input type="hidden" name="post_id" value="">
                 <textarea class="create-post-textarea" name="body"></textarea>
                 <input type="file" style="width:50%" name="image">
-                <input type="submit" value="submit">
+                <input type="submit" value="submit-update" id="submit-update">
                 
             </form>
             <div class = "close-btn" id="close-btn">&times;</div>

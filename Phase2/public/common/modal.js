@@ -14,14 +14,21 @@ $(document).ready(function() {
     $(document).on('click', '#update', function(event) {
         console.log("KDOAKD");
         let item = $(this);
+        let post_id = item.siblings('.post-id').val()
+        console.log(post_id);
+        $('input[name="post_id"]').val(post_id);
+
+        console.log($('input[name="post_id"]').val(post_id));
         $('#popup_js2').toggleClass('active'); // Toggle the 'active' class for visibility
+        
+        
       }
     )
 
     $(document).on('click', '#close-btn', function(e){
         $('#popup_js2').toggleClass('active');
     })
-
+    /*
     // Attach a click event listener to the document
     $(document).on('click', '#delete', function(event) {
         console.log("KDOAKD");
@@ -33,10 +40,49 @@ $(document).ready(function() {
     $(document).on('click', '#close-btn2', function(e){
         $('#popup_js3').toggleClass('active');
     })
+        */
 
-    }
-);
+    const form  = $('#update-form-form');   
+    $('#update-form-form').submit(async function(event) {
+        event.preventDefault();
+        const formData = new FormData(this); // 'this' refers to the form element
+        try {
+            const response = await fetch('/api/post/updatePost', {
+              method: 'PATCH',
+              body: formData,
+            });
+        
+            if (!response.ok) {
+              throw new Error(`Error updating post: ${response.statusText}`);
+            }
+        
+            const data = await response.json();
+            location.reload();
+            console.log('Post updated successfully:', data);
+          } catch (error) {
+            console.log('Error updating post:', error);
+          }
+    });
 
+    $(document).on('click', '.delbutton', async function(e){
+        let item = $(this);
+        let post_idX = item.siblings('.post-id').val()
+        console.log(post_idX);
+        const resp = await fetch(`/api/post/deletePost/${post_idX}`, {
+            method: 'DELETE',
+          });
+
+        if(!resp.ok){
+            location.reload();
+            throw new Error(`Error updating post: ${resp.statusText}`);
+
+        }
+        location.reload();
+    });
+
+          
+});
+//<form class="create-post-form" id="update-form-form" name="update-post-form" action="/api/post/updatePost" method="PUT" enctype="multipart/form-data">
 //TODO MCO2: Client-side AJAX Comment React
 $(document).ready(function(){
 

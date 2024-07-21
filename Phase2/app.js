@@ -89,7 +89,11 @@ server.get('/', (req,res)=>{
 })
 
 
-
+server.get('/logout', function(req, resp){
+    req.session.destroy(function(err) {
+        resp.redirect('/api/user/login');
+    });
+});
 
 
 server.use("/api/page", pageRoute);

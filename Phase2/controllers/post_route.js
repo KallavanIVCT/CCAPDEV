@@ -101,7 +101,7 @@ router.get('/getPost', async (req,res)=>{
 router.get('/getPost/:id', async(req, res) => {
     const { id } = req.params;
     const login_id = req.session.login_user ? JSON.stringify(req.session.login_user) : null;
-    const login_id2 = req.session.login_user ? req.session.login_user : null;
+    const login_id2 = req.session.login_user ? req.session.login_user : null; // is used cause di nagana na nakastringify then nag findOne
     let usernameX = null;
     if (login_id2){
         const theUser = await User.findOne({_id: login_id2});
@@ -233,17 +233,47 @@ router.post('/reactPost', async(req,res)=>{
     }
 
 })
-
-router.patch('/updatePost', async(req,res)=>{
+/*
+router.post('/createPost', upload.single('image'), async (req,res)=>{
     
-    const {title, body, id, tags} = req.body;
-
+    const {title, body, tags} = req.body;
+    const {filename, path: filepath} = req.file;
+    const login_id = req.session.login_user ? req.session.login_user : null;
     try{
-
-        if(!id){
-            res.status(405).send("no id provided")
+        if (!login_id || !title || !body){ //no need to check tags since not required
+            req.status(405).send("incomplete fields");
         }
-
+        else{
+            const result = await Post.create({
+                p_title: title,
+                p_body: body,
+                p_u_OID: login_id,
+                p_tags: tags, // if tags undefined mongo auto handles this
+                p_image:{
+                    p_filename: filename,
+                    p_filepath: filepath,
+                }
+            })
+            res.render('success',{
+                layout:'index',
+                message: true,
+            })
+        }
+    
+    } catch (e){
+        console.log(e);
+        return res.status(406).send(e);
+    }
+})
+*/
+router.patch('/updatePost', upload.single('image'), async(req,res)=>{
+    
+    const {title, body, post_id, tags} = req.body;
+    const {filename, path: filepath} = req.file;
+    try{
+        if(!post_id || !title || !body){
+            res.status(405).send("no post_id provided")
+        }
         const update = {
             $set: {}
         }
@@ -257,8 +287,16 @@ router.patch('/updatePost', async(req,res)=>{
         if (tags){
             update.$set.p_tags = tags;
         }
+        update.$set.p_image = {
+            p_filename: filename,
+            p_filepath: filepath,
+        }
+        if (title || body | tags){
+            update.$set.p_has_been_edited = true;
+        }
+        
 
-        const result = await Post.findByIdAndUpdate(id,update);
+        const result = await Post.findByIdAndUpdate(post_id,update);
         if(result){
             return res.status(200).send("sucesfully in updating");
         }else{
@@ -273,12 +311,18 @@ router.patch('/updatePost', async(req,res)=>{
 router.delete('/deletePost/:id', async(req,res)=>{
     const {id} = req.params // meaning url like /deletePost/664960f2e743681a290ca483
 
+
     try{
         if (!id){
             return res.status(404).send("no id found")
         }
 
         const result = await Post.findByIdAndDelete(id);
+
+        console.log(id);
+        const resultForComments = await Comment.deleteMany({c_post_id: id})
+
+        console.log(resultForComments);
         if(result){
             res.status(200).send("sucesfull in deleting")
         }else{
