@@ -13,22 +13,27 @@ const {upload} = require('../app.js');
 router.post('/createPost', upload.single('image'), async (req,res)=>{
     
     const {title, body, tags} = req.body;
-    const {filename, path: filepath} = req.file;
     const login_id = req.session.login_user ? req.session.login_user : null;
+
     try{
         if (!login_id || !title || !body){ //no need to check tags since not required
             req.status(405).send("incomplete fields");
         }
         else{
+            let imageDetails = {};
+            if (req.file) {
+                const { filename, path: filepath } = req.file;
+                imageDetails = {
+                    p_filename: filename,
+                    p_filepath: filepath
+                };
+            }
             const result = await Post.create({
                 p_title: title,
                 p_body: body,
                 p_u_OID: login_id,
                 p_tags: tags, // if tags undefined mongo auto handles this
-                p_image:{
-                    p_filename: filename,
-                    p_filepath: filepath,
-                }
+                p_image: imageDetails,
             })
             res.render('success',{
                 layout:'index',

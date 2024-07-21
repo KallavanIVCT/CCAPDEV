@@ -25,7 +25,9 @@
             <p class="main-post-description">
                 {{postdetails.p_body}}
             </p>
-            <img class="post-img" src="/{{postdetails.p_image.p_filepath}}">
+            {{#if postdetails.p_image.p_filepath }}
+                <img class="post-img" src="/{{postdetails.p_image.p_filepath}}">
+            {{/if}}
             <br>
             <div class="tagsContainer">
                 <div class="tag">{{postdetails.p_tags}}</div>

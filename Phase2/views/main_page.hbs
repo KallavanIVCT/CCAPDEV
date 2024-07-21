@@ -49,7 +49,9 @@
         <div class="date-post"><strong>{{p_date}}</strong></div>
         <div class="description-post">{{p_body}}<br><br></div>
         <div class="tags"><button style="margin-right:10px;">{{p_tags}}</button></div>
-        <div class="img-div-post"><img src="/{{p_image.p_filepath}}" class="img-post"></div>
+        {{#if p_image.p_filepath}}
+            <div class="img-div-post"><img src="/{{p_image.p_filepath}}" class="img-post"></div>
+        {{/if}}
         <br>
             <input type="button" onclick="navigateToPostPageLogged('{{_id}}')" value="See More">
 
@@ -80,7 +82,7 @@
                 <label>Content</label>
                 <!--<input type="hidden" name="id" value={{login_id}}>  this is hardcoded for now sir said since ala pa sessions User A-->
                 <textarea class="create-post-textarea" name="body" required></textarea>
-                <input type="file" style="width:50%" name="image" required>
+                <input type="file" style="width:50%" name="image">
                 <input type="submit" value="submit">
             </form>
         </div>
