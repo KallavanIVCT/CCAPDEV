@@ -2,62 +2,64 @@ const User = require('../models/userModel.js');
 const Post = require('../models/postModel.js');
 const Comment = require('../models/commentModel.js');
 const express = require('express');
-
+const bcrypt = require('bcrypt');
 const router = express.Router();
 //const bcrypt = require('bcrypt'); MCO3 Implement 
 
 // create a register that will be sent and process it to go to the mongoodb database
-router.post('/createUser', async (req,res)=>{
-    const {username, password, displayname, birthdate} = req.body;
+// create a register that will be sent and process it to go to the mongoodb database
+router.post('/createUser', async (req, res) => {
+    const { username, password, displayname, birthdate } = req.body;
 
     try {
         let username_exist = await User.findOne({ u_username: username }).exec();
         if (username_exist) {
-            res.render('register_page',{
+            return res.render('register_page', {
                 layout: 'index',
                 res: "invalid, username already taken",
             });
         }
 
-        // MCO3 Implement 
-        //const hashedPassword = await bcrypt.hash(password, 10);
+        const saltRounds = 5;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         const user = await User.create({
             u_username: username,
-            u_password: password,
+            u_password: hashedPassword,
             u_birthdate: new Date(birthdate), 
             u_displayname: displayname,
         });
 
         res.redirect('/api/user/login');
 
-    }catch(e){
+    } catch (e) {
         console.log(e);
         res.status(500).json({ error: "Internal server error" });
     }
-})
+});
 
 
-router.post('/login', async(req,res)=>{
-    /* should verify  if user exist, if it exist render the /api/post/getPost and send the username and password baka lang magamit*/
-    const {username, password} = req.body
-    try{
-        const username_exist = await User.findOne({u_username: username, u_password: password});
-        if(username_exist){
-            req.session.login_user = username_exist._id;
-            req.session.login_id = req.sessionID;
-            res.redirect('/api/post/getPost')
-        }else{
-            res.render('login_page',{
-                layout: 'index',
-                res: "invalid, try again",
-            });
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        const user = await User.findOne({ u_username: username }).exec();
+        if (user) {
+            const isMatch = await bcrypt.compare(password, user.u_password);
+            if (isMatch) {
+                req.session.login_user = user._id;
+                req.session.login_id = req.sessionID;
+                return res.redirect('/api/post/getPost');
+            }
         }
-    }catch(e){
-        res.status(409).json("ERROR");
+        res.render('login_page', {
+            layout: 'index',
+            res: "invalid, try again",
+        });
+    } catch (e) {
+        console.log(e);
+        res.status(500).json("ERROR");
     }
-})
-
+});
 
 router.get('/login', (req,res)=>{
     res.render('login_page',{

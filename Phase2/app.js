@@ -3,6 +3,7 @@ const handlebars = require('express-handlebars');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
+const bcrypt = require('bcrypt');
 
 
 const storage = multer.diskStorage({
