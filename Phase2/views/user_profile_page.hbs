@@ -6,26 +6,20 @@
 
     <div class="blur profile-bar">
         <div>
-            <div class="profile-circle-holder">
-            </div>
+            <div class="profile-circle-holder"></div>
             <div class="profile-details-container">
                 <div class="profile-username">{{user.u_username}}</div>
                 {{#if hasPrivelage}}
-                    <button onclick = "togglePopup('popup_js')">Edit</button>
-                {{/if}}
-                {{#if hasPrivelage}}
-                    <button onclick="togglePopup('popup_js3')">Delete Account</button>
+                    <button onclick="togglePopup('popup_js')">Edit</button>
+                    <button id="delete-account-button" data-userid="{{user._id}}" onclick="togglePopup('popup_js3')">Delete Account</button>
                 {{/if}}
             </div>
-
-        </div> 
+        </div>
         <div class="description-container">
             <p class="profile-description">{{user.u_description}}</p>
-
         </div>
-        
-
     </div>
+
     <div class="profile-container2">
         <div class="blur-left profile-post-container">
             <div class="profile-post-header">
@@ -72,78 +66,92 @@
     </div>
 
     <!-- popout -->
-    <div class = "popup" id = "popup_js">
-        
+    <div class="popup" id="popup_js">
         <div class="blur-bottom update-profile-container">
             <h1 style="text-align: center;">Update Profile</h1>
-            <form class='Update-form'>
-                
+            <form id="update-profile-form">
                 <div class="input-box">
                     <label>Username</label>
-                    <input type="username">
-                    <div class = "close-btn" onclick="window.location.reload();">&times;</div>
+                    <input type="text" name="username" value="{{user.u_username}}">
+                    <div class="close-btn" onclick="hidePopup('popup_js')">&times;</div>
                 </div>
                 <div class="input-box">
                     <label>Password</label>
-                    <input type="password" class="password">
+                    <input type="password" name="password">
                 </div>
                 <div class="input-box">
                     <label>Profile Pic</label>
-                    <input type="file" class="profile-Pic">
+                    <input type="file" name="profilePic">
                 </div>
                 <div class="input-box">
                     <label>Description</label>
-                    <input type="text" class="form-profile-description">
+                    <input type="text" name="description" value="{{user.u_description}}">
                 </div>
-                <input type="submit" value="submit-update-profile" id="submit-update-profile">
-            </form>      
-        </div>
-    </div>
-
-<!-- popup for  UPDATE BUTTON-->
-<div class = "popup" id = "popup_js2">
-        <div class="for-center-create">
-        <div class="blur-left post-form-container">
-            <h1><strong>Update Post</strong></h1>
-            <form class="create-post-form" id="update-form-form" name="update-post-form">
-                <div class = "close-btn" id="close-btn">&times;</div>
-                <label>Title</label>
-                <input type="text" placeholder="Enter Title" class="create-select-tag" style="width:50%" name="title">
-                <label>Tag</label>
-                    <select style="width:50%" name="tags">
-                        <option>Genshin Impact</option>
-                        <option>Honkai Star Rail</option>
-                        <option>Honkai Impact</option>
-                        <option>Zenless Zone Zero</option>
-                        <option>Mihoyo</option>
-                    </select>
-                <label>Content</label>
-                <input type="hidden" name="user_id" value={{login_id}}>
-                <input type="hidden" name="post_id" value="">
-                <textarea class="create-post-textarea" name="body"></textarea>
-                <input type="file" style="width:50%" name="image">
-                <input type="submit" value="submit-update" id="submit-update">
-                
+                <input type="submit" value="Update Profile">
             </form>
-            <div class = "close-btn" id="close-btn">&times;</div>
-            <h1> <strong>This feature is Coming Soon! Wait for Updates!</strong></h1>
         </div>
     </div>
-</div>
 
+    <!-- popup for  UPDATE post BUTTON-->
+    <div class = "popup" id = "popup_js2">
+            <div class="for-center-create">
+            <div class="blur-left post-form-container">
+                <h1><strong>Update Post</strong></h1>
+                <form class="create-post-form" id="update-form-form" name="update-post-form">
+                    <div class = "close-btn" id="close-btn">&times;</div>
+                    <label>Title</label>
+                    <input type="text" placeholder="Enter Title" class="create-select-tag" style="width:50%" name="title">
+                    <label>Tag</label>
+                        <select style="width:50%" name="tags">
+                            <option>Genshin Impact</option>
+                            <option>Honkai Star Rail</option>
+                            <option>Honkai Impact</option>
+                            <option>Zenless Zone Zero</option>
+                            <option>Mihoyo</option>
+                        </select>
+                    <label>Content</label>
+                    <input type="hidden" name="user_id" value={{login_id}}>
+                    <input type="hidden" name="post_id" value="">
+                    <textarea class="create-post-textarea" name="body"></textarea>
+                    <input type="file" style="width:50%" name="image">
+                    <input type="submit" value="submit-update" id="submit-update">
+                    
+                </form>
+                <div class = "close-btn" id="close-btn">&times;</div>
+                <h1> <strong>This feature is Coming Soon! Wait for Updates!</strong></h1>
+            </div>
+        </div>
+    </div>
 
-<!-- popup for  DELETE BUTTON-->
-<div class = "popup" id = "popup_js3">
+    <!-- popup for  DELETE BUTTON-->
+    <div class="popup" id="popup_js3">
         <div class="for-center-create">
-        <div class="blur-left post-form-container">
-            <div class = "close-btn" id="close-btn2">&times;</div>
-            <h1> <strong>Are you sure you want to delete this account?</strong></h1>
-            <button id="deleteaccount">Yes</button>
-            <button id="updaasdte">No</button>
+            <div class="blur-left post-form-container">
+                <div class="close-btn" id="close-btn2" onclick="hidePopup('popup_js3')">&times;</div>
+                <h1><strong>Are you sure you want to delete your account?</strong></h1>
+                <button id="confirm-delete-account" onclick="deleteUser('{{user._id}}')">Yes, delete</button>
+                <button onclick="hidePopup('popup_js3')">Cancel</button>
+            </div>
         </div>
     </div>
-</div>
-
-
 
 <script src="/common/modal.js"></script>
+<!--test script for acc deletion -->
+<script>
+    async function deleteUser(userId) {
+        try {
+            const resp = await fetch(`/api/user/deleteUser/${userId}`, {
+                method: 'DELETE',
+            });
+
+            if (!resp.ok) {
+                throw new Error(`Error deleting user: ${resp.statusText}`);
+            }
+
+            location.reload();
+            console.log('User deleted successfully');
+        } catch (error) {
+            console.log('Error deleting user:', error);
+        }
+    }
+</script>

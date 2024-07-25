@@ -84,13 +84,52 @@ $(document).ready(function() {
 //<form class="create-post-form" id="update-form-form" name="update-post-form" action="/api/post/updatePost" method="PUT" enctype="multipart/form-data">
 //TODO MCO2: Client-side AJAX Comment React
 $(document).ready(function(){
+    const updateUserForm = $('#update-profile-form');   
+    $('#update-profile-form').submit(async function(event) {
+        event.preventDefault();
+        const formData = new FormData(this); 
+        try {
+            const response = await fetch('/api/user/updateUser', {
+                method: 'PATCH',
+                body: formData,
+            });
+        
+            if (!response.ok) {
+                throw new Error(`Error updating profile: ${response.statusText}`);
+            }
+        
+            const data = await response.json();
+            location.reload();
+            console.log('Profile updated successfully:', data);
+        } catch (error) {
+            console.log('Error updating profile:', error);
+        }
+    });
 
+    $(document).on('click', '#delete-account-button', async function(e){
+        const userId = $(this).data('userid');
+        try {
+            const resp = await fetch(`/api/user/deleteUser/${userId}`, {
+                method: 'DELETE',
+            });
+    
+            if (!resp.ok) {
+                throw new Error(`Error deleting user: ${resp.statusText}`);
+            }
+    
+            location.reload();
+            console.log('User deleted successfully');
+        } catch (error) {
+            console.log('Error deleting user:', error);
+        }
+    });
 });
 
 
+// User Description, PFP, and Username Update and Entire Delete 
+$(document).ready(function(){
 
-
-
+});
 
 function toggleReplyComment(button) {
     button.parentElement.getElementsByTagName("div")[0].style.display = (button.parentElement.getElementsByTagName("div")[0].style.display === 'block') ? 'none' : 'block';
