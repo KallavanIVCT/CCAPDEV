@@ -11,14 +11,17 @@
             <div class="profile-details-container">
                 <div class="profile-username">{{user.u_username}}</div>
                 {{#if hasPrivelage}}
-                    <button onclick = "togglePopup()">Edit</button>
+                    <button onclick = "togglePopup('popup_js')">Edit</button>
                 {{/if}}
-                
+                {{#if hasPrivelage}}
+                    <button onclick="togglePopup('popup_js3')">Delete Account</button>
+                {{/if}}
             </div>
 
         </div> 
         <div class="description-container">
             <p class="profile-description">{{user.u_description}}</p>
+
         </div>
         
 
@@ -134,7 +137,9 @@
         <div class="for-center-create">
         <div class="blur-left post-form-container">
             <div class = "close-btn" id="close-btn2">&times;</div>
-            <h1> <strong>This feature is Coming Soon! Wait for Updates!</strong></h1>
+            <h1> <strong>Are you sure you want to delete this account?</strong></h1>
+            <button id="deleteaccount">Yes</button>
+            <button id="updaasdte">No</button>
         </div>
     </div>
 </div>

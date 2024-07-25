@@ -97,14 +97,6 @@ router.get('/profile', async (req,res)=>{
     })
 })
 
-
-
-
-
-
-
-
-
 router.patch('/updateUser', async(req,res)=>{ //this is for updating
     const {id, username, password, description} = req.body;
 
@@ -134,8 +126,6 @@ router.patch('/updateUser', async(req,res)=>{ //this is for updating
 })
 
 
-
-
 router.get('/getUsers', async (req,res)=>{
 
     const result = await User.find({})
@@ -148,10 +138,6 @@ router.get('/getUsers/:id', async (req,res)=>{
     const result = await User.findById(id);
     res.status(200).json(result);
 })
-
-
-
-
 
 router.delete('/deleteUser/:id', async (req,res)=>{
     const {id} = req.params;

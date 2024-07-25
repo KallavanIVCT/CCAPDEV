@@ -1,10 +1,9 @@
-function togglePopup()
-{
-    document.getElementById("popup_js").classList.toggle("active");
+function togglePopup(popupId) {
+    document.getElementById(popupId).classList.toggle("active");
 }
 
-function hidePopup(){
-    document.getElementById("popup_js").classList.remove("active");
+function hidePopup(popupId) {
+    document.getElementById(popupId).classList.remove("active");
 }
 
 
