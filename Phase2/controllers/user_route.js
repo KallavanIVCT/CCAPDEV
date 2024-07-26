@@ -7,7 +7,6 @@ const router = express.Router();
 //const bcrypt = require('bcrypt'); MCO3 Implement 
 
 // create a register that will be sent and process it to go to the mongoodb database
-// create a register that will be sent and process it to go to the mongoodb database
 router.post('/createUser', async (req, res) => {
     const { username, password, displayname, birthdate } = req.body;
 

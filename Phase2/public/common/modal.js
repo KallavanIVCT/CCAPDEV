@@ -106,7 +106,7 @@ $(document).ready(function(){
         }
     });
     
-    $(document).on('click', '#delete-account-button', async function(e){
+    $(document).on('click', '#confirm-delete-account', async function(e){
         const userId = $(this).data('userid');
         try {
             const resp = await fetch(`/api/user/deleteUser/${userId}`, {
@@ -117,7 +117,7 @@ $(document).ready(function(){
                 throw new Error(`Error deleting user: ${resp.statusText}`);
             }
 
-            window.location.href = '/views/register_page.hbs'; //Head back to register as to not cause any trouble with sessions
+            window.location.href = '/api/user/register'; //Head back to register as to not cause any trouble with sessions
         } catch (error) {
             console.log('Error deleting user:', error);
         }
