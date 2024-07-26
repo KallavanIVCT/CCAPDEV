@@ -73,15 +73,15 @@ server.use(express.static('uploads'));
 server.listen(3000,()=>{
     console.log("Working");
 })
-mongoose.connect("mongodb://localhost:27017/CCAPDEV")
+mongoose.connect("mongodb+srv://joshuavillavieja:kirakiradays2@cluster0.aa80jrk.mongodb.net/CCAPDEV?retryWrites=true&w=majority&appName=Cluster0")
 .then(()=>{
     console.log("Connnected to database!");
 }).catch((e)=>{
     console.log(e);
 });
 
+/*mongodb://localhost:27017/CCAPDEV*/ 
 
-/*mongodb+srv://joshuavillavieja:kirakiradays@cluster.3c0qj0x.mongodb.net/?retryWrites=true&w=majority&appName=Cluster*/
 
 
 
