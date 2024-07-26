@@ -9,9 +9,10 @@
             <div class="profile-circle-holder">
             </div>
             <div class="profile-details-container">
-                <div class="profile-username">{{user.u_username}}</div>
+                <div class="profile-username">{{user.u_displayname}}</div>
                 {{#if hasPrivelage}}
-                    <button onclick = "togglePopup()">Edit</button>
+                    <button onclick = "togglePopup('popup_js')">Edit</button>
+                    <button id="delete-account-button" data-userid="{{user._id}}">Delete Account</button>
                 {{/if}}
                 
             </div>
@@ -73,25 +74,26 @@
         
         <div class="blur-bottom update-profile-container">
             <h1 style="text-align: center;">Update Profile</h1>
-            <form class='Update-form'>
+            <form class='Update-form' id="update-the-user" name="update-the-user">
                 
                 <div class="input-box">
-                    <label>Username</label>
-                    <input type="username">
+                    <label>displayname</label>
+                    <input type="displayname" name="displayname">
                     <div class = "close-btn" onclick="window.location.reload();">&times;</div>
                 </div>
                 <div class="input-box">
                     <label>Password</label>
-                    <input type="password" class="password">
+                    <input type="password" class="password" name="password">
                 </div>
                 <div class="input-box">
                     <label>Profile Pic</label>
-                    <input type="file" class="profile-Pic">
+                    <input type="file" class="profile-Pic" name="image">
                 </div>
                 <div class="input-box">
                     <label>Description</label>
-                    <input type="text" class="form-profile-description">
+                    <input type="text" class="form-profile-description" name="description">
                 </div>
+                <input type="hidden" name="id" value={{login_id}}>
                 <input type="submit" value="submit-update-profile" id="submit-update-profile">
             </form>      
         </div>
@@ -129,15 +131,17 @@
 </div>
 
 
-<!-- popup for  DELETE BUTTON-->
-<div class = "popup" id = "popup_js3">
+    <!-- popup for DELETE BUTTON-->
+    <div class="popup" id="popup_js3">
         <div class="for-center-create">
-        <div class="blur-left post-form-container">
-            <div class = "close-btn" id="close-btn2">&times;</div>
-            <h1> <strong>This feature is Coming Soon! Wait for Updates!</strong></h1>
+            <div class="blur-left post-form-container">
+                <div class="close-btn" id="close-btn2" onclick="hidePopup('popup_js3')">&times;</div>
+                <h1><strong>Are you sure you want to delete your account?</strong></h1>
+                <button id="confirm-delete-account" data-userid="{{user._id}}">Yes, delete</button>
+                <button id="no">Cancel</button>
+            </div>
         </div>
     </div>
-</div>
 
 
 

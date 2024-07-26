@@ -28,19 +28,21 @@ $(document).ready(function() {
     $(document).on('click', '#close-btn', function(e){
         $('#popup_js2').toggleClass('active');
     })
-    /*
+
     // Attach a click event listener to the document
-    $(document).on('click', '#delete', function(event) {
-        console.log("KDOAKD");
+    $(document).on('click', '#delete-account-button', function(event) {
         let item = $(this);
         $('#popup_js3').toggleClass('active'); // Toggle the 'active' class for visibility
       }
     )
 
-    $(document).on('click', '#close-btn2', function(e){
+    $(document).on('click', '#no', function(e){
         $('#popup_js3').toggleClass('active');
     })
-        */
+
+
+
+
 
     const form  = $('#update-form-form');   
     $('#update-form-form').submit(async function(event) {
@@ -80,8 +82,57 @@ $(document).ready(function() {
         location.reload();
     });
 
+
+    $('#update-the-user').submit(async function(event) {
+        event.preventDefault();
+        const formData = new FormData(this); 
+        console.log(formData);
+        try {
+            const response = await fetch('/api/user/updateUser', {
+                method: 'PATCH',
+                body: formData,
+            });
+        
+            if (!response.ok) {
+                throw new Error(`Error updating profile: ${response.statusText}`);
+            }
+        
+            const data = await response.json();
+            location.reload();
+            console.log('Profile updated successfully:', data);
+        } catch (error) {
+            console.log('Error updating profile:', error);
+        }
+    });
+    
+    $(document).on('click', '#confirm-delete-account', async function(e){
+        const userId = $(this).data('userid');
+        try {
+            const resp = await fetch(`/api/user/deleteUser/${userId}`, {
+                method: 'DELETE',
+            });
+
+            if (!resp.ok) {
+                throw new Error(`Error deleting user: ${resp.statusText}`);
+            }
+
+            window.location.href = '/api/user/register'; //Head back to register as to not cause any trouble with sessions
+        } catch (error) {
+            console.log('Error deleting user:', error);
+        }
+    });
           
 });
+
+//<form class="create-post-form" id="update-form-form" name="update-post-form" action="/api/post/updatePost" method="PUT" enctype="multipart/form-data">
+//TODO MCO2: Client-side AJAX Comment React
+$(document).ready(function(){
+
+});
+
+
+
+
 //<form class="create-post-form" id="update-form-form" name="update-post-form" action="/api/post/updatePost" method="PUT" enctype="multipart/form-data">
 //TODO MCO2: Client-side AJAX Comment React
 $(document).ready(function(){

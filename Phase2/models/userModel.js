@@ -7,12 +7,12 @@ const userSchema = mongoose.Schema(
             required:true,
             unique:true,
         },
-        p_image:{
-            p_filename:{
+        u_image:{
+            u_filename:{
                 type: String,
                 required:false,
             },
-            p_filepath:{
+            u_filepath:{
                 type:String,
                 required:false,
             }

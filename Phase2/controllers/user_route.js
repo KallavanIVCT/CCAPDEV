@@ -4,6 +4,8 @@ const Comment = require('../models/commentModel.js');
 const express = require('express');
 const bcrypt = require('bcrypt');
 const router = express.Router();
+
+const {upload} = require('../app.js')
 //const bcrypt = require('bcrypt'); MCO3 Implement 
 
 // create a register that will be sent and process it to go to the mongoodb database
@@ -80,6 +82,8 @@ router.get('/profile', async (req,res)=>{
     //const {id} = req.params;// wag muna gamitin since hardcoded daw sabi ni sir ung specific user
     const login_id = req.session.login_user ? req.session.login_user : null;
 
+    const login_id2 = req.session.login_user ? JSON.stringify(req.session.login_user) : null;
+
     //console.log(login_id);
 
     const resultPost = await Post.find({p_u_OID: login_id}).lean();
@@ -105,21 +109,43 @@ router.get('/profile', async (req,res)=>{
 
 
 
-router.patch('/updateUser', async(req,res)=>{ //this is for updating
-    const {id, username, password, description} = req.body;
+router.patch('/updateUser', upload.single('image'), async(req,res)=>{ //this is for updating
+    const {id, displayname, password, description} = req.body;
+
 
     try{
-        if (!id || !username || !password || !description){
+        if (!id ){
             return res.status(408).json({"result" : "incomplete parameters"});
+            
         }
         else{
+            console.log("DWKODWAKODAWK");
             const update = {
-                $set:{
-                    u_username:username,
-                    u_password:password,
-                    u_description:description,
-                }
+                $set:{}
+            };
+            if (displayname){
+                update.$set.u_displayname = displayname;
             }
+            if (password){
+                const saltRounds = 5;
+                const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+                update.$set.u_password = hashedPassword;                
+            }
+            if (description){
+                update.$set.u_description = description;
+            }
+            if (req.file){
+                const { filename, path: filepath } = req.file;
+                imageDetails = {
+                    u_filename: filename,
+                    u_filepath: filepath
+                };
+
+                update.$set.u_image = imageDetails
+            }
+            console.log(update);
+            console.log("dKODAK");
             const result = await User.findByIdAndUpdate(id,update) //findbyidandupdate is object id + update params
             if (result){
                 return res.status(200).json({"result": "updated successfully"});

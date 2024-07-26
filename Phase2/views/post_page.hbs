@@ -11,8 +11,8 @@
             <h1 class="main-post-title">{{postdetails.p_title}}</h1>
             <div class="authorContainer">
 
-                {{#if c_image}}
-                    <img class="pfp" name="profilePicture" src="/{{c_image.c_filepath}}" onclick="window.location.href='/api/user/profile/{{postdetails.p_u_OID._id}}'">
+                {{#if postdetails.p_u_OID.u_image.u_filepath}}
+                    <img class="pfp" name="profilePicture" src="/{{postdetails.p_u_OID.u_image.u_filepath}}" onclick="window.location.href='/api/user/profile/{{postdetails.p_u_OID._id}}'">
                 {{else}}
                     <img class="pfp" name="profilePicture" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg" onclick="window.location.href='/api/user/profile/{{postdetails.p_u_OID._id}}'">
                 {{/if}}
