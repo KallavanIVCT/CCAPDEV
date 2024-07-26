@@ -274,7 +274,7 @@ router.post('/createPost', upload.single('image'), async (req,res)=>{
 router.patch('/updatePost', upload.single('image'), async(req,res)=>{
     
     const {title, body, post_id, tags} = req.body;
-    const {filename, path: filepath} = req.file;
+
     try{
         if(!post_id || !title || !body){
             res.status(405).send("no post_id provided")
@@ -292,10 +292,16 @@ router.patch('/updatePost', upload.single('image'), async(req,res)=>{
         if (tags){
             update.$set.p_tags = tags;
         }
-        update.$set.p_image = {
-            p_filename: filename,
-            p_filepath: filepath,
+        if(req.file){
+            const {filename, path: filepath} = req.file;
+            const image = {
+                p_filename: filename,
+                p_filepath: filepath,
+            }
+
+            update.$set.p_image = image
         }
+
         if (title || body | tags){
             update.$set.p_has_been_edited = true;
         }
