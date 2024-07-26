@@ -65,32 +65,37 @@
         </div>
     </div>
 
-    <!-- popout -->
-    <div class="popup" id="popup_js">
-        <div class="blur-bottom update-profile-container">
-            <h1 style="text-align: center;">Update Profile</h1>
-            <form id="update-profile-form">
-                <div class="input-box">
-                    <label>Username</label>
-                    <input type="text" name="username" value="{{user.u_username}}">
-                    <div class="close-btn" onclick="hidePopup('popup_js')">&times;</div>
-                </div>
-                <div class="input-box">
-                    <label>Password</label>
-                    <input type="password" name="password">
-                </div>
-                <div class="input-box">
-                    <label>Profile Pic</label>
-                    <input type="file" name="profilePic">
-                </div>
-                <div class="input-box">
-                    <label>Description</label>
-                    <input type="text" name="description" value="{{user.u_description}}">
-                </div>
-                <input type="submit" value="Update Profile">
-            </form>
-        </div>
+    <!-- popout_js = updating profile -->
+    <!-- popout_js2 = updating posts -->
+    <!-- popout_js3 = deleting profile -->
+
+<!-- popout for editing profile -->
+<div class="popup" id="popup_js">
+    <div class="blur-bottom update-profile-container">
+        <h1 style="text-align: center;">Update Profile</h1>
+        <form id="update-profile-form">
+            <input type="hidden" name="id" value="{{user._id}}">
+            <div class="input-box">
+                <label>Username</label>
+                <input type="text" name="username" value="{{user.u_username}}">
+                <div class="close-btn" onclick="hidePopup('popup_js')">&times;</div>
+            </div>
+            <div class="input-box">
+                <label>Password</label>
+                <input type="password" name="password">
+            </div>
+            <div class="input-box">
+                <label>Profile Pic</label>
+                <input type="file" name="profilePic">
+            </div>
+            <div class="input-box">
+                <label>Description</label>
+                <input type="text" name="description" value="{{user.u_description}}">
+            </div>
+            <input type="submit" value="Update Profile">
+        </form>
     </div>
+</div>
 
     <!-- popup for  UPDATE post BUTTON-->
     <div class = "popup" id = "popup_js2">
@@ -123,35 +128,16 @@
         </div>
     </div>
 
-    <!-- popup for  DELETE BUTTON-->
+    <!-- popup for DELETE BUTTON-->
     <div class="popup" id="popup_js3">
         <div class="for-center-create">
             <div class="blur-left post-form-container">
                 <div class="close-btn" id="close-btn2" onclick="hidePopup('popup_js3')">&times;</div>
                 <h1><strong>Are you sure you want to delete your account?</strong></h1>
-                <button id="confirm-delete-account" onclick="deleteUser('{{user._id}}')">Yes, delete</button>
+                <button id="confirm-delete-account" data-userid="{{user._id}}">Yes, delete</button>
                 <button onclick="hidePopup('popup_js3')">Cancel</button>
             </div>
         </div>
     </div>
 
 <script src="/common/modal.js"></script>
-<!--test script for acc deletion -->
-<script>
-    async function deleteUser(userId) {
-        try {
-            const resp = await fetch(`/api/user/deleteUser/${userId}`, {
-                method: 'DELETE',
-            });
-
-            if (!resp.ok) {
-                throw new Error(`Error deleting user: ${resp.statusText}`);
-            }
-
-            location.reload();
-            console.log('User deleted successfully');
-        } catch (error) {
-            console.log('Error deleting user:', error);
-        }
-    }
-</script>

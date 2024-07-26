@@ -105,20 +105,19 @@ $(document).ready(function(){
             console.log('Error updating profile:', error);
         }
     });
-
+    
     $(document).on('click', '#delete-account-button', async function(e){
         const userId = $(this).data('userid');
         try {
             const resp = await fetch(`/api/user/deleteUser/${userId}`, {
                 method: 'DELETE',
             });
-    
+
             if (!resp.ok) {
                 throw new Error(`Error deleting user: ${resp.statusText}`);
             }
-    
-            location.reload();
-            console.log('User deleted successfully');
+
+            window.location.href = '/views/register_page.hbs'; //Head back to register as to not cause any trouble with sessions
         } catch (error) {
             console.log('Error deleting user:', error);
         }

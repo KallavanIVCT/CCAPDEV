@@ -97,33 +97,33 @@ router.get('/profile', async (req,res)=>{
     })
 })
 
-router.patch('/updateUser', async(req,res)=>{ //this is for updating
-    const {id, username, password, description} = req.body;
+router.patch('/updateUser', async(req, res) => {
+    const { id, username, password, description } = req.body;
 
-    try{
-        if (!id || !username || !password || !description){
-            return res.status(408).json({"result" : "incomplete parameters"});
-        }
-        else{
+    try {
+        if (!id || !username || !password || !description) {
+            return res.status(400).json({"result" : "incomplete parameters"});
+        } else {
             const update = {
-                $set:{
-                    u_username:username,
-                    u_password:password,
-                    u_description:description,
+                $set: {
+                    u_username: username,
+                    u_password: password,
+                    u_description: description,
                 }
-            }
-            const result = await User.findByIdAndUpdate(id,update) //findbyidandupdate is object id + update params
-            if (result){
+            };
+            const result = await User.findByIdAndUpdate(id, update, { new: true }); // ensure new:true to return updated doc
+            if (result) {
                 return res.status(200).json({"result": "updated successfully"});
-            }else{
-                return res.status(405).json({"result": "did not update successfully"});
+            } else {
+                return res.status(400).json({"result": "did not update successfully"});
             }
         }
-    }catch(e){
+    } catch(e) {
         console.log(e);
-        res.status(406).json({"result": e});
+        res.status(500).json({"result": e});
     }
-})
+});
+
 
 
 router.get('/getUsers', async (req,res)=>{
