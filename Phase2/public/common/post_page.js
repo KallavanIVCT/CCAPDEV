@@ -99,13 +99,10 @@ document.addEventListener('DOMContentLoaded',function(){
                 }else{
 
                     const data = await response.json();
-                    // Get the next sibling that has the class 'upvote-count-comment'
-                    var $upvote = $(upvoteIcon[i]);//convert to jQuery Element
+                    var $upvote = $(upvoteIcon[i]);
                     var $upvoteSiblings = $upvote.siblings();
 
                     console.log($upvoteSiblings);
-                
-                    // Filter siblings to find the one with the class 'upvote-count-comment'
                     var $upvoteComment = $upvoteSiblings.filter('.upvote-count-comment');
                     var $downvoteComment = $upvoteSiblings.filter('.downvote-count-comment');
                     $upvoteComment.text( data.upvotes);
@@ -144,13 +141,11 @@ document.addEventListener('DOMContentLoaded',function(){
                     console.log('cannot upvote/downvote');
                 }else{
                     const data = await response.json();
-                    // Get the next sibling that has the class 'upvote-count-comment'
-                    var $downvote = $(downvoteIcon[i]);//convert to jQuery Element
+                    var $downvote = $(downvoteIcon[i]);
                     var $downvoteSiblings = $downvote.siblings();
 
                     console.log($downvoteSiblings);
-                
-                    // Filter siblings to find the one with the class 'downvote-count-comment'
+            
                     var $upvoteComment = $downvoteSiblings.filter('.upvote-count-comment');
                     var $downvoteComment = $downvoteSiblings.filter('.downvote-count-comment');
                     $upvoteComment.text( data.upvotes);
@@ -170,4 +165,28 @@ document.addEventListener('DOMContentLoaded',function(){
     }
     
 
+})
+
+document.addEventListener('DOMContentLoaded',function(){
+    $('#create-comment-id').submit(async function(event) {
+        event.preventDefault();
+        const formval = (this)
+        const formDataX = new FormData(formval); // 
+        try {
+            const response = await fetch('/api/comment/createComment', {
+              method: 'POST',
+              body: formDataX,
+            });
+            if (!response.ok) {
+                console.log("DKOADKAOKDA");
+              throw new Error(`Error updating post: ${response.statusText}`);
+            }
+            const data = await response.json();
+            location.reload();
+            console.log('Post updated successfully:', data);
+          } catch (error) {
+            console.log('Error updating post:', error);
+          }
+    });
+  
 })

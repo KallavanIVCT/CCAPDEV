@@ -49,18 +49,20 @@
         </div>
         <div class="comments-container">
             <h2>Comments</h2>
-            <form name="create-comment" action="/api/comment/createComment" method="post">
+            <form name="create-comment" id="create-comment-id">
             <div class="createComment">
-                <input id="draftComment" name="commentText" type="text" contenteditable="true" placeholder="Enter your comment here" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></input>
+                <input id="draftComment" name="commentText" type="text">
+                <!-- <input id="draftComment" name="commentText" type="text" contenteditable="true" placeholder="Enter your comment here" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></input> -->
+                <input type="hidden" name="comment_uid" value={{login_id}}> 
+                <input type="hidden" name="post_id" value="{{postdetails._id}}"> 
+                <input type="hidden" name="parentComment"> 
                 <div class="buttonsContainer">
-                    <button id="attachFilesComment" onclick="window.alert('To Be Done')">Attach Files</button>
-                    <button id="postComment">Post</button>
+                    <!--<button id="attachFilesComment" onclick="window.alert('To Be Done')">Attach Files</button>-->
+                    <button id="postComment" type="submit">Post</button>
                 </div>
-                <input type="hidden" name="comment_uid" value={{login_id}}> <!-- this is hardcoded for now sir said since ala pa sessions -->
-                <input type="hidden" name="post_id" value="{{postdetails._id}}"> <!-- this is hardcoded for now sir said since ala pa sessions -->
-                <input type="hidden" name="parentComment"> <!-- this is hardcoded for now sir said since ala pa sessions -->
-            </div>
             </form>
+            </div>
+
             {{#if login_id}}
                 {{#each commentdetails}}
                     {{> comment this login_id=true}}

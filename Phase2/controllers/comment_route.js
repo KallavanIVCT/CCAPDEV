@@ -5,7 +5,7 @@ const router = express.Router();
 
 const {upload} = require('../app.js');
 
-router.post('/createComment', async (req,res)=>{
+router.post('/createComment', upload.none(), async (req,res)=>{
     
     const {comment_uid, post_id, commentText, parentComment} = req.body;
     try{
@@ -17,9 +17,9 @@ router.post('/createComment', async (req,res)=>{
             let c_parent_comment;
             if (parentComment)
                 c_parent_comment = parentComment;
-            else
+            else{
                 c_parent_comment = null;
-            
+            }
             const result = await Comment.create({
                 c_u_OID: comment_uid,
                 c_body: commentText,

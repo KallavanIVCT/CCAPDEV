@@ -27,7 +27,6 @@ module.exports = {upload};
 
 
 
-
 const postRoute = require('./controllers/post_route.js');
 const userRoute = require('./controllers/user_route.js');
 const commentRoute = require('./controllers/comment_route.js');
@@ -39,6 +38,7 @@ const server = express();
 
 server.use(express.json()); 
 server.use(express.urlencoded({ extended: true }));
+
 
 
 
