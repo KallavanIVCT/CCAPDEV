@@ -51,7 +51,7 @@ server.use(session({
     saveUninitialized: true, 
     resave: false,
     store: new mongoStore({ 
-      uri: "mongodb://localhost:27017",
+      uri: "mongodb://localhost:27017", // change this next time
       collection: 'mySession',
       expires: 1000*60*60 // 1 hour
     })
@@ -73,14 +73,14 @@ server.use(express.static('uploads'));
 server.listen(3000,()=>{
     console.log("Working");
 })
-mongoose.connect("mongodb+srv://joshuavillavieja:kirakiradays2@cluster0.aa80jrk.mongodb.net/CCAPDEV?retryWrites=true&w=majority&appName=Cluster0")
+mongoose.connect("mongodb://localhost:27017/CCAPDEV")
 .then(()=>{
     console.log("Connnected to database!");
 }).catch((e)=>{
     console.log(e);
 });
-
-/*mongodb://localhost:27017/CCAPDEV*/ 
+/* mongodb+srv://joshuavillavieja:kirakiradays2@cluster0.aa80jrk.mongodb.net/CCAPDEV?retryWrites=true&w=majority&appName=Cluster0*/
+/**/ 
 
 
 

@@ -7,7 +7,7 @@
         {{/if}}
     </div>
     <div class="commentTextContainer">
-        <h4 name="username">{{c_u_OID.u_username}}</h4>
+        <h4 name="username">{{c_u_OID.u_displayname}}</h4>
         <span name="date">{{c_date}}</span>
         {{#if c_has_been_edited}}
         <span>Edited</span><br>
@@ -18,10 +18,18 @@
             <button id="postComment" onclick="editCommentDiv(this); window.alert('To Be Done')">Edit Comment</button>
         </div>
             <div class="commentActionsContainer">
-            <i class="fa-solid fa-thumbs-up" id="like_{{c_id}}"></i>
-            <span name="numLikes"> {{c_numLikes}}</span>
-            <i class="fa-solid fa-thumbs-down" id="dislike_{{c_id}}"></i>                                                                         
-            <span name="numDislikes"> {{c_numDislikes}}</span>
+            {{#if login_id}}
+            <i class="fa-solid fa-thumbs-up upvote-icon-comment" data-comment-id="{{_id}}"></i>
+            <span class="upvote-count-comment">{{c_upvotes}}</span>
+            <i class="fa-solid fa-thumbs-down downvote-icon-comment" data-comment-id="{{_id}}"></i>
+            <span class="downvote-count-comment">{{c_downvotes}}</span>
+            {{else}}
+            <i class="fa-solid fa-thumbs-up"></i>
+            <span class="upvote-count-comment">{{c_upvotes}}</span>
+            <i class="fa-solid fa-thumbs-down"></i>
+            <span class="downvote-count-comment">{{c_downvotes}}</span>
+            {{/if}}
+
             {{#if login_id}}
                 <button class="replyButton" onclick="toggleReplyComment(this)">Reply</button>
                 {{#if c_isAuthor}}
@@ -32,16 +40,16 @@
             {{/if}}
 
             <form name="create-comment" action="/api/comment/createComment" method="post">
-            <div class="createComment replyComment">
-                <input id="draftComment" name="commentText" type="text" contenteditable="true" placeholder="Enter your comment here" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></input>
-                <div class="buttonsContainer">
-                    <button id="attachFilesComment" onclick="window.alert('To Be Done')">Attach Files</button>
-                    <button id="postComment">Reply</button>
+                <div class="createComment replyComment">
+                    <input id="draftComment" name="commentText" type="text" contenteditable="true" placeholder="Enter your comment here" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></input>
+                    <div class="buttonsContainer">
+                        <button id="attachFilesComment" onclick="window.alert('To Be Done')">Attach Files</button>
+                        <button id="postComment">Reply</button>
+                    </div>
                 </div>
-            </div>
-            <input type="hidden" name="comment_uid" value={{login_id}}> <!-- this is hardcoded for now sir said since ala pa sessions -->
-            <input type="hidden" name="post_id" value="{{c_post_id}}"> <!-- this is hardcoded for now sir said since ala pa sessions -->
-            <input type="hidden" name="parentComment" value="{{_id}}"> <!-- this is hardcoded for now sir said since ala pa sessions -->
+                <input type="hidden" name="comment_uid" value={{login_id}}> <!-- this is hardcoded for now sir said since ala pa sessions -->
+                <input type="hidden" name="post_id" value="{{c_post_id}}"> <!-- this is hardcoded for now sir said since ala pa sessions -->
+                <input type="hidden" name="parentComment" value="{{_id}}"> <!-- this is hardcoded for now sir said since ala pa sessions -->
             </form>
         </div>
         {{#if login_id}}

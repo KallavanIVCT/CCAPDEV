@@ -160,7 +160,7 @@ router.get('/getPost/:id', async(req, res) => {
                 layout: 'index',
                 postdetails: result,
                 commentdetails: nestedComments,
-                login_id: login_id,
+                login_id: login_id2,
             });
         } else {
             res.status(404).send("no post found");

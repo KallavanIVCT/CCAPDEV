@@ -50,7 +50,30 @@ const commentSchema = mongoose.Schema(
         c_dislikes:{
             type: [mongoose.Schema.Types.ObjectId],
             default: [],
-        }
+        },
+        c_reacted_by:[{
+            c_user:{
+                type:mongoose.Schema.Types.ObjectId,
+                ref:'User',
+                required:false,
+            },
+            c_reactType:{
+                type:String,
+                enum:['upvote','downvote'],
+                required:false,
+            }
+
+        }],
+        c_upvotes:{
+            type:Number,
+            required:true,
+            default:0,
+        },
+        c_downvotes:{
+            type:Number,
+            required:true,
+            default:0,
+        },
     }
 )
 
