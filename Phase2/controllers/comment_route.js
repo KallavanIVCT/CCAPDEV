@@ -7,7 +7,11 @@ const {upload} = require('../app.js');
 
 router.post('/createComment', upload.none(), async (req,res)=>{
     
-    const {comment_uid, post_id, commentText, parentComment} = req.body;
+    const {post_id, commentText, parentComment} = req.body;
+    const comment_uid = req.session.login_user ? req.session.login_user : null;
+    if (!comment_uid){
+        res.send({sessions: nothing});
+    }
     try{
         //console.log(comment_uid);
         if (!commentText){ 
@@ -36,7 +40,35 @@ router.post('/createComment', upload.none(), async (req,res)=>{
         return res.status(406).send(e);
     }
 })
+router.patch('/deleteComment', async(req,res)=>{
+    const {comment_id} = req.body 
+    console.log("EXPRESS" + comment_id);
 
+    try{
+        if (!comment_id){
+            return res.status(404).send("no id found")
+        }
+
+        const update = {
+            $set: {}
+        }
+
+
+        update.$set.c_body = "[DELETED COMMENT]";
+        const result = await Comment.findByIdAndUpdate(comment_id,update);
+
+        if(result){
+            res.status(200).send("sucesfull in deleting")
+        }else{
+            res.status(405).send("cannot find id");
+        }
+
+
+    }catch(e){
+        console.log(e);
+        return res.status(406).send(e);
+    }
+})
 router.post('/reactComment', async(req,res)=>{
     const {comment_id,user_id} = req.body;
     const {UP} = req.body;
@@ -76,7 +108,6 @@ router.post('/reactComment', async(req,res)=>{
             returnComment = true;
         }
         if (result.c_reactType === 'upvote' && UP === 'downvote'){ // if user previously upvoted now he wants to downvote
-            console.log("DASDAD");
             const updatedComment = await Comment.updateOne({_id: comment_id, 'c_reacted_by.c_user': user_id, 'c_reacted_by.c_reactType': 'upvote' },
                 {
                     $set: {'c_reacted_by.$.c_reactType': UP},
@@ -85,7 +116,6 @@ router.post('/reactComment', async(req,res)=>{
             returnComment = true;
         }
         if (result.c_reactType === 'downvote' && UP === 'upvote'){
-            console.log("WHAT VALUE " + UP);
             const updatedComment = await Comment.updateOne({_id: comment_id, 'c_reacted_by.c_user': user_id, 'c_reacted_by.c_reactType': 'downvote' },
                 {
                     
@@ -111,7 +141,6 @@ router.post('/reactComment', async(req,res)=>{
     }
 
     if (returnComment === true){
-        console.log("X");
         const rez = await Comment.findById(comment_id);
         res.json({upvotes: rez.c_upvotes, downvotes: rez.c_downvotes})
     }
@@ -119,7 +148,36 @@ router.post('/reactComment', async(req,res)=>{
 })
 
 
+router.patch('/updateComment', upload.none(), async(req,res)=>{
+    const {comment_id, bodyX} = req.body 
+    console.log("EXPRESS" + comment_id);
+    console.log(bodyX);
 
+    try{
+        if (!comment_id){
+            return res.status(404).send("no id found")
+        }
+
+        const update = {
+            $set: {}
+        }
+
+
+        update.$set.c_body = bodyX;
+        const result = await Comment.findByIdAndUpdate(comment_id,update);
+
+        if(result){
+            res.status(200).send("sucesfull in UPDATING")
+        }else{
+            res.status(405).send("cannot find id");
+        }
+
+
+    }catch(e){
+        console.log(e);
+        return res.status(406).send(e);
+    }
+})
 
 
 

@@ -10,7 +10,6 @@ const commentSchema = mongoose.Schema(
         c_body:{
             type:String,
             required:true,
-            unique:true,
         },
         c_post_id:{
             type:mongoose.Schema.Types.ObjectId,

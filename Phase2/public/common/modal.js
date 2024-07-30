@@ -12,13 +12,9 @@ $(document).ready(function() {
   
     // Attach a click event listener to the document
     $(document).on('click', '#update', function(event) {
-        console.log("KDOAKD");
         let item = $(this);
         let post_id = item.siblings('.post-id').val()
-        console.log(post_id);
         $('input[name="post_id"]').val(post_id);
-
-        console.log($('input[name="post_id"]').val(post_id));
         $('#popup_js2').toggleClass('active'); // Toggle the 'active' class for visibility
         
         
@@ -69,7 +65,6 @@ $(document).ready(function() {
     $(document).on('click', '.delbutton', async function(e){
         let item = $(this);
         let post_idX = item.siblings('.post-id').val()
-        console.log(post_idX);
         const resp = await fetch(`/api/post/deletePost/${post_idX}`, {
             method: 'DELETE',
           });
@@ -86,7 +81,6 @@ $(document).ready(function() {
     $('#update-the-user').submit(async function(event) {
         event.preventDefault();
         const formData = new FormData(this); 
-        console.log(formData);
         try {
             const response = await fetch('/api/user/updateUser', {
                 method: 'PATCH',
@@ -121,7 +115,7 @@ $(document).ready(function() {
             console.log('Error deleting user:', error);
         }
     });
-          
+
 });
 
 //<form class="create-post-form" id="update-form-form" name="update-post-form" action="/api/post/updatePost" method="PUT" enctype="multipart/form-data">
@@ -140,8 +134,74 @@ $(document).ready(function(){
 });
 
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all elements with the class 'confirm-delete-account'
+    const deleteButtons = document.querySelectorAll('.deleteCommentButton');
+    // Use for...of loop to iterate over each button
+    for (const button of deleteButtons) {
+        button.addEventListener('click', async function(e) {
+            e.preventDefault(); // Prevent the default action (e.g., form submission or navigation)
+            let $button = $(button);
+            const comment_id = button.dataset.commentId;
 
+            console.log("CommentID" + comment_id);
+            try {
+                const response = await fetch('/api/comment/deleteComment', {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json' // Ensure the Content-Type is set to application/json
+                    },
+                    body: JSON.stringify({comment_id}),
+                });
+            
+                if (!response.ok) {
+                    throw new Error(`Error updating profile: ${response.statusText}`);
+                }
+                location.reload();
+                console.log('Profile updated successfully:', data);
+            } catch (error) {
+                console.log('Error updating profile:', error);
+            }
+        })
+    }
+})
 
+document.addEventListener('DOMContentLoaded', function() {
+    // Select all elements with the class 'confirm-delete-account'
+    const deleteButtons = document.querySelectorAll('.button-for-edit');
+    console.log(deleteButtons);
+    // Use for...of loop to iterate over each button
+    for (const button of deleteButtons) {
+        button.addEventListener('click', async function(e) {
+            e.preventDefault(); // Prevent the default action (e.g., form submission or navigation)
+            const comment_id = button.dataset.commentId;
+            let buttonparent = button.parentElement;
+            let $buttonparent = $(buttonparent);
+            let $buttonparentsiblings = $buttonparent.siblings();
+            let $theneed = $buttonparentsiblings.filter('.body-for-text');
+            let bodyX = $theneed.text();
+            console.log(bodyX);
+            console.log("CommentID" + comment_id);
+            try {
+                const response = await fetch('/api/comment/updateComment', {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json' // Ensure the Content-Type is set to application/json
+                    },
+                    body: JSON.stringify({comment_id, bodyX}),
+                });
+            
+                if (!response.ok) {
+                    throw new Error(`Error updating profile: ${response.statusText}`);
+                }
+                location.reload();
+                console.log('Profile updated successfully:', data);
+            } catch (error) {
+                console.log('Error updating profile:', error);
+            }
+        })
+    }
+})
 
 
 function toggleReplyComment(button) {

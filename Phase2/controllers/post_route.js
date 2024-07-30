@@ -117,7 +117,7 @@ router.get('/getPost/:id', async(req, res) => {
     //console.log("login" + login_id);
     try {
         const result = await Post.findById(id).populate('p_u_OID').lean();
-        const comments = await Comment.find({ c_post_id: result._id }).populate('c_u_OID').lean();
+        const comments = await Comment.find({ c_post_id: result._id }).populate('c_u_OID').populate('c_post_id').lean();
         /*
         console.log(result._id);
         console.log(JSON.stringify(comments, null, 2));
@@ -154,7 +154,7 @@ router.get('/getPost/:id', async(req, res) => {
         });
 
         //console.log(JSON.stringify(nestedComments, null, 2));
-
+        //console.log(nestedComments);
         if (result) {
             res.render('post_page', {
                 layout: 'index',

@@ -12,12 +12,14 @@
         {{#if c_has_been_edited}}
         <span>Edited</span><br>
         {{/if}}
-        <p name="commentText">{{c_body}}</p>
+        <p name="commentText" class="body-for-text">{{c_body}}</p>
         <div class="buttonsContainer editCommentButtons">
-            <button id="attachFilesComment">Attach Files</button>
-            <button id="postComment" onclick="editCommentDiv(this); window.alert('To Be Done')">Edit Comment</button>
+            
+            <!--<button id="attachFilesComment">Attach Files</button> -->
+            <button id="postComment" onclick="editCommentDiv(this);" data-comment-id="{{_id}}" class="button-for-edit">Edit Comment</button>
+            <!-- <button id="postComment" onclick="editCommentDiv(this); window.alert('To Be Done')" data-comment-id="{{_id}}" class="button-for-edit">Edit Comment</button> -->
         </div>
-            <div class="commentActionsContainer">
+        <div class="commentActionsContainer">
             {{#if login_id}}
             <i class="fa-solid fa-thumbs-up upvote-icon-comment" data-comment-id="{{_id}}"></i>
             <span class="upvote-count-comment">{{c_upvotes}}</span>
@@ -29,16 +31,15 @@
             <i class="fa-solid fa-thumbs-down"></i>
             <span class="downvote-count-comment">{{c_downvotes}}</span>
             {{/if}}
-
             {{#if login_id}}
-                <button class="replyButton" onclick="toggleReplyComment(this)">Reply</button>
-                {{#if c_isAuthor}}
-                    <button onclick="editCommentDiv(this)">Edit</button>
-                    <button class="deleteCommentButton" onclick="window.alert('To Be Done')">Delete</button>
+            <button class="replyButton" onclick="toggleReplyComment(this)">Reply</button>
+            {{#if c_isAuthor}}
+            <button onclick="editCommentDiv(this)">Edit</button>
+            <button class="deleteCommentButton" data-comment-id="{{_id}}">Delete</button>
+            <!-- <button class="deleteCommentButton" onclick="window.alert('To Be Done')">Delete</button>-->
                 {{/if}}
             {{else}}
             {{/if}}
-
             <form name="create-comment" action="/api/comment/createComment" method="post">
                 <div class="createComment replyComment">
                     <input id="draftComment" name="commentText" type="text" contenteditable="true" placeholder="Enter your comment here" oninput="if(this.innerHTML.trim()==='<br>')this.innerHTML=''"></input>
@@ -47,9 +48,8 @@
                         <button id="postComment">Reply</button>
                     </div>
                 </div>
-                <input type="hidden" name="comment_uid" value={{login_id}}> <!-- this is hardcoded for now sir said since ala pa sessions -->
-                <input type="hidden" name="post_id" value="{{c_post_id}}"> <!-- this is hardcoded for now sir said since ala pa sessions -->
-                <input type="hidden" name="parentComment" value="{{_id}}"> <!-- this is hardcoded for now sir said since ala pa sessions -->
+                <input type="hidden" name="post_id" value="{{c_post_id}}">
+                <input type="hidden" name="parentComment" value="{{_id}}">
             </form>
         </div>
         {{#if login_id}}
