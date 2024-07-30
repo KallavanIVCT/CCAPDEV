@@ -37,6 +37,10 @@ const userSchema = mongoose.Schema(
         u_displayname:{
             type:String,
             required:true,
+        },
+        u_isDeleted:{
+            type:Boolean,
+            default:false,
         }
     }
 )

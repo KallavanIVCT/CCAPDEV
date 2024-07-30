@@ -45,13 +45,18 @@ router.post('/login', async (req, res) => {
     const { username, password } = req.body;
     try {
         const user = await User.findOne({ u_username: username }).exec();
-        if (user) {
+        if (user && user.u_isDeleted === false) {
             const isMatch = await bcrypt.compare(password, user.u_password);
             if (isMatch) {
                 req.session.login_user = user._id;
                 req.session.login_id = req.sessionID;
                 return res.redirect('/api/post/getPost');
             }
+        }else{
+            return res.render('login_page', {
+                layout: 'index',
+                res: "invalid credentials",
+            });
         }
         res.render('login_page', {
             layout: 'index',
@@ -185,7 +190,14 @@ router.delete('/deleteUser/:id', async (req,res)=>{
         if(!id){
             return res.status(405).send("No ID given");
         }else{
-            const result = await User.findByIdAndDelete(id);
+            const update = {
+                $set: {
+                    u_isDeleted: true,
+                    u_displayname: "[DELETED USER]",
+                }
+
+            }
+            const result = await User.findByIdAndUpdate(id, update);
             if(result){
                 return res.status(200).send("succesfully deleted");
             }else{
