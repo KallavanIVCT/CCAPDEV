@@ -1,7 +1,7 @@
 <div class="comment">
     <div class="commentContainer">
-        {{#if c_image.c_filepath}}
-        <img class="pfp" name="profilePicture" src="/{{c_image.c_filepath}}">
+        {{#if c_u_OID.u_image.u_filepath}}
+        <img class="pfp" name="profilePicture" src="/{{c_u_OID.u_image.u_filepath}}">
         {{else}}
         <img class="pfp" name="profilePicture" src="https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg">
         {{/if}}
@@ -54,7 +54,7 @@
         </div>
         {{#if login_id}}
             {{#each replies}}
-                {{> comment this login_id=true}}
+                {{> comment this postdetails=../postdetails login_id=true}}
             {{/each}}
         {{else}}
             {{#each replies}}

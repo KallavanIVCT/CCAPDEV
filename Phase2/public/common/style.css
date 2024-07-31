@@ -153,20 +153,30 @@
     
 }
 .profile-circle-holder{
-    border-radius:50%;
+    border-radius: 50%;
     background-color: aliceblue;
     border-color: var(--slate800);
     border-width: 2px;
-    border-style:double;
-    display:inline-block;
-    width:120px;
-    height:120px;
-    position:relative;
-    bottom:20px;
-    background-image: url("https://upload.wikimedia.org/wikipedia/commons/a/af/Default_avatar_profile.jpg");
-    background-size:cover;
+    border-style: double;
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    position: relative;
+    bottom: 20px;
+    background-size: cover; /* Ensure the image covers the div */
+    background-repeat: no-repeat; /* Prevent repeating */
+    background-position: center; /* Center the image */
 }
-
+.profile-circle-holder img {
+    width: 100%; /* Make the image fit the container width */
+    height: 100%; /* Make the image fit the container height */
+    object-fit: cover; /* Ensure the image covers the container, preserving aspect ratio */
+    border-radius: 50%; /* Round the image to fit the circular shape */
+}
+.pfp{
+    width:100%;
+    height:50%;
+}
 .navbar > img
 {
     width: 70px;

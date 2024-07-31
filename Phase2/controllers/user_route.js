@@ -42,7 +42,8 @@ router.post('/createUser', async (req, res) => {
 
 
 router.post('/login', async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, rememberMe} = req.body;
+    console.log(rememberMe);
     try {
         const user = await User.findOne({ u_username: username }).exec();
         if (user && user.u_isDeleted === false) {
@@ -50,6 +51,11 @@ router.post('/login', async (req, res) => {
             if (isMatch) {
                 req.session.login_user = user._id;
                 req.session.login_id = req.sessionID;
+                if (rememberMe === "yes") {
+                    req.session.cookie.maxAge = 1000 * 60 * 60 * 24 * 21; // 1 week
+                } else {
+                    req.session.cookie.maxAge = null; // Session expires when browser is closed
+                }
                 return res.redirect('/api/post/getPost');
             }
         }else{

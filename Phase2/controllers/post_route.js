@@ -152,7 +152,7 @@ router.get('/getPost/:id', async(req, res) => {
             comment.c_isAuthor = (comment.c_u_OID.u_username === usernameX); //usernameX is the session
             //console.log(comment.c_isAuthor);
         });
-
+        console.log(nestedComments);
         //console.log(JSON.stringify(nestedComments, null, 2));
         //console.log(nestedComments);
         if (result) {
