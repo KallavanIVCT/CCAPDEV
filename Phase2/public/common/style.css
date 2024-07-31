@@ -316,7 +316,7 @@ input::file-selector-button{
 }
 
 .create-post-textarea{
-    width:1000px;
+    width:900px;
     height:200px;
     border: 1px solid var(--slate1100)
 }

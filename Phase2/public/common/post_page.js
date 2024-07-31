@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded',function(){
             if(!response.ok){
                 console.log('cannot upvote/downvote');
             }
-           
+            location.reload();
         }
         catch(e){
             console.log(e);
@@ -52,6 +52,7 @@ document.addEventListener('DOMContentLoaded',function(){
             if(!response.ok){
                 console.log('cannot upvote/downvote');
             }
+            location.reload();
            
         }
         catch(e){
@@ -152,8 +153,6 @@ document.addEventListener('DOMContentLoaded',function(){
                     $downvoteComment.text( data.downvotes);
                 }
 
-                const data = await response.json();
-                data
                
             }
             catch(e){
@@ -181,7 +180,6 @@ document.addEventListener('DOMContentLoaded',function(){
                 console.log("DKOADKAOKDA");
               throw new Error(`Error updating post: ${response.statusText}`);
             }
-            const data = await response.json();
             location.reload();
             console.log('Post updated successfully:', data);
           } catch (error) {

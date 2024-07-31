@@ -54,7 +54,6 @@ $(document).ready(function() {
               throw new Error(`Error updating post: ${response.statusText}`);
             }
         
-            const data = await response.json();
             location.reload();
             console.log('Post updated successfully:', data);
           } catch (error) {
@@ -91,7 +90,6 @@ $(document).ready(function() {
                 throw new Error(`Error updating profile: ${response.statusText}`);
             }
         
-            const data = await response.json();
             location.reload();
             console.log('Profile updated successfully:', data);
         } catch (error) {
