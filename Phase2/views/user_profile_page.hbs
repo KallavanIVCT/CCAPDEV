@@ -15,14 +15,17 @@
             </div>
             <div class="profile-details-container">
                 <div class="profile-username">{{user.u_displayname}}</div>
-                {{#if hasPrivelage}}
-                    <button onclick = "togglePopup('popup_js')">Edit</button>
-                    <button id="delete-account-button" data-userid="{{user._id}}">Delete Account</button>
-                {{/if}}
+
                 
             </div>
 
         </div> 
+        <div>
+            {{#if hasPrivelage}}
+                <button onclick = "togglePopup('popup_js')">Edit</button>
+                <button id="delete-account-button" data-userid="{{user._id}}">Delete Account</button>
+            {{/if}}
+        </div>
         <div class="description-container">
             <p class="profile-description">{{user.u_description}}</p>
         </div>
@@ -130,7 +133,6 @@
                 
             </form>
             <div class = "close-btn" id="close-btn">&times;</div>
-            <h1> <strong>This feature is Coming Soon! Wait for Updates!</strong></h1>
         </div>
     </div>
 </div>

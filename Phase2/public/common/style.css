@@ -325,7 +325,6 @@ input::file-selector-button{
     font-size: 24px;
     font-weight: bold;
 }
-
 .for-center 
 {
     margin-left: 450px;
@@ -340,8 +339,6 @@ input::file-selector-button{
 .for-center-create
 {
     display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     margin:0px 600px 0px 600px;
     color: var(--slate1100);
@@ -349,14 +346,24 @@ input::file-selector-button{
 .popup 
 {
     position: fixed;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
+    top: 0;
+    left: 0;
+    height:100%;
+    width:100%;
     background: rgba(14, 12, 28, 0.7);
     z-index:1;
     display: none;
 }
+.popupX
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(14, 12, 28, 0.7);
+    z-index:1;
+    display: none;
+}
+
 .popup.active
 {
    
@@ -369,6 +376,20 @@ input::file-selector-button{
     transition:all 300ms ease-in-out;
     transform: translate(-50%, -50%) scale(1);
 }
+
+.popupX.active
+{
+   
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.popupX.active .for-center
+{
+    transition:all 300ms ease-in-out;
+    transform: translate(-50%, -50%) scale(1);
+}
+
 .close-btn:hover 
 {
     background-color: rgb(67, 63, 63); 
@@ -559,7 +580,7 @@ h1
     background-color: var(--slate1100);
     height: 35px;
     border-radius: 0px;
-    width: 50%;
+    width: 100%;
     border: 2px solid var(--slate100);
     border-top: transparent;
     font-weight: bold;
@@ -577,6 +598,7 @@ h1
 
 #postComment{
     border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
 }
 
 .comment{

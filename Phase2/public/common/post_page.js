@@ -127,8 +127,6 @@ document.addEventListener('DOMContentLoaded',function(){
             const UP = 'downvote';
             console.log(UP);
             console.log(comment_id);
-
-            
             try{
                 const response = await fetch('/api/comment/reactComment', {
                     method: 'POST',
@@ -144,9 +142,7 @@ document.addEventListener('DOMContentLoaded',function(){
                     const data = await response.json();
                     var $downvote = $(downvoteIcon[i]);
                     var $downvoteSiblings = $downvote.siblings();
-
                     console.log($downvoteSiblings);
-            
                     var $upvoteComment = $downvoteSiblings.filter('.upvote-count-comment');
                     var $downvoteComment = $downvoteSiblings.filter('.downvote-count-comment');
                     $upvoteComment.text( data.upvotes);
