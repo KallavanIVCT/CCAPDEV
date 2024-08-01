@@ -30,10 +30,7 @@ router.post('/createComment', upload.none(), async (req,res)=>{
                 c_post_id: post_id,
                 c_parentComment: c_parent_comment,
             })
-            res.render('success',{
-                layout:'index',
-                message: true,
-            })
+            res.redirect(`/api/post/getPost/${post_id}`);
         }
     } catch (e){
         console.log(e);
