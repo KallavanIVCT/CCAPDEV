@@ -69,9 +69,9 @@
             <h1><strong>Create Post</strong></h1>
             <form class="create-post-form" name="create-post-form" action="/api/post/createPost" method="POST" enctype="multipart/form-data">
                 <div class = "close-btn" onclick="hidePopup()">&times;</div>
-                <label>Title</label>
+                <label style="color:black">Title</label>
                 <input type="text" placeholder="Enter Title" class="create-select-tag" style="width:40%" name="title" required>
-                <label>Tag</label>
+                <label style="color:black">Tag</label>
                     <select style="width:50%" name="tags" required>
                         <option>Genshin Impact</option>
                         <option>Honkai Star Rail</option>
@@ -79,7 +79,7 @@
                         <option>Zenless Zone Zero</option>
                         <option>Mihoyo</option>
                     </select>
-                <label>Content</label>
+                <label style="color:black">Content</label>
                 <!--<input type="hidden" name="id" value={{login_id}}>  this is hardcoded for now sir said since ala pa sessions User A-->
                 <textarea class="create-post-textarea" style="width:1px:"name="body" required></textarea>
                 <input type="file" style="width:50%" name="image">
