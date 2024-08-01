@@ -10,12 +10,12 @@ function hidePopup(){
 
 $(document).ready(function() {
   
-    // Attach a click event listener to the document
+
     $(document).on('click', '#update', function(event) {
         let item = $(this);
         let post_id = item.siblings('.post-id').val()
         $('input[name="post_id"]').val(post_id);
-        $('#popup_js2').toggleClass('active'); // Toggle the 'active' class for visibility
+        $('#popup_js2').toggleClass('active'); 
         
         
       }
@@ -25,10 +25,10 @@ $(document).ready(function() {
         $('#popup_js2').toggleClass('active');
     })
 
-    // Attach a click event listener to the document
+
     $(document).on('click', '#delete-account-button', function(event) {
         let item = $(this);
-        $('#popup_js3').toggleClass('active'); // Toggle the 'active' class for visibility
+        $('#popup_js3').toggleClass('active'); 
       }
     )
 
@@ -43,7 +43,7 @@ $(document).ready(function() {
     const form  = $('#update-form-form');   
     $('#update-form-form').submit(async function(event) {
         event.preventDefault();
-        const formData = new FormData(this); // 'this' refers to the form element
+        const formData = new FormData(this);
         try {
             const response = await fetch('/api/post/updatePost', {
               method: 'PATCH',
@@ -108,7 +108,7 @@ $(document).ready(function() {
                 throw new Error(`Error deleting user: ${resp.statusText}`);
             }
 
-            window.location.href = '/api/user/register'; //Head back to register as to not cause any trouble with sessions
+            window.location.href = '/api/user/register'; 
         } catch (error) {
             console.log('Error deleting user:', error);
         }
@@ -116,8 +116,7 @@ $(document).ready(function() {
 
 });
 
-//<form class="create-post-form" id="update-form-form" name="update-post-form" action="/api/post/updatePost" method="PUT" enctype="multipart/form-data">
-//TODO MCO2: Client-side AJAX Comment React
+
 $(document).ready(function(){
 
 });
@@ -125,20 +124,18 @@ $(document).ready(function(){
 
 
 
-//<form class="create-post-form" id="update-form-form" name="update-post-form" action="/api/post/updatePost" method="PUT" enctype="multipart/form-data">
-//TODO MCO2: Client-side AJAX Comment React
 $(document).ready(function(){
 
 });
 
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Select all elements with the class 'confirm-delete-account'
+
     const deleteButtons = document.querySelectorAll('.deleteCommentButton');
-    // Use for...of loop to iterate over each button
+
     for (const button of deleteButtons) {
         button.addEventListener('click', async function(e) {
-            e.preventDefault(); // Prevent the default action (e.g., form submission or navigation)
+            e.preventDefault(); 
             let $button = $(button);
             const comment_id = button.dataset.commentId;
 
@@ -147,7 +144,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const response = await fetch('/api/comment/deleteComment', {
                     method: 'PATCH',
                     headers: {
-                        'Content-Type': 'application/json' // Ensure the Content-Type is set to application/json
+                        'Content-Type': 'application/json' 
                     },
                     body: JSON.stringify({comment_id}),
                 });
@@ -165,13 +162,13 @@ document.addEventListener('DOMContentLoaded', function() {
 })
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Select all elements with the class 'confirm-delete-account'
+
     const deleteButtons = document.querySelectorAll('.button-for-edit');
     console.log(deleteButtons);
-    // Use for...of loop to iterate over each button
+
     for (const button of deleteButtons) {
         button.addEventListener('click', async function(e) {
-            e.preventDefault(); // Prevent the default action (e.g., form submission or navigation)
+            e.preventDefault(); 
             const comment_id = button.dataset.commentId;
             let buttonparent = button.parentElement;
             let $buttonparent = $(buttonparent);
@@ -184,7 +181,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const response = await fetch('/api/comment/updateComment', {
                     method: 'PATCH',
                     headers: {
-                        'Content-Type': 'application/json' // Ensure the Content-Type is set to application/json
+                        'Content-Type': 'application/json' 
                     },
                     body: JSON.stringify({comment_id, bodyX}),
                 });
