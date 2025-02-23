@@ -1,5 +1,13 @@
 # CCAPDEV
-This project is a forum webpage website, kind of like reddit.
+This project is an unofficial forum website for Hoyogames, to create discussions, news, and reactions within the Community.
+
+Features:
+1. Account creation
+2. Create Posts with images
+3. Customize Profile
+4. Upvotes and Downvotes
+5. Support Nested Comments with reactions
+6. Filtering / searching posts
 
 
 -------------------------------------------------------------------------------------------------
